@@ -6,7 +6,7 @@ export default class Inicio extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.titulo}>Bienvenio a Karaoke Chamamecero</Text>
-        <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raices chamameceras, tus raices...</Text>
+        <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raices chamameceras, tus raices... </Text>
       </View>
     );
   }
