@@ -1,24 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
 
-import Inicio from './components//inicio/inicio';
-import Header from './components/header/header';
-import Menu from './components/menu/menu';
+import drawerStack from './components/stacks/drawerStack';
+
+const Navigator = createStackNavigator({
+  drawerStack: {screen: drawerStack}
+}, {
+  headerMode: 'none',
+  initialRouteName: 'drawerStack'
+})
 
 export default class App extends React.Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Header />
-        <Inicio />
-      </View>
-    );
+    return <Navigator/>;
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'black',
-  }
-});
