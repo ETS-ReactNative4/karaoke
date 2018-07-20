@@ -16,7 +16,7 @@ export default class Header extends React.Component {
 const styles = StyleSheet.create({
   container: {
     height: 55,
-    marginVertical: 24,
+    marginTop: 24,
     flexDirection: 'row',
     backgroundColor: 'gray',
     alignItems: 'center',

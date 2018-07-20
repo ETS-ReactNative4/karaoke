@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
   },
   titulo: {
     flex: 4,
-    marginVertical: 20,
     color: 'blue',
     fontWeight: 'bold',
     fontSize: 30,
