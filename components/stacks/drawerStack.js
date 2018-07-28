@@ -1,36 +1,34 @@
 import React from 'react';
-import { TouchableNativeFeedback, Text, View, StyleSheet } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
-import drawerScreen from './drawerScreen';
+import DrawerScreen from './drawerScreen';
+import Karaoke from '../views/canta/karaoke/karaoke';
+import Login from '../views/login/login';
+import Canta from '../views/canta/canta';
+import Festival from '../views/festival/festival';
+import Agenda from '../views/agenda/agenda';
+import Musica from '../views/musica/musica';
 
-const DrawerNavigation = createStackNavigator({
-    drawerStack: {screen: drawerScreen}
-}, {
-    headerMode: 'float',
-    navigationOptions: ({navigation}) => ({
-        headerStyle: {
-            backgroundColor: 'rgb(255, 45, 85)'
-        },
-        title: 'Karaoke',
-        headerTintColor: 'white',
-        headerLeft: <View style={styles.icono}>
-            <TouchableNativeFeedback 
-                onPress={() => {
-                    navigation.toggleDrawer();
-                }}>
-                <Icon name="bars" color="white" size={25} />
-            </TouchableNativeFeedback>
-        </View>
-    })
-})
+const AuthStack = createStackNavigator({ 
+  Login: {screen: Login}
+  },
+  {
+    headerMode: 'none'
+  });
 
-const styles = StyleSheet.create({
-    icono: {
-      
-      paddingLeft: 20
-    }
+const drawer = createStackNavigator({
+  DrawerScreen: {screen: DrawerScreen}
+},{
+  headerMode: 'none'
 });
 
-export default DrawerNavigation;
+const DrawerStack = createStackNavigator({
+  AuthStack: {screen: AuthStack},
+  drawer: {screen: drawer},
+  Karaoke: {screen: Karaoke}
+},
+{
+  headerMode: 'none'
+})
+
+export default DrawerStack;
