@@ -44,14 +44,14 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
   },
   titulo: {
-    color: '#3399ff',
+    color: '#6ABB3A',
     fontWeight: 'bold',
     fontSize: 30,
     textAlign: 'center',
     marginBottom: 5,
   },
   subTitulo: {
-    color: '#3399ff',
+    color: '#6ABB3A',
     fontWeight: 'normal',
     fontSize: 25,
     textAlign: 'center',

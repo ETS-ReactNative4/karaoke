@@ -32,13 +32,13 @@ const DrawerScreen = createDrawerNavigator({
   headerMode: 'none',
   drawerWidth: Dimensions.get('window').width - 50,
   initialRouteName: 'Inicio',
-  drawerBackgroundColor: 'rgba(30,89,148, 0.94)',
+  drawerBackgroundColor: '#6ABB3A',
   fontSize: 50,
     fontWeight: 100,
   contentOptions: {
     activeTintColor: 'white',
-    activeBackgroundColor: 'rgba(210,212,212, 0.71)',
-    inactiveTintColor: '#0dacc9',
+    activeBackgroundColor: '#333333',
+    inactiveTintColor: '#333333',
     labelStyle: {
       fontSize: 25,
       fontFamily: 'notoserif',

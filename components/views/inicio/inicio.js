@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
   titulo: {
     flex: 2,
-    color: '#3399ff',
+    color: '#6ABB3A',
     fontWeight: 'bold',
     fontSize: 30,
     textAlign: 'center',

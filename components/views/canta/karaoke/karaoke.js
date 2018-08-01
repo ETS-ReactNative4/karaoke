@@ -53,7 +53,8 @@ export default class Karaoke extends React.Component {
         <View style={styles.container}>
 
           <View style={styles.top}>
-          <Text style={styles.titulo}>{this.props.navigation.state.params.title} - {this.props.navigation.state.params.autor}</Text>
+          <Text style={styles.titulo}>{this.props.navigation.state.params.title}</Text>
+          <Text style={styles.subTitulo}>{this.props.navigation.state.params.autor}</Text>
           </View>
 
           <View style={styles.center}>
@@ -105,9 +106,16 @@ const styles = StyleSheet.create({
   },
   titulo: {
     flex: 2,
-    color: '#3399ff',
+    color: '#6ABB3A',
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 28,
+    textAlign: 'center',
+  },
+  subTitulo: {
+    flex: 2,
+    color: '#6ABB3A',
+    fontWeight: 'bold',
+    fontSize: 22,
     textAlign: 'center',
   },
   texto: {
