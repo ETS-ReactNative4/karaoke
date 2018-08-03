@@ -38,9 +38,9 @@ _renderUserInfo = () => {
     <View style={styles.bottom}>
       <Image 
         source={{ uri: this.state.userInfo.picture.data.url}}
-        style={{ width: 100, height: 100, borderRadius: 50, alignSelf: 'center' }} 
+        style={styles.avatar} 
       />
-      <Text style={{ fontSize: 20, textAlign: 'center', marginBottom: 10 }}> {this.state.userInfo.name} </Text>
+      <Text style={styles.infoUser}> {this.state.userInfo.name} </Text>
       <View style={styles.button}>
       <TouchableNativeFeedback
         onPress={() => {
@@ -84,7 +84,7 @@ _renderButtonFacebook = () => {
           <View style={styles.container}>
             <View style={styles.top}>
               <Text style={styles.titulo}>Karaoke Chamamecero</Text>
-              <IconM name='microphone-variant' size={70}/>
+              <IconM name='microphone-variant' size={70} color='white'/>
             </View>
             {!this.state.userInfo ? (this._renderButtonFacebook()) : (this._renderUserInfo())}
           </View>
@@ -96,7 +96,7 @@ _renderButtonFacebook = () => {
       container: {
         flex: 1,
         paddingTop: 50,
-        backgroundColor: 'white',
+        backgroundColor: '#6ABB3A',
         alignItems: 'center',
         justifyContent: 'center',
       },
@@ -108,7 +108,7 @@ _renderButtonFacebook = () => {
         flex: 5,
       },
       titulo: {
-        color: 'black',
+        color: 'white',
         fontWeight: 'bold',
         fontSize: 30,
         textAlign: 'center',
@@ -122,9 +122,7 @@ _renderButtonFacebook = () => {
         backgroundColor: '#1259c3',
         alignItems: 'center',
         justifyContent: 'center',
-        borderWidth: 1,
         borderRadius: 5,
-        borderColor: '#fff',
       },
       btnClickContain: {
         flex: 1,
@@ -138,9 +136,22 @@ _renderButtonFacebook = () => {
       },
       btnText: {
         fontSize: 20,
-        color: '#fff',
+        color: 'white',
         marginLeft: 20,
         fontWeight: 'bold',
+      },
+      avatar: {
+        width: 100, 
+        height: 100, 
+        borderRadius: 50, 
+        alignSelf: 'center',
+        borderColor: 'white'
+      },
+      infoUser: {
+        fontSize: 20, 
+        textAlign: 'center', 
+        marginBottom: 10,
+        color: 'white'
       }
 
     });

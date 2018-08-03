@@ -28,7 +28,8 @@ const DrawerStack = createStackNavigator({
   Karaoke: {screen: Karaoke}
 },
 {
-  headerMode: 'none'
+  headerMode: 'none',
+  //initialRouteName: 'Karaoke' //Solo habilitado en dev
 })
 
 export default DrawerStack;

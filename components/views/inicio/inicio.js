@@ -1,7 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, BackHandler } from 'react-native';
 
 export default class Inicio extends React.Component {
+
+  componentDidMount() {
+    this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.navigation.goBack(); // works best when the goBack is async
+      return true;
+    });
+  }
+
+  componentWillUnmount() {
+    this.backHandler.remove();
+  }
 
   render() {
     return (
@@ -9,7 +20,6 @@ export default class Inicio extends React.Component {
         <Text style={styles.titulo}>Bienvenio a Karaoke Chamamecero</Text>
         <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raices chamameceras, tus raices... </Text>
         <Text style={styles.texto1}>Podrás cantar a karaoke algunos de los chamamé más conocidos y que todo el mundo lo vea </Text>
-        
       </View>
       
     );
@@ -19,14 +29,14 @@ export default class Inicio extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
-    backgroundColor: 'white',
+    paddingTop: 24,
+    backgroundColor: '#6ABB3A',
     alignItems: 'center',
     justifyContent: 'center',
   },
   titulo: {
     flex: 2,
-    color: '#6ABB3A',
+    color: 'white',
     fontWeight: 'bold',
     fontSize: 30,
     textAlign: 'center',
@@ -34,7 +44,7 @@ const styles = StyleSheet.create({
   texto: {
     flex: 3,
     marginHorizontal: 10,
-    color: 'gray',
+    color: 'white',
     fontWeight: 'normal',
     fontSize: 25,
     textAlign: 'center',

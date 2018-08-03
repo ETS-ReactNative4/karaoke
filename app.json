@@ -1,8 +1,15 @@
 {
   "expo": {
     "sdkVersion": "27.0.0",
+    "name": "karaoke",
     "facebookScheme": "fb1755097877936704",
-    "FacebookAppID": "1755097877936704",
-    "facebookDisplayName": "karaoke"
+    "facebookAppID": "1755097877936704",
+    "facebookDisplayName": "karaoke",
+    "ios": {
+      "bundleIdentifier": "host.exp.Exponent"
+    },
+    "android": {
+      "package": "host.exp.Exponent"
+    }
   }
 }

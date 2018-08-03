@@ -34,8 +34,8 @@ export default class Festival extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
-    backgroundColor: 'white',
+    paddingTop: 24,
+    backgroundColor: '#6ABB3A',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -44,14 +44,14 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
   },
   titulo: {
-    color: '#6ABB3A',
+    color: 'white',
     fontWeight: 'bold',
     fontSize: 30,
     textAlign: 'center',
     marginBottom: 5,
   },
   subTitulo: {
-    color: '#6ABB3A',
+    color: 'white',
     fontWeight: 'normal',
     fontSize: 25,
     textAlign: 'center',
@@ -59,11 +59,11 @@ const styles = StyleSheet.create({
   },
   texto: {
     marginHorizontal: 10,
-    color: 'black',
+    color: 'white',
     fontWeight: 'normal',
     fontSize: 18,
     marginBottom: 10,
-    textAlign: 'justify',
+    textAlign: 'center',
   },
   texto2: {
     marginHorizontal: 10,

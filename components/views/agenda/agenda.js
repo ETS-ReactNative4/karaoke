@@ -42,8 +42,8 @@ export default class Agenda extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
-    backgroundColor: 'white',
+    paddingTop: 24,
+    backgroundColor: '#6ABB3A',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -54,10 +54,10 @@ const styles = StyleSheet.create({
   sectionContainer: {
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(0, 0, 0, 0.12)',
-    backgroundColor: '#efefef',
+    backgroundColor: '#5a8d3b',
   },
   sectionTitle: {
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
     fontSize: 18,
     marginBottom: 8,
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     borderBottomColor: 'rgba(0, 0, 0, 0.12)',
   },
   sectionItemTitle: {
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
     fontSize: 14,
     margin: 4,

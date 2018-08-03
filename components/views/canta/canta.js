@@ -70,20 +70,20 @@ export default class Canta extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 25,
-    backgroundColor: 'white',
+    paddingTop: 24,
+    backgroundColor: '#6ABB3A',
     alignItems: 'center',
     justifyContent: 'center',
   },
   titulo: {
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
     fontSize: 30,
     textAlign: 'center',
   },
   texto: {
     marginHorizontal: 10,
-    color: 'black',
+    color: 'white',
     fontWeight: 'normal',
     fontSize: 25,
     textAlign: 'justify',
@@ -91,10 +91,10 @@ const styles = StyleSheet.create({
   lista: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: '#6ABB3A',
     borderWidth: 1,
-    borderColor: 'white',
-    borderBottomColor: '#d1d1d1', 
+    borderColor: '#6ABB3A',
+    borderBottomColor: 'white', 
     marginBottom: 5,
     minHeight: 55,
     alignItems: 'center',
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     height: 40
   },
   detalles: {
-  color: 'black', 
+  color: 'white', 
   fontSize: 18, 
   marginHorizontal: 5, 
   textAlign: 'left'
