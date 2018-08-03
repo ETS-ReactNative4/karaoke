@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableNativeFeedback, FlatList, Alert, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Alert, Dimensions } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -47,7 +47,7 @@ export default class Canta extends React.Component {
                   {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item14'},
                   {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item15'}]}
           renderItem={({item, separators}) => (
-            <TouchableNativeFeedback
+            <TouchableOpacity
               onPress={() => Alert.alert('REPRODUCTOR')}
               onShowUnderlay={separators.highlight}
               onHideUnderlay={separators.unhighlight}>
@@ -55,7 +55,7 @@ export default class Canta extends React.Component {
                 <Icon name='play-circle' size={40} color={'white'}/>
                 <Text style={styles.texto}>{item.title} - {item.autor}</Text>
               </View>
-            </TouchableNativeFeedback>
+            </TouchableOpacity>
           )}
         />
       </View>

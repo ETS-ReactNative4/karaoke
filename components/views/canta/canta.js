@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableNativeFeedback, FlatList, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image, Dimensions } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -50,7 +50,7 @@ export default class Canta extends React.Component {
                   {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item14'},
                   {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item15'}]}
           renderItem={({item, separators}) => (
-            <TouchableNativeFeedback
+            <TouchableOpacity
               onPress={() => this.props.navigation.navigate('Karaoke', {title: item.title, autor: item.autor, key: item.key})}
               onShowUnderlay={separators.highlight}
               onHideUnderlay={separators.unhighlight}>
@@ -59,7 +59,7 @@ export default class Canta extends React.Component {
                       source={require('../../resources/images/estudiante.jpg')}/>
                 <Text style={styles.detalles}>{item.title} - {item.autor}</Text>
               </View>
-            </TouchableNativeFeedback>
+            </TouchableOpacity>
           )}
         />
       </View>

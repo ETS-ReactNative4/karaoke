@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableNativeFeedback, StyleSheet, Dimensions, Alert, Image } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Alert, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationActions } from 'react-navigation';
@@ -42,7 +42,7 @@ _renderUserInfo = () => {
       />
       <Text style={styles.infoUser}> {this.state.userInfo.name} </Text>
       <View style={styles.button}>
-      <TouchableNativeFeedback
+      <TouchableOpacity
         onPress={() => {
           this.props.navigation.navigate('Inicio');
         }} style={styles.btnClickContain}>
@@ -50,7 +50,7 @@ _renderUserInfo = () => {
           style={styles.btnContainer}>
           <Text style={styles.btnText}>Ingresar</Text>
         </View>
-      </TouchableNativeFeedback>
+      </TouchableOpacity>
       </View>
     </View>
   );
@@ -60,7 +60,7 @@ _renderButtonFacebook = () => {
   return (
     <View style={styles.bottom}>
       <View style={styles.button}>
-      <TouchableNativeFeedback
+      <TouchableOpacity
         onPress={() => {
           //this.props.navigation.navigate('Inicio');
           //this.resetTo();
@@ -74,7 +74,7 @@ _renderButtonFacebook = () => {
             color='#fff'/>
           <Text style={styles.btnText}>Iniciar Sesión con Facebook</Text>
         </View>
-      </TouchableNativeFeedback>
+      </TouchableOpacity>
       </View>
     </View>
   );
