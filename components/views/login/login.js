@@ -1,15 +1,26 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Alert, Image } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationActions } from 'react-navigation';
+import { Font } from 'expo';
 
 export default class Login extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {userInfo: null};
+    this.state = {userInfo: null, fontLoaded: false};
   }
+
+  async componentDidMount() {
+
+    await Font.loadAsync({
+      'berlin3': require('../../assets/fonts/berlin3.ttf'),
+    });
+
+    this.setState({ fontLoaded: true });
+  }
+  
 static navigationOptions = {left: null}
 resetTo() {
   const actionToDispatch = NavigationActions.reset({
@@ -48,6 +59,10 @@ _renderUserInfo = () => {
         }} style={styles.btnClickContain}>
         <View
           style={styles.btnContainer}>
+          <Icon
+            name='facebook-square'
+            size={50}
+            color='white'/>
           <Text style={styles.btnText}>Ingresar</Text>
         </View>
       </TouchableOpacity>
@@ -69,90 +84,96 @@ _renderButtonFacebook = () => {
         <View
           style={styles.btnContainer}>
           <Icon
-            name='facebook'
-            size={30}
-            color='#fff'/>
-          <Text style={styles.btnText}>Iniciar Sesión con Facebook</Text>
+            name='facebook-square'
+            size={50}
+            color='white'/>
+          <Text style={styles.btnText}>Entrar con Facebook</Text>
         </View>
       </TouchableOpacity>
       </View>
     </View>
   );
 }
-    render() {
-        return (
-          <View style={styles.container}>
-            <View style={styles.top}>
-              <Text style={styles.titulo}>Karaoke Chamamecero</Text>
-              <IconM name='microphone-variant' size={70} color='white'/>
-            </View>
-            {!this.state.userInfo ? (this._renderButtonFacebook()) : (this._renderUserInfo())}
-          </View>
-        );
-      }
-    }
-    
-    const styles = StyleSheet.create({
-      container: {
-        flex: 1,
-        paddingTop: 50,
-        backgroundColor: '#6ABB3A',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      top: {
-        flex: 3,
-        alignItems: 'center',
-      },
-      bottom: {
-        flex: 5,
-      },
-      titulo: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 30,
-        textAlign: 'center',
-        height: 50,
-        marginBottom: 30,
-        fontFamily: 'sans-serif-condensed',
-      },
-      button: {
-        width: Dimensions.get('window').width - 5,
-        height: 70,
-        backgroundColor: '#1259c3',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 5,
-      },
-      btnClickContain: {
-        flex: 1,
-        flexDirection: 'row',
-      },
-      btnContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-      btnText: {
-        fontSize: 20,
-        color: 'white',
-        marginLeft: 20,
-        fontWeight: 'bold',
-      },
-      avatar: {
-        width: 100, 
-        height: 100, 
-        borderRadius: 50, 
-        alignSelf: 'center',
-        borderColor: 'white'
-      },
-      infoUser: {
-        fontSize: 20, 
-        textAlign: 'center', 
-        marginBottom: 10,
-        color: 'white'
-      }
 
-    });
+_renderView = () => {
+  return (
+    <View style={styles.top}>
+      <Text style={styles.titulo}>Karaoke Chamamecero</Text>
+      <IconM name='microphone-variant' size={70} color='white'/>
+    </View>
+  )
+}
+
+render() {
+    return (
+      <View style={styles.container}>
+        { this.state.fontLoaded ? (this._renderView()) : null }
+        {!this.state.userInfo ? (this._renderButtonFacebook()) : (this._renderUserInfo())}
+      </View>
+    );
+  }
+}
     
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 50,
+    backgroundColor: '#6ABB3A',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  top: {
+    flex: 3,
+    alignItems: 'center',
+  },
+  bottom: {
+    flex: 5,
+  },
+  titulo: {
+    color: 'white',
+    fontSize: 30,
+    textAlign: 'center',
+    height: 50,
+    marginBottom: 30,
+    fontFamily: 'berlin3',
+  },
+  button: {
+    width: Dimensions.get('window').width - 5,
+    height: 70,
+    backgroundColor: '#6893d4',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+    borderColor: 'white'
+  },
+  btnClickContain: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  btnContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  btnText: {
+    fontSize: 20,
+    color: 'white',
+    marginLeft: 20,
+    fontWeight: 'bold',
+  },
+  avatar: {
+    width: 100, 
+    height: 100, 
+    borderRadius: 50, 
+    alignSelf: 'center',
+    borderColor: 'white'
+  },
+  infoUser: {
+    fontSize: 20, 
+    textAlign: 'center', 
+    marginBottom: 10,
+    color: 'white'
+  }
+
+});

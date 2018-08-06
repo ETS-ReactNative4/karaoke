@@ -2,66 +2,87 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image, Dimensions } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Font } from 'expo';
 
 export default class Canta extends React.Component {
   static navigationOptions = {
     headerTitle: 'Cantá'
   };
+
+  state = {
+    fontLoaded: false,
+  };
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'berlin3': require('../../assets/fonts/berlin3.ttf'),
+    });
+
+    this.setState({ fontLoaded: true });
+  }
+
+  _renderView = () => {
+    return (
+      <View>
+        <View style={{marginBottom: 10}}>
+          <SearchBar
+            clearIcon={{ color: 'gray', size: 15 }}
+            searchIcon={{size: 55}}
+            // onChangeText={}
+            // onClear={}
+            inputStyle={{
+              backgroundColor: 'transparent',
+              color: 'gray'
+            }}
+            containerStyle={{
+              width: Dimensions.get('window').width - 5,
+              backgroundColor: 'rgba(255,255,255, 0.40)', 
+              borderWidth: 2, 
+              borderRadius: 5,
+              borderColor: 'gray'
+            }}
+            placeholder='Buscar...' />
+          </View>
+          <FlatList
+            // ItemSeparatorComponent={(
+            //   <View style={[style.separator, highlighted && {marginLeft: 0}]} />
+            // )}
+            data={[{title: 'Kilómetro 11', autor: 'Tránsito Cocomarola', key: 'item1'},
+                    {title: 'Oración del Remanso', autor: 'Amandayé', key: 'item2'},
+                    {title: 'Estudiante del Interior', autor: 'Mario Bofill', key: 'item3'},
+                    {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item4'},
+                    {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item5'},
+                    {title: 'Kilómetro 11', autor: 'Tránsito Cocomarola', key: 'item6'},
+                    {title: 'Oración del Remanso', autor: 'Amandayé', key: 'item7'},
+                    {title: 'Estudiante del Interior', autor: 'Mario Bofill', key: 'item8'},
+                    {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item9'},
+                    {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item10'},
+                    {title: 'Kilómetro 11', autor: 'Tránsito Cocomarola', key: 'item11'},
+                    {title: 'Oración del Remanso', autor: 'Amandayé', key: 'item12'},
+                    {title: 'Estudiante del Interior', autor: 'Mario Bofill', key: 'item13'},
+                    {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item14'},
+                    {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item15'}]}
+            renderItem={({item, separators}) => (
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('Karaoke', {title: item.title, autor: item.autor, key: item.key})}
+                onShowUnderlay={separators.highlight}
+                onHideUnderlay={separators.unhighlight}>
+                <View style={styles.lista}>
+                <Image style={styles.imagen}
+                        source={require('../../resources/images/estudiante.jpg')}/>
+                  <Text style={styles.detalles}>{item.title} - {item.autor}</Text>
+                </View>
+              </TouchableOpacity>
+            )}
+          />
+      </View>
+    )
+  }
   
   render() {
     return (
       <View style={styles.container}>
-        <View style={{marginBottom: 10}}>
-        <SearchBar
-          clearIcon={{ color: '#d1d1d1', size: 15 }}
-          searchIcon={{size: 55}}
-          // onChangeText={}
-          // onClear={}
-          inputStyle={{
-            backgroundColor: 'transparent',
-            color: 'black'
-          }}
-          containerStyle={{
-            width: Dimensions.get('window').width - 5,
-            backgroundColor: 'white', 
-            borderWidth: 2, 
-            borderRadius: 5,
-            borderColor: 'gray'
-          }}
-          placeholder='Buscar...' />
-        </View>
-        <FlatList
-          // ItemSeparatorComponent={(
-          //   <View style={[style.separator, highlighted && {marginLeft: 0}]} />
-          // )}
-          data={[{title: 'Kilometro 11', autor: 'Transito Cocomarola', key: 'item1'},
-                  {title: 'Oracion del Remanso', autor: 'Amandaye', key: 'item2'},
-                  {title: 'Estudiante del Interior', autor: 'Mario Bofill', key: 'item3'},
-                  {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item4'},
-                  {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item5'},
-                  {title: 'Kilometro 11', autor: 'Transito Cocomarola', key: 'item6'},
-                  {title: 'Oracion del Remanso', autor: 'Amandaye', key: 'item7'},
-                  {title: 'Estudiante del Interior', autor: 'Mario Bofill', key: 'item8'},
-                  {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item9'},
-                  {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item10'},
-                  {title: 'Kilometro 11', autor: 'Transito Cocomarola', key: 'item11'},
-                  {title: 'Oracion del Remanso', autor: 'Amandaye', key: 'item12'},
-                  {title: 'Estudiante del Interior', autor: 'Mario Bofill', key: 'item13'},
-                  {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item14'},
-                  {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item15'}]}
-          renderItem={({item, separators}) => (
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Karaoke', {title: item.title, autor: item.autor, key: item.key})}
-              onShowUnderlay={separators.highlight}
-              onHideUnderlay={separators.unhighlight}>
-              <View style={styles.lista}>
-              <Image style={styles.imagen}
-                      source={require('../../resources/images/estudiante.jpg')}/>
-                <Text style={styles.detalles}>{item.title} - {item.autor}</Text>
-              </View>
-            </TouchableOpacity>
-          )}
-        />
+        {this.state.fontLoaded ? (this._renderView()) : null}
       </View>
     );
   }
@@ -77,14 +98,14 @@ const styles = StyleSheet.create({
   },
   titulo: {
     color: 'white',
-    fontWeight: 'bold',
+    fontFamily: 'berlin3',
     fontSize: 30,
     textAlign: 'center',
   },
   texto: {
     marginHorizontal: 10,
     color: 'white',
-    fontWeight: 'normal',
+    fontFamily: 'berlin3',
     fontSize: 25,
     textAlign: 'justify',
   },
@@ -106,6 +127,7 @@ const styles = StyleSheet.create({
   },
   detalles: {
   color: 'white', 
+  fontFamily: 'berlin3',
   fontSize: 18, 
   marginHorizontal: 5, 
   textAlign: 'left'

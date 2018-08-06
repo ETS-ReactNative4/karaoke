@@ -24,7 +24,7 @@ const drawer = createStackNavigator({
 
 const DrawerStack = createStackNavigator({
   AuthStack: {screen: AuthStack},
-  drawer: {screen: drawer},
+  DrawerScreen: {screen: DrawerScreen},
   Karaoke: {screen: Karaoke}
 },
 {

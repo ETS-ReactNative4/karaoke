@@ -26,5 +26,10 @@
     "react-native-elements": "^0.19.1",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.8.0"
+  },
+  "rnpm": {
+    "assets": [
+      "componentes/assets/fonts/berlin3.ttf"
+    ]
   }
 }

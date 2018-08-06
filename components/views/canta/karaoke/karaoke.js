@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Vibration, Alert } from 'react-native';
-import { Camera, Permissions, FileSystem, Constants } from 'expo';
+import { StyleSheet, Text, View, TouchableOpacity, Vibration, Alert, Dimensions } from 'react-native';
+import { Camera, Permissions, FileSystem, Font, Constants } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class Karaoke extends React.Component {
@@ -11,8 +11,16 @@ export default class Karaoke extends React.Component {
     hasCameraRollPermission: null,
     photoId: 0,
     isRecording: true,
-
+    fontLoaded: false,
   };
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'berlin3': require('../../../assets/fonts/berlin3.ttf'),
+    });
+
+    this.setState({ fontLoaded: true });
+  }
 
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -123,6 +131,44 @@ export default class Karaoke extends React.Component {
   //   }
   // };
 
+  _renderView = () => {
+    return (
+      <View style={{flex: 1, width: Dimensions.get('window').width}}>
+        <View style={styles.top}>
+              <Text style={styles.titulo}>{this.props.navigation.state.params.title}</Text>
+              <Text style={styles.subTitulo}>{this.props.navigation.state.params.autor}</Text>
+        </View>
+        <View style={styles.center}>
+        <View style={styles.camera}>
+          <Camera ref={ref => {this.camera = ref;}} style={{ flex: 1}} type={'front'}>
+            {this.state.isRecording ?
+              (
+              <TouchableOpacity style={styles.capture}
+                onPress={this.playRecording.bind(this)} >
+                <Text style={styles.btnText}> COMENZAR </Text>
+              </TouchableOpacity>
+              ) :
+              (
+                <TouchableOpacity style={styles.capture}
+                onPress={this.stopRecording.bind(this)} >
+                <Text style={styles.btnText}> PARAR </Text>
+              </TouchableOpacity>
+              )
+            }
+          </Camera>
+          </View>
+          <View style={styles.video}>
+            <Text>VIDEO</Text>
+          </View>
+        </View>
+
+        <View style={styles.bottom}>
+          <Text></Text>
+        </View>
+      </View>
+    )
+  }
+
   render() {
     //const params = this.state.params;
     const { hasCameraPermission } = this.state;
@@ -136,38 +182,7 @@ export default class Karaoke extends React.Component {
         
         <View style={styles.container}>
 
-          <View style={styles.top}>
-          <Text style={styles.titulo}>{this.props.navigation.state.params.title}</Text>
-          <Text style={styles.subTitulo}>{this.props.navigation.state.params.autor}</Text>
-          </View>
-
-          <View style={styles.center}>
-          <View style={styles.camera}>
-            <Camera ref={ref => {this.camera = ref;}} style={{ flex: 1}} type={'front'}>
-              {this.state.isRecording ?
-                (
-                <TouchableOpacity style={styles.capture}
-                  onPress={this.playRecording.bind(this)} >
-                  <Text style={styles.btnText}> COMENZAR </Text>
-                </TouchableOpacity>
-                ) :
-                (
-                  <TouchableOpacity style={styles.capture}
-                  onPress={this.stopRecording.bind(this)} >
-                  <Text style={styles.btnText}> PARAR </Text>
-                </TouchableOpacity>
-                )
-              }
-            </Camera>
-            </View>
-            <View style={styles.video}>
-              <Text>VIDEO</Text>
-            </View>
-          </View>
-
-          <View style={styles.bottom}>
-            <Text></Text>
-          </View>
+          {this.state.fontLoaded ? (this._renderView()) : null}
 
         </View>
         
@@ -200,14 +215,14 @@ const styles = StyleSheet.create({
   titulo: {
     //flex: 1,
     color: 'white',
-    fontWeight: 'bold',
+    fontFamily: 'berlin3',
     fontSize: 28,
     textAlign: 'center',
   },
   subTitulo: {
     //flex: 1,
     color: 'white',
-    fontWeight: 'bold',
+    fontFamily: 'berlin3',
     fontSize: 22,
     textAlign: 'center',
   },
@@ -215,7 +230,7 @@ const styles = StyleSheet.create({
     flex: 3,
     marginHorizontal: 10,
     color: 'gray',
-    fontWeight: 'normal',
+    fontFamily: 'berlin3',
     fontSize: 25,
     textAlign: 'center',
   },
@@ -237,7 +252,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontFamily: 'berlin3',
     textAlign: 'center',
     color: 'gold'
   },

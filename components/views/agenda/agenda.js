@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, SectionList, Image, Dimensions } from 'react-native';
+import { Font } from 'expo';
 import { ListItem, Divider, Header } from 'react-native-elements';
 
 function keyExtractor(item) {
@@ -21,9 +22,21 @@ const renderItem = ({ item }) =>
   </View>
 
 export default class Agenda extends React.Component {
-  render() {
+
+  state = {
+    fontLoaded: false,
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'berlin3': require('../../assets/fonts/berlin3.ttf'),
+    });
+
+    this.setState({ fontLoaded: true });
+  }
+  _renderView = () => {
     return (
-      <View style={styles.container}>
+      <View>
         <SectionList
           keyExtractor={keyExtractor}
           renderSectionHeader={renderSectionHeader}
@@ -31,7 +44,14 @@ export default class Agenda extends React.Component {
           sections={SECTIONS}
           style={styles.list}
         />
-
+      </View>
+    )
+  }
+  render() {
+    return (
+      <View style={styles.container}>
+        
+        {this.state.fontLoaded ? (this._renderView()) : null}
         {/* <Image style={styles.imagen} source={require('../../resources/images/festival.jpg')}/>
         <Text style={styles.subTitulo}>Programa del Día</Text> */}
       </View>
@@ -58,7 +78,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     color: 'white',
-    fontWeight: 'bold',
+    fontFamily: 'berlin3',
     fontSize: 18,
     marginBottom: 8,
     marginLeft: 16,
@@ -73,13 +93,13 @@ const styles = StyleSheet.create({
   },
   sectionItemTitle: {
     color: 'white',
-    fontWeight: 'bold',
+    fontFamily: 'berlin3',
     fontSize: 14,
     margin: 4,
   },
   sectionItemDate: {
     color: 'gray',
-    fontWeight: 'normal',
+    fontFamily: 'berlin3',
     fontSize: 12,
     margin: 4,
   },

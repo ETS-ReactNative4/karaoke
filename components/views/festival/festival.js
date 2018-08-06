@@ -1,12 +1,24 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, Dimensions } from 'react-native';
+import { Font } from 'expo';
 
 export default class Festival extends React.Component {
   
-  render() {
+  state = {
+    fontLoaded: false,
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'berlin3': require('../../assets/fonts/berlin3.ttf'),
+    });
+
+    this.setState({ fontLoaded: true });
+  }
+
+  _renderView = () => {
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.scroll}>
+      <View>
         <Text style={styles.titulo}>Fiesta Nacional del Chamamé</Text>
         <Text style={styles.subTitulo}>29° FIESTA NACIONAL DEL CHAMAMÉ</Text>
         <Text style={styles.subTitulo}>15° FIESTA DEL CHAMAMÉ DEL MERCOSUR</Text>
@@ -17,7 +29,7 @@ export default class Festival extends React.Component {
         <Image style={styles.imagen} source={require('../../resources/images/programa.jpeg')}/>
         <Text style={styles.subTitulo}>FIESTA DEL CHAMAMÉ</Text>
         <Text style={styles.texto}>La Fiesta del Chamamé se celebra en la ciudad de Corrientes, Argentina, específicamente en el Anfiteatro Cocomarola y en el Puente Pexoa, donde cada año durante varios días del mes de enero, suena y se baila el chamamé, un género musical de origen folclórico
-        característico de la región oriental de Argentina, el Paraguay, Río Grande del Sur y algunos pueblos de sur de Brasil, y Uruguay.</Text>
+        característico de la región oriental de Argentina, el Paraguay, Río Grande del Sur y algunos pueblos del sur de Brasil y Uruguay.</Text>
         <Text style={styles.subTitulo}>CHAMAMÉ</Text>
         <Text style={styles.texto}>Acerca del origen del nombre &quot;chamamé&quot;: La acepción más equilibrada contempla la propia de “baile que se improvisa” o “espontáneo” o “como nace desde adentro” o “como se siente” también aplicado por autores al baile como &quot;ritmo bailado
         de acuerdo al sentimiento que provoca la música, sin reglas estructuradas&quot;.</Text>
@@ -25,9 +37,18 @@ export default class Festival extends React.Component {
         <Text style={styles.texto2}>Chamamé Maceta: de pulsos y ritmos vivos, habituales en los grupos que tocan en festivales, bailes y &quot;boliches&quot;.</Text>
         <Text style={styles.texto2}>Chamamé Cangüí (triste): se caracteriza por su tónica lenta y sentimental.</Text>
         <Text style={styles.texto2}>Chamamé Orillero: en el que se notan muchas influencias del tango.</Text>
+      </View>
+    )
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <ScrollView style={styles.scroll}>
+          {this.state.fontLoaded ? (this._renderView()) : null}
         </ScrollView>
       </View>
-    );
+    )
   }
 }
 
@@ -45,14 +66,14 @@ const styles = StyleSheet.create({
   },
   titulo: {
     color: 'white',
-    fontWeight: 'bold',
+    fontFamily: 'berlin3',
     fontSize: 30,
     textAlign: 'center',
     marginBottom: 5,
   },
   subTitulo: {
     color: 'white',
-    fontWeight: 'normal',
+    fontFamily: 'berlin3',
     fontSize: 25,
     textAlign: 'center',
     marginBottom: 5,
@@ -60,19 +81,19 @@ const styles = StyleSheet.create({
   texto: {
     marginHorizontal: 10,
     color: 'white',
-    fontWeight: 'normal',
+    fontFamily: 'berlin3',
     fontSize: 18,
     marginBottom: 10,
     textAlign: 'center',
   },
   texto2: {
     marginHorizontal: 10,
-    color: 'gray',
-    fontWeight: 'bold',
-    fontStyle: 'italic',
+    color: '#cccccc',
+    fontFamily: 'berlin3',
+    //fontStyle: 'italic',
     fontSize: 18,
     marginBottom: 10,
-    textAlign: 'auto',
+    textAlign: 'center',
   },
   imagen: {
     flex: 1, 
