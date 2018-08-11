@@ -54,3 +54,7 @@ buck-out/
 */fastlane/screenshots
 
 # Bundle artifact
+<<<<<<< HEAD
+=======
+*.jsbundle
+>>>>>>> 53ccdb1d201496cbcadb2ec26bfddbfbb37522f9

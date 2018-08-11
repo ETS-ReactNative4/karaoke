@@ -37,7 +37,7 @@ export default class Karaoke extends React.Component {
   getKey = function() {
     switch(this.props.navigation.state.params.key) {
       case 'arrebol':
-          key = require('../../../resources/videos/arrebol-640.mp4');
+          key = require('../../../resources/videos/arrebol.mp4');
           break;
       case 'nangapiri':
       key = require('../../../resources/videos/nangapiri.mp4');

@@ -47,9 +47,9 @@ export default class Canta extends React.Component {
             // ItemSeparatorComponent={(
             //   <View style={[style.separator, highlighted && {marginLeft: 0}]} />
             // )}
-            data={[{title: 'Kilómetro 11', autor: 'Tránsito Cocomarola', key: 'item1'},
-                    {title: 'Oración del Remanso', autor: 'Amandayé', key: 'item2'},
-                    {title: 'Estudiante del Interior', autor: 'Mario Bofill', key: 'item3'},
+            data={[{title: 'Arrebol', autor: 'Félix Chávez y Mateo Villalba', key: 'arrebol'},
+                    {title: 'Ñangapiri', autor: 'Amandayé', key: 'nangapiri'},
+                    {title: 'Yo Que Te Quiero Tanto', autor: 'Mario Bofill', key: 'yo-que-te-quiero-tanto'},
                     {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item4'},
                     {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item5'},
                     {title: 'Kilómetro 11', autor: 'Tránsito Cocomarola', key: 'item6'},
