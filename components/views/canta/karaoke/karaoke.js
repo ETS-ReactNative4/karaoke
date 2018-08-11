@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Vibration, Alert, Dimensions } from 'react-native';
-import { Camera, Permissions, FileSystem, Font, Constants } from 'expo';
+import { Camera, Permissions, FileSystem, Font, Video, Constants, ScreenOrientation } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Iconm from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconMat from 'react-native-vector-icons/MaterialIcons';
 
 export default class Karaoke extends React.Component {
-  
+
   state = {
     hasCameraPermission: null,
     hasAudioRecordingPermission: null,
@@ -12,6 +14,12 @@ export default class Karaoke extends React.Component {
     photoId: 0,
     isRecording: true,
     fontLoaded: false,
+    shouldPlay: false,
+    control: true,
+    recording: false,
+    processing: false,
+    key: "",
+    like: false,
   };
 
   async componentDidMount() {
@@ -19,8 +27,28 @@ export default class Karaoke extends React.Component {
       'berlin3': require('../../../assets/fonts/berlin3.ttf'),
     });
 
+    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+    
     this.setState({ fontLoaded: true });
+
+    
   }
+
+  getKey = function() {
+    switch(this.props.navigation.state.params.key) {
+      case 'arrebol':
+          key = require('../../../resources/videos/arrebol-640.mp4');
+          break;
+      case 'nangapiri':
+      key = require('../../../resources/videos/nangapiri.mp4');
+          break;
+      case 'yo-que-te-quiero-tanto':
+      key = require('../../../resources/videos/yo-que-te-quiero-tanto.mp4');
+          break;
+  } 
+
+  return key;
+}
 
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -31,18 +59,18 @@ export default class Karaoke extends React.Component {
     this.setState({ hasCameraRollPermission: status2 === 'granted' });
   }
 
-  ensureFolderExists = function () {
-    const path = `${FileSystem.documentDirectory}photos`
-    return FileSystem.getInfoAsync(path).then(({exists}) => {
-      if (!exists) {
-        Alert.alert(path);
-        return FileSystem.makeDirectoryAsync(path)
-      } else {
-        Alert.alert(path);
-        return Promise.resolve(true)
-      }
-    })
-  }
+  // ensureFolderExists = function () {
+  //   const path = `${FileSystem.documentDirectory}photos`
+  //   return FileSystem.getInfoAsync(path).then(({exists}) => {
+  //     if (!exists) {
+  //       Alert.alert(path);
+  //       return FileSystem.makeDirectoryAsync(path)
+  //     } else {
+  //       Alert.alert(path);
+  //       return Promise.resolve(true)
+  //     }
+  //   })
+  // }
 
   // async componentDidMount() {
   //   try {
@@ -57,14 +85,43 @@ export default class Karaoke extends React.Component {
   //   }
   // }
 
+  async startRecording() {
+    this.setState({ recording: true });
+    // default to mp4 for android as codec is not set
+    const { uri, codec = "mp4" } = await this.camera.recordAsync();
+    this.setState({ recording: false, processing: true });
+    const type = `video/${codec}`;
+
+    const data = new FormData();
+    data.append("video", {
+      name: "mobile-video-upload",
+      type,
+      uri
+    });
+
+    try {
+      await fetch(ENDPOINT, {
+        method: "post",
+        body: data
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  
+    this.setState({ processing: false });
+  }
+
   stopRecording = function() {
-    this.setState({ isRecording: true});
+    this.setState({ isRecording: true });
+    this.setState({ shouldPlay: false });
+    //this.camera.stopRecording();
     //Alert.alert('stop');
     Vibration.vibrate();
   }
 
   playRecording = function() {
     this.setState({ isRecording: false });
+    this.setState({ shouldPlay: true });
     Vibration.vibrate();
   }
 
@@ -77,14 +134,14 @@ export default class Karaoke extends React.Component {
   //   }
   // };
 
-  onPictureSaved = async photo => {
-    await FileSystem.moveAsync({
-      from: photo.uri,
-      to: `${FileSystem.documentDirectory}photos/${Date.now()}.jpg`,
-    });
-    //this.setState({ newPhotos: true });
+  // onPictureSaved = async photo => {
+  //   await FileSystem.moveAsync({
+  //     from: photo.uri,
+  //     to: `${FileSystem.documentDirectory}photos/${Date.now()}.jpg`,
+  //   });
+  //   //this.setState({ newPhotos: true });
     
-  };
+  // };
 
 //   takePicture = () => {
     
@@ -133,37 +190,51 @@ export default class Karaoke extends React.Component {
 
   _renderView = () => {
     return (
-      <View style={{flex: 1, width: Dimensions.get('window').width}}>
+      <View style={{flex: 1}}>
         <View style={styles.top}>
               <Text style={styles.titulo}>{this.props.navigation.state.params.title}</Text>
               <Text style={styles.subTitulo}>{this.props.navigation.state.params.autor}</Text>
         </View>
         <View style={styles.center}>
-        <View style={styles.camera}>
-          <Camera ref={ref => {this.camera = ref;}} style={{ flex: 1}} type={'front'}>
-            {this.state.isRecording ?
-              (
-              <TouchableOpacity style={styles.capture}
-                onPress={this.playRecording.bind(this)} >
-                <Text style={styles.btnText}> COMENZAR </Text>
-              </TouchableOpacity>
-              ) :
-              (
-                <TouchableOpacity style={styles.capture}
-                onPress={this.stopRecording.bind(this)} >
-                <Text style={styles.btnText}> PARAR </Text>
-              </TouchableOpacity>
-              )
-            }
-          </Camera>
+          <View style={styles.camera}>
+            <Camera ref={ref => {this.camera = ref;}} style={{ flex: 1}} type={'front'}>
+              
+            </Camera>
           </View>
           <View style={styles.video}>
-            <Text>VIDEO</Text>
-          </View>
+            <Video
+                //source={{ uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
+                //source={require('../../../resources/videos/kilometro11.mp4')}
+                source={this.getKey()}
+                ref={(ref) => {
+                  this.player = ref;
+                }}
+                rate={1.0}
+                shouldPlay={this.state.shouldPlay}
+                resizeMode="stretch"
+                //useNativeControls={this.state.control}
+                //style={{ width: 255, height: 352, alignSelf: 'center'}}
+                style={{ width: Dimensions.get('window').width, height: Dimensions.get('window').width / 1.4, alignSelf: 'center'}}
+            />
+            </View>
         </View>
-
         <View style={styles.bottom}>
-          <Text></Text>
+          <View style={styles.bottomLeft}>
+            <Iconm name="share-variant" style={styles.icono} size={30}/>
+            <Iconm name="heart-outline" style={styles.icono} size={30}/>
+          </View>
+          <View style={styles.bottomRight}>
+            {this.state.isRecording ?
+                  (
+                  <IconMat name="play-circle-outline" size={50} color={'white'} marginVertical={50}
+                    onPress={this.playRecording.bind(this)} />
+                  ) :
+                  (
+                    <IconMat name="pause-circle-outline" size={50} color={'white'} marginLeft={100}
+                    onPress={this.stopRecording.bind(this)} />
+                  )
+                }
+          </View>
         </View>
       </View>
     )
@@ -179,17 +250,12 @@ export default class Karaoke extends React.Component {
       return <Text>La cámara no posee permisos para activarse</Text>;
     } else {
       return (
-        
         <View style={styles.container}>
-
           {this.state.fontLoaded ? (this._renderView()) : null}
-
         </View>
-        
       );
     }
-  
-}
+  }
 }
 const styles = StyleSheet.create({
   container: {
@@ -200,35 +266,38 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   top: {
-    flex: 3, 
+    flex: 1,
     backgroundColor: '#6ABB3A'
   },
   center: { 
-    flex: 5, 
-    flexDirection: 'row'
+    flex: 8,
   },
   camera: {
-    flex: 1,
+    flex: 5,
     backgroundColor: 'transparent',
     justifyContent: 'center',
   },
-  titulo: {
-    //flex: 1,
-    color: 'white',
-    fontFamily: 'berlin3',
-    fontSize: 28,
-    textAlign: 'center',
+  video: {
+    flex: 5,
+    backgroundColor: 'black',
+    alignContent: 'center',
+    borderTopColor: 'gray',
+    borderTopWidth: 3,
   },
-  subTitulo: {
-    //flex: 1,
+  titulo: {
     color: 'white',
     fontFamily: 'berlin3',
     fontSize: 22,
     textAlign: 'center',
+    marginTop: 2,
+  },
+  subTitulo: {
+    color: 'white',
+    fontFamily: 'berlin3',
+    fontSize: 20,
+    textAlign: 'center',
   },
   texto: {
-    flex: 3,
-    marginHorizontal: 10,
     color: 'gray',
     fontFamily: 'berlin3',
     fontSize: 25,
@@ -236,19 +305,16 @@ const styles = StyleSheet.create({
   },
   capture: {
     backgroundColor: 'transparent',
+    position: 'absolute',
     height: 40,
     justifyContent: 'center',
     alignContent: 'center',
+    alignSelf: 'center',
     borderWidth: 1,
     borderColor: 'gold',
     borderRadius: 25,
-    marginHorizontal: 20,
     marginBottom: 10,
-    marginTop: 280
-  },
-  video: { 
-    flex: 1, 
-    backgroundColor: 'gray'
+    marginTop: 10,
   },
   btnText: {
     fontSize: 14,
@@ -257,7 +323,24 @@ const styles = StyleSheet.create({
     color: 'gold'
   },
   bottom: { 
-    flex: 2, 
-    backgroundColor: '#6ABB3A'
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#6ABB3A',
+  },
+  bottomLeft: {
+    flex: 4,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+  icono: {
+    marginLeft: 10,
+    marginTop: 10,
+    textAlign: 'center',
+    color: 'white', 
+  },
+  bottomRight: {
+    flex: 5,
+    paddingTop: 10,
+    alignItems: 'flex-start',
   }
 });
