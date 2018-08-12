@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, SectionList, Image, Dimensions } from 'react-native';
-import { Font } from 'expo';
+import { Font, ScreenOrientation } from 'expo';
 import { ListItem, Divider, Header } from 'react-native-elements';
 
 function keyExtractor(item) {
@@ -33,7 +33,9 @@ export default class Agenda extends React.Component {
     });
 
     this.setState({ fontLoaded: true });
+    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
+
   _renderView = () => {
     return (
       <View>

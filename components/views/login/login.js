@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image } from 'rea
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationActions } from 'react-navigation';
-import { Font } from 'expo';
+import { Font, ScreenOrientation } from 'expo';
 
 export default class Login extends React.Component {
 
@@ -19,6 +19,8 @@ export default class Login extends React.Component {
     });
 
     this.setState({ fontLoaded: true });
+
+    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
   
 static navigationOptions = {left: null}

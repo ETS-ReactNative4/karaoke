@@ -2,13 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image, Dimensions } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Font } from 'expo';
+import { Font, ScreenOrientation } from 'expo';
 
 export default class Canta extends React.Component {
-  static navigationOptions = {
-    headerTitle: 'Cantá'
-  };
-
+  
   state = {
     fontLoaded: false,
   };
@@ -17,13 +14,18 @@ export default class Canta extends React.Component {
     await Font.loadAsync({
       'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });
-
-    this.setState({ fontLoaded: true });
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+    
+    this.setState({ fontLoaded: true });    
   }
+
+  // async componentWillUnmount() {
+  //   ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+  // }
 
   _renderView = () => {
     return (
-      <View>
+      <View style={styles.container}>
         <View style={{marginBottom: 10}}>
           <SearchBar
             clearIcon={{ color: 'gray', size: 15 }}
@@ -35,7 +37,7 @@ export default class Canta extends React.Component {
               color: 'gray'
             }}
             containerStyle={{
-              width: Dimensions.get('window').width - 5,
+              width: Dimensions.get('window').width,
               backgroundColor: 'rgba(255,255,255, 0.40)', 
               borderWidth: 2, 
               borderRadius: 5,
@@ -80,11 +82,16 @@ export default class Canta extends React.Component {
   }
   
   render() {
-    return (
-      <View style={styles.container}>
-        {this.state.fontLoaded ? (this._renderView()) : null}
-      </View>
-    );
+    // return (
+    //   <View style={styles.container}>
+    //     {this.state.fontLoaded ? (this._renderView()) : null}
+    //   </View>
+    // );
+    if(!this.state.fontLoaded) {
+    return ( <View style={styles.container}><Text>'Cargando..'</Text></View> );
+    } else {
+    return this._renderView();
+    }
   }
 }
 

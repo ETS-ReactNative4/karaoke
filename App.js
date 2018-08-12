@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import DrawerStack from './components/stacks/drawerStack';
-import { Font } from 'expo';
+import { Font, ScreenOrientation } from 'expo';
 
 export default class App extends React.Component {
 
@@ -15,6 +15,7 @@ export default class App extends React.Component {
     });
 
     this.setState({ fontLoaded: true });
+    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
  

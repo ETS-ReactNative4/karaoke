@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, BackHandler } from 'react-native';
-import { Font } from 'expo';
+import { StyleSheet, Text, View, BackHandler, Dimensions } from 'react-native';
+import { Font, ScreenOrientation } from 'expo';
 
 export default class Inicio extends React.Component {
 
@@ -19,11 +19,13 @@ export default class Inicio extends React.Component {
     });
 
     this.setState({ fontLoaded: true });
+    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
 
   componentWillUnmount() {
     this.backHandler.remove();
+    
   }
 
   _renderView = () => {

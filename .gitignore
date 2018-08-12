@@ -29,7 +29,8 @@ build/
 .gradle
 local.properties
 *.iml
-components/resources/videos
+/components/resources/videos
+/components/resources/musica
 
 # node.js
 #

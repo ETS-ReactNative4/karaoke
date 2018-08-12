@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Alert, Dimensions } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Font } from 'expo';
+import { Font, ScreenOrientation } from 'expo';
 
 export default class Canta extends React.Component {
 
@@ -16,6 +16,8 @@ export default class Canta extends React.Component {
     });
 
     this.setState({ fontLoaded: true });
+
+    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
   _renderView = () => {
@@ -32,7 +34,7 @@ export default class Canta extends React.Component {
             color: 'gray'
           }}
           containerStyle={{
-            width: Dimensions.get('window').width - 5,
+            width: Dimensions.get('window').width,
             backgroundColor: 'rgba(255,255,255, 0.40)', 
             borderWidth: 2, 
             borderRadius: 5,

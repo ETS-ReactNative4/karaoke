@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, Dimensions } from 'react-native';
-import { Font } from 'expo';
+import { Font, ScreenOrientation } from 'expo';
 
 export default class Festival extends React.Component {
   
@@ -14,6 +14,8 @@ export default class Festival extends React.Component {
     });
 
     this.setState({ fontLoaded: true });
+
+    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
   _renderView = () => {
