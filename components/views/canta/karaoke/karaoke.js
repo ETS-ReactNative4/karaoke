@@ -14,7 +14,7 @@ export default class Karaoke extends React.Component {
     hasAudioRecordingPermission: null,
     hasCameraRollPermission: null,
     photoId: 0,
-    isRecording: true,
+    isRecording: false,
     fontLoaded: false,
     shouldPlay: false,
     control: true,
@@ -33,6 +33,12 @@ export default class Karaoke extends React.Component {
 
     ScreenOrientation.allow(ScreenOrientation.Orientation.LANDSCAPE);
   }
+
+  _onPlaybackStatusUpdate = status => {
+      if (status.didJustFinish) {
+        this.stopRecording()
+      }
+  };
 
   getKey = function() {
     switch(this.props.navigation.state.params.key) {
@@ -114,7 +120,7 @@ export default class Karaoke extends React.Component {
   }
 
   stopRecording = function() {
-    this.setState({ isRecording: true });
+    this.setState({ isRecording: false });
     this.setState({ shouldPlay: false });
     //this.camera.stopRecording();
     //Alert.alert('stop');
@@ -122,7 +128,7 @@ export default class Karaoke extends React.Component {
   }
 
   playRecording = function() {
-    this.setState({ isRecording: false });
+    this.setState({ isRecording: true });
     this.setState({ shouldPlay: true });
     Vibration.vibrate();
   }
@@ -215,6 +221,7 @@ export default class Karaoke extends React.Component {
                 }}
                 rate={1.0}
                 shouldPlay={this.state.shouldPlay}
+                onPlaybackStatusUpdate={this._onPlaybackStatusUpdate}
                 resizeMode="stretch"
                 useNativeControls={this.state.control}
                 //style={{ width: 255, height: 352, alignSelf: 'center'}}
@@ -228,7 +235,7 @@ export default class Karaoke extends React.Component {
             <Iconm name="heart-outline" style={styles.iconoL} size={20}/>
           </View>
           <View style={styles.bottomRightL}>
-            {this.state.isRecording ?
+            {!this.state.isRecording ?
                   (
                   <IconMat name="play-circle-outline" size={30} color={'white'}
                     onPress={this.playRecording.bind(this)} />
