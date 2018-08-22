@@ -3,6 +3,15 @@ package com.karaoke;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
+import guichaguri.trackplayer.TrackPlayer;
+import org.reactnative.camera.RNCameraPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import guichaguri.trackplayer.TrackPlayer;
+import org.reactnative.camera.RNCameraPackage;
+import guichaguri.trackplayer.TrackPlayer;
+import com.brentvatne.react.ReactVideoPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -20,15 +29,26 @@ public class MainApplication extends Application implements ReactApplication {
     }
 
     @Override
-    protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+    protected List getPackages() {
+      return Arrays.asList(
+          new MainReactPackage(),
+            new VectorIconsPackage(),
+            new TrackPlayer(),
+            new RNCameraPackage(),
+            new ReactVideoPackage(),
+            new VectorIconsPackage(),
+            new TrackPlayer()
       );
     }
 
     @Override
     protected String getJSMainModuleName() {
       return "index";
+    }
+
+    @Override
+    public List<ReactPackage> createAdditionalReactPackages() {
+        return getPackages();
     }
   };
 

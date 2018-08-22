@@ -3,8 +3,9 @@ import { StyleSheet, Text, View, TouchableOpacity, FlatList, Alert, Dimensions }
 import { SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Font, ScreenOrientation } from 'expo';
+import Player from './Player.js';
 
-export default class Canta extends React.Component {
+export default class Musica extends React.Component {
 
   state = {
     fontLoaded: false,
@@ -46,13 +47,13 @@ export default class Canta extends React.Component {
           // ItemSeparatorComponent={(
           //   <View style={[style.separator, highlighted && {marginLeft: 0}]} />
           // )}
-          data={[{title: 'Kilómetro 11', autor: 'Tránsito Cocomarola', key: 'item1'},
-                  {title: 'Oración del Remanso', autor: 'Amandaye', key: 'item2'},
-                  {title: 'Estudiante del Interior', autor: 'Mario Bofill', key: 'item3'},
-                  {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item4'},
+          data={[{title: 'Camino a Mburucuya', autor: 'La Yunta Correntina', key: 'item1'},
+                  {title: 'Cañada Fragosa', autor: 'Grupo Integración', key: 'item2'},
+                  {title: 'Basilio Mago', autor: 'Grupo Reencuentro', key: 'item3'},
+                  {title: 'Viejo Caa Cati', autor: 'Santiago "Bocha" Sheridan', key: 'item4'},
                   {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item5'},
-                  {title: 'Kilómetro 11', autor: 'Tránsito Cocomarola', key: 'item6'},
-                  {title: 'Oración del Remanso', autor: 'Amandaye', key: 'item7'},
+                  {title: 'Soy Forastero', autor: 'Grupo Integración', key: 'item6'},
+                  {title: 'Al Fin de Cuentas', autor: 'Grupo Integración', key: 'item7'},
                   {title: 'Estudiante del Interior', autor: 'Mario Bofill', key: 'item8'},
                   {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item9'},
                   {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item10'},
@@ -63,7 +64,7 @@ export default class Canta extends React.Component {
                   {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item15'}]}
           renderItem={({item, separators}) => (
             <TouchableOpacity
-              onPress={() => Alert.alert('REPRODUCTOR')}
+              onPress={() => this.props.navigation.navigate('Player', {title: item.title, autor: item.autor, key: item.key})}
               onShowUnderlay={separators.highlight}
               onHideUnderlay={separators.unhighlight}>
               <View style={styles.lista}>
