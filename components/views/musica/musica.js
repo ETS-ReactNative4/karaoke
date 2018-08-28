@@ -1,9 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Alert, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Alert, Dimensions, Image } from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Font, ScreenOrientation } from 'expo';
 import Player from './Player.js';
+
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
+const SIZE_ICON = 60;
 
 export default class Musica extends React.Component {
 
@@ -43,36 +47,37 @@ export default class Musica extends React.Component {
           }}
           placeholder='Buscar...' />
         </View>
-        <FlatList
-          // ItemSeparatorComponent={(
-          //   <View style={[style.separator, highlighted && {marginLeft: 0}]} />
-          // )}
-          data={[{title: 'Camino a Mburucuya', autor: 'La Yunta Correntina', key: 'item1'},
-                  {title: 'Cañada Fragosa', autor: 'Grupo Integración', key: 'item2'},
-                  {title: 'Basilio Mago', autor: 'Grupo Reencuentro', key: 'item3'},
-                  {title: 'Viejo Caa Cati', autor: 'Santiago "Bocha" Sheridan', key: 'item4'},
-                  {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item5'},
-                  {title: 'Soy Forastero', autor: 'Grupo Integración', key: 'item6'},
-                  {title: 'Al Fin de Cuentas', autor: 'Grupo Integración', key: 'item7'},
-                  {title: 'Estudiante del Interior', autor: 'Mario Bofill', key: 'item8'},
-                  {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item9'},
-                  {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item10'},
-                  {title: 'Kilómetro 11', autor: 'Tránsito Cocomarola', key: 'item11'},
-                  {title: 'Oración del Remanso', autor: 'Amandaye', key: 'item12'},
-                  {title: 'Estudiante del Interior', autor: 'Mario Bofill', key: 'item13'},
-                  {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item14'},
-                  {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item15'}]}
+        <FlatList style={styles.flatList}
+          horizontal= {false}
+          numColumns= {2}
+          data={[{title: 'Acordeón y Guitarra', anio: '2003', autor: 'La Yunta Correntina', thumb: require('../../resources/images/la-yunta-correntina.png'), key: 'item1'},
+                {title: 'Pese a Todo', anio: '2003', autor: 'Grupo Integración', thumb: require('../../resources/images/grupo-integracion.jpg'), key: 'item2'},
+                {title: 'El Canto de Nuestro Gente', autor: 'Grupo Reencuentro', thumb: require('../../resources/images/grupo-reencuentro.png'), key: 'item3'},
+                {title: 'Rumbeando pal Litoral', autor: 'Santiago "Bocha" Sheridan', thumb: require('../../resources/images/bocha.jpg'), key: 'item4'},
+                {title: 'Maravilloso Amor', autor: 'Mario Bofill', thumb: require('../../resources/images/estudiante.jpg'), key: 'item5'},
+                {title: 'Soy Forastero', autor: 'Grupo Integración', thumb: require('../../resources/images/grupo-integracion.jpg'), key: 'item6'},
+                {title: 'Al Fin de Cuentas', autor: 'Grupo Integración',thumb: require('../../resources/images/bocha.jpg'),  key: 'item7'},
+                {title: 'Estudiante del Interior', autor: 'Mario Bofill', thumb: require('../../resources/images/estudiante.jpg'), key: 'item8'},
+                {title: 'Neike Chamigo', autor: 'Julian Zini', thumb: require('../../resources/images/grupo-reencuentro.png'), key: 'item9'},
+                {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', thumb: require('../../resources/images/la-yunta-correntina.png'), key: 'item10'},
+                {title: 'Kilómetro 11', autor: 'Tránsito Cocomarola',thumb: require('../../resources/images/bocha.jpg'),  key: 'item11'},
+                {title: 'Oración del Remanso', autor: 'Amandaye', thumb: require('../../resources/images/grupo-reencuentro.png'), key: 'item12'},
+                {title: 'Estudiante del Interior', autor: 'Mario Bofill', thumb: require('../../resources/images/estudiante.jpg'), key: 'item13'},
+                {title: 'Neike Chamigo', autor: 'Julian Zini', thumb: require('../../resources/images/grupo-integracion.jpg'), key: 'item14'},
+                {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan',thumb: require('../../resources/images/bocha.jpg'),  key: 'item15'}]}
           renderItem={({item, separators}) => (
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Player', {title: item.title, autor: item.autor, key: item.key})}
+            <TouchableOpacity style={styles.button}
+              onPress={() => this.props.navigation.navigate('Lista', {title: item.title, autor: item.autor, key: item.key})}
               onShowUnderlay={separators.highlight}
-              onHideUnderlay={separators.unhighlight}>
-              <View style={styles.lista}>
-                <Icon name='play-circle' size={40} color={'white'}/>
+              onHideUnderlay={separators.unhighlight}
+              >
+              <View style={styles.cell}>                    
+                <Image style={styles.thumb} source= {item.thumb} />
                 <Text style={styles.texto}>{item.title} - {item.autor}</Text>
               </View>
+              
             </TouchableOpacity>
-          )}
+            )}
         />
         </View>
     )
@@ -106,11 +111,33 @@ const styles = StyleSheet.create({
     fontFamily: 'berlin3',
     fontSize: 18, 
     marginHorizontal: 5, 
-    textAlign: 'left'
+    textAlign: 'center'
+  },
+  flatList: {
+    flex: 1,
+  },
+  cell: {
+    flexDirection: 'column',
+    width: WIDTH / 2 - 12,
+    alignItems: 'center'
+  },
+  thumb: {
+    resizeMode: 'contain',
+    width: WIDTH / 2 - 12,
+    height: HEIGHT / 2 - (SIZE_ICON * 3),
+  },
+  button: {
+    width: WIDTH / 2 - 10,
+    marginVertical: 5,
+    backgroundColor: '#6ABB3A',
+    borderWidth: 1,
+    borderColor: '#6ABB3A',
+    borderBottomColor: '#d1d1d1', 
+    marginBottom: 5,
+    alignItems: 'center'
   },
   lista: {
     flex: 1,
-    flexDirection: 'row',
     backgroundColor: '#6ABB3A',
     borderWidth: 1,
     borderColor: '#6ABB3A',

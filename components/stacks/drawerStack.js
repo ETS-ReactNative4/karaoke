@@ -9,6 +9,7 @@ import Festival from '../views/festival/festival';
 import Agenda from '../views/agenda/agenda';
 import Musica from '../views/musica/musica';
 import Player from '../views/musica/Player';
+import Lista from '../views/musica/lista';
 
 const AuthStack = createStackNavigator({ 
   Login: {screen: Login}
@@ -27,7 +28,8 @@ const DrawerStack = createStackNavigator({
   AuthStack: {screen: AuthStack},
   DrawerScreen: {screen: DrawerScreen},
   Karaoke: {screen: Karaoke},
-  Player: {screen: Player}
+  Player: {screen: Player},
+  Lista: {screen: Lista}
 },
 {
   headerMode: 'none',
