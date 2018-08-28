@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import DrawerStack from './components/stacks/drawerStack';
+import LoginStack from './components/stacks/tabBarBottom';
+import TabBarBottom from './components/stacks/tabBarBottom';
 import { Font, ScreenOrientation } from 'expo';
 
 export default class App extends React.Component {
@@ -21,7 +23,7 @@ export default class App extends React.Component {
  
   render() {
     return (
-        <DrawerStack style={styles.container} />
+        <LoginStack style={styles.container} />
     )
   }
 }
