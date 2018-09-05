@@ -3,16 +3,19 @@ import { StyleSheet, Text, View, TouchableOpacity, FlatList, Alert, Dimensions, 
 import { SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Font, ScreenOrientation } from 'expo';
+import ajax from '../../services/fetchMusica';
 import Player from './Player.js';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const SIZE_ICON = 60;
+const URI = 'http://192.168.0.101';
 
 export default class Musica extends React.Component {
 
   state = {
     fontLoaded: false,
+    temas: []
   };
 
   async componentDidMount() {
@@ -20,7 +23,9 @@ export default class Musica extends React.Component {
       'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });
 
-    this.setState({ fontLoaded: true });
+    const temas = await ajax.fetchMusica();
+    
+    this.setState({temas, fontLoaded: true});
 
     ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
@@ -50,34 +55,21 @@ export default class Musica extends React.Component {
         <FlatList style={styles.flatList}
           horizontal= {false}
           numColumns= {2}
-          data={[{title: 'Acordeón y Guitarra', anio: '2003', autor: 'La Yunta Correntina', thumb: require('../../resources/images/la-yunta-correntina.png'), key: 'item1'},
-                {title: 'Pese a Todo', anio: '2003', autor: 'Grupo Integración', thumb: require('../../resources/images/grupo-integracion.jpg'), key: 'item2'},
-                {title: 'El Canto de Nuestro Gente', autor: 'Grupo Reencuentro', thumb: require('../../resources/images/grupo-reencuentro.png'), key: 'item3'},
-                {title: 'Rumbeando pal Litoral', autor: 'Santiago "Bocha" Sheridan', thumb: require('../../resources/images/bocha.jpg'), key: 'item4'},
-                {title: 'Maravilloso Amor', autor: 'Mario Bofill', thumb: require('../../resources/images/estudiante.jpg'), key: 'item5'},
-                {title: 'Soy Forastero', autor: 'Grupo Integración', thumb: require('../../resources/images/grupo-integracion.jpg'), key: 'item6'},
-                {title: 'Al Fin de Cuentas', autor: 'Grupo Integración',thumb: require('../../resources/images/bocha.jpg'),  key: 'item7'},
-                {title: 'Estudiante del Interior', autor: 'Mario Bofill', thumb: require('../../resources/images/estudiante.jpg'), key: 'item8'},
-                {title: 'Neike Chamigo', autor: 'Julian Zini', thumb: require('../../resources/images/grupo-reencuentro.png'), key: 'item9'},
-                {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', thumb: require('../../resources/images/la-yunta-correntina.png'), key: 'item10'},
-                {title: 'Kilómetro 11', autor: 'Tránsito Cocomarola',thumb: require('../../resources/images/bocha.jpg'),  key: 'item11'},
-                {title: 'Oración del Remanso', autor: 'Amandaye', thumb: require('../../resources/images/grupo-reencuentro.png'), key: 'item12'},
-                {title: 'Estudiante del Interior', autor: 'Mario Bofill', thumb: require('../../resources/images/estudiante.jpg'), key: 'item13'},
-                {title: 'Neike Chamigo', autor: 'Julian Zini', thumb: require('../../resources/images/grupo-integracion.jpg'), key: 'item14'},
-                {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan',thumb: require('../../resources/images/bocha.jpg'),  key: 'item15'}]}
+          data={this.state.temas}
           renderItem={({item, separators}) => (
             <TouchableOpacity style={styles.button}
-              onPress={() => this.props.navigation.navigate('Lista', {title: item.title, autor: item.autor, key: item.key})}
+              onPress={() => this.props.navigation.navigate('Lista', {album: item.album})}
               onShowUnderlay={separators.highlight}
               onHideUnderlay={separators.unhighlight}
               >
               <View style={styles.cell}>                    
-                <Image style={styles.thumb} source= {item.thumb} />
-                <Text style={styles.texto}>{item.title} - {item.autor}</Text>
+                <Image style={styles.thumb} source= {{uri: URI + item.thumb}} />
+                <Text style={styles.texto}>{item.album} - {item.autor}</Text>
               </View>
               
             </TouchableOpacity>
             )}
+            keyExtractor={item => item.id.toString()}
         />
         </View>
     )

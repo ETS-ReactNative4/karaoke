@@ -3,11 +3,15 @@ import { StyleSheet, Text, View, TouchableOpacity, FlatList, Alert, Dimensions }
 import { SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Font, ScreenOrientation } from 'expo';
+import ajax from '../../services/fetchMusica';
+
+const URI = 'http://192.168.0.101';
 
 export default class Lista extends React.Component {
 
   state = {
     fontLoaded: false,
+    temas: []
   };
 
   async componentDidMount() {
@@ -15,7 +19,9 @@ export default class Lista extends React.Component {
       'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });
 
-    this.setState({ fontLoaded: true });
+    //const temas = await ajax.fetchMusica();
+    const temas = await ajax.fetchAlbum(this.props.navigation.state.params.album);
+    this.setState({ temas, fontLoaded: true });
 
     ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
@@ -43,35 +49,19 @@ export default class Lista extends React.Component {
           placeholder='Buscar...' />
         </View>
         <FlatList
-          // ItemSeparatorComponent={(
-          //   <View style={[style.separator, highlighted && {marginLeft: 0}]} />
-          // )}
-          data={[{title: 'Camino a Mburucuya', autor: 'La Yunta Correntina', thumb: require('../../resources/images/la-yunta-correntina.png'), key: 'item1'},
-                  {title: 'Cañada Fragosa', autor: 'Grupo Integración', thumb: require('../../resources/images/grupo-integracion.jpg'), key: 'item2'},
-                  {title: 'Basilio Mago', autor: 'Grupo Reencuentro', thumb: require('../../resources/images/grupo-reencuentro.png'), key: 'item3'},
-                  {title: 'Viejo Caa Cati', autor: 'Santiago "Bocha" Sheridan', key: 'item4'},
-                  {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item5'},
-                  {title: 'Soy Forastero', autor: 'Grupo Integración', key: 'item6'},
-                  {title: 'Al Fin de Cuentas', autor: 'Grupo Integración', key: 'item7'},
-                  {title: 'Estudiante del Interior', autor: 'Mario Bofill', key: 'item8'},
-                  {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item9'},
-                  {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item10'},
-                  {title: 'Kilómetro 11', autor: 'Tránsito Cocomarola', key: 'item11'},
-                  {title: 'Oración del Remanso', autor: 'Amandaye', key: 'item12'},
-                  {title: 'Estudiante del Interior', autor: 'Mario Bofill', key: 'item13'},
-                  {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item14'},
-                  {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item15'}]}
-          renderItem={({item, separators}) => (
+          data={this.state.temas}
+          renderItem={({item, separators}) => (  
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Player', {title: item.title, autor: item.autor, thumb: item.thumb, key: item.key})}
+              onPress={() => this.props.navigation.navigate('Player', {album: item.album, index: item.track_id})}
               onShowUnderlay={separators.highlight}
               onHideUnderlay={separators.unhighlight}>
               <View style={styles.lista}>
                 <Icon name='play-circle' size={40} color={'white'}/>
-                <Text style={styles.texto}>{item.title} - {item.autor}</Text>
+                <Text style={styles.texto}>{item.titulo} - {item.autor}</Text>
               </View>
             </TouchableOpacity>
           )}
+          keyExtractor={item => item.id.toString()}
         />
         </View>
     )
