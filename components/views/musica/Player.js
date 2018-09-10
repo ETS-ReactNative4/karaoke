@@ -10,6 +10,9 @@ import {
 } from 'react-native';
 import { Asset, Audio, Font, Video } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons';
+import ajax from '../../services/fetchMusica';
+
+const URI = 'http://192.168.0.101';
 
 class Icon {
   constructor(module, width, height) {
@@ -21,40 +24,18 @@ class Icon {
 }
 
 class PlaylistItem {
-  constructor(name, uri, isVideo) {
+  constructor(name, autor, album, uri, thumb, isVideo) {
     this.name = name;
+    this.autor = autor;
+    this.album = album;
     this.uri = uri;
+    this.thumb = thumb;
     this.isVideo = false;
   }
 }
 
-const PLAYLIST = [
-  new PlaylistItem(
-    'Camino a Mburucuya',
-    require('../../resources/musica/01_camino_a_mburucuya.mp3'),
-    false
-  ),
-  new PlaylistItem(
-    'Cañada Fragosa Bocha',
-    require('../../resources/musica/02_canada_fragosa.mp3'),
-    false
-  ),
-  new PlaylistItem(
-    'Basilio Mago',
-    require('../../resources/musica/03_basilio_mago.mp3'),
-    false
-  ),
-  new PlaylistItem(
-    'Viejo Caa Cati',
-    require('../../resources/musica/04_viejo_caa_cati.mp3'),
-    false
-  ),
-  new PlaylistItem(
-    'Soy Forastero',
-    require('../../resources/musica/05_soy_forastero.mp3'),
-    false
-  ),
-];
+
+
 
 const ICON_THROUGH_EARPIECE = 'speaker-phone';
 const ICON_THROUGH_SPEAKER = 'speaker';
@@ -86,7 +67,7 @@ const FONT_SIZE = 16;
 const LOADING_STRING = '... cargando ...';
 const BUFFERING_STRING = '...buffering...';
 const RATE_SCALE = 3.0;
-const VIDEO_CONTAINER_HEIGHT = DEVICE_HEIGHT * 2.0 / 5.0 - FONT_SIZE * 2;
+const VIDEO_CONTAINER_HEIGHT = DEVICE_HEIGHT / 2.0 - FONT_SIZE;
 
 export default class Player extends React.Component {
   constructor(props) {
@@ -95,9 +76,12 @@ export default class Player extends React.Component {
     this.isSeeking = false;
     this.shouldPlayAtEndOfSeek = false;
     this.playbackInstance = null;
+    
     this.state = {
       showVideo: false,
       playbackInstanceName: LOADING_STRING,
+      playbackInstanceThumb: null,
+      playbackInstanceAutor: null,
       loopingType: LOOPING_TYPE_ALL,
       muted: false,
       playbackInstancePosition: null,
@@ -116,12 +100,19 @@ export default class Player extends React.Component {
       useNativeControls: false,
       fullscreen: false,
       throughEarpiece: false,
+      temas: [],
+      PLAYLIST : [],
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
 
     this._isMounted = true;
+
+    const temas = await ajax.fetchAlbum(this.props.navigation.state.params.album);
+    this.setState({ temas: temas });
+
+    await this.LoadPlaylist(this.state.temas);
     
     Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
@@ -144,6 +135,23 @@ export default class Player extends React.Component {
     this._isMounted = false;
   }
 
+  LoadPlaylist(temas) {
+    
+    //this.setState({ PLAYLIST : this.newItem(temas) });
+    for(var i=0; i < temas.length; i++) {
+      
+      this.state.PLAYLIST.push(new PlaylistItem(
+        this.state.temas[i].titulo,
+        this.state.temas[i].autor,
+        this.state.temas[i].album,
+        URI + this.state.temas[i].url,
+        URI + this.state.temas[i].thumb,
+        false
+        )
+      )
+    }
+  }
+
   async _loadNewPlaybackInstance(playing) {
     if (this.playbackInstance != null) {
       await this.playbackInstance.unloadAsync();
@@ -151,8 +159,8 @@ export default class Player extends React.Component {
       this.playbackInstance = null;
     }
 
-    const source = PLAYLIST[this.index].uri;
-    //const source = { uri: PLAYLIST[this.index].uri };
+    //const source = this.state.PLAYLIST[this.index].uri;
+    const source = { uri: this.state.PLAYLIST[this.index].uri };
     //const source = require('../../resources/musica/01_camino_a_mburucuya.mp3');
     const initialStatus = {
       shouldPlay: playing,
@@ -165,7 +173,7 @@ export default class Player extends React.Component {
       // androidImplementation: 'MediaPlayer',
     };
 
-    if (PLAYLIST[this.index].isVideo) {
+    if (this.state.PLAYLIST[this.index].isVideo) {
       this._video.setOnPlaybackStatusUpdate(this._onPlaybackStatusUpdate);
       await this._video.loadAsync(source, initialStatus);
       this.playbackInstance = this._video;
@@ -199,8 +207,10 @@ export default class Player extends React.Component {
       });
     } else {
       this.setState({
-        playbackInstanceName: PLAYLIST[this.index].name,
-        showVideo: PLAYLIST[this.index].isVideo,
+        playbackInstanceName: this.state.PLAYLIST[this.index].name,
+        playbackInstanceThumb: this.state.PLAYLIST[this.index].thumb,
+        playbackInstanceAutor: this.state.PLAYLIST[this.index].autor,
+        showVideo: this.state.PLAYLIST[this.index].isVideo,
         isLoading: false,
       });
     }
@@ -263,7 +273,7 @@ export default class Player extends React.Component {
   };
 
   _advanceIndex(forward) {
-    this.index = (this.index + (forward ? 1 : PLAYLIST.length - 1)) % PLAYLIST.length;
+    this.index = (this.index + (forward ? 1 : this.state.PLAYLIST.length - 1)) % this.state.PLAYLIST.length;
   }
 
   async _updatePlaybackInstanceForIndex(playing) {
@@ -442,8 +452,11 @@ export default class Player extends React.Component {
       <View style={styles.container}>
         <View />
         <View style={styles.nameContainer}>
-          <Text style={[styles.text, { fontFamily: 'berlin3' }]}>
+          <Text style={[styles.text1, { fontFamily: 'berlin3' }]}>
             {this.state.playbackInstanceName}
+          </Text>
+          <Text style={[styles.text1, { fontFamily: 'berlin3' }]}>
+            {this.state.playbackInstanceAutor}
           </Text>
         </View>
         <View style={styles.space} />
@@ -467,7 +480,7 @@ export default class Player extends React.Component {
             onReadyForDisplay={this._onReadyForDisplay}
             useNativeControls={this.state.useNativeControls}
           />
-          <Image source={require('../../resources/images/cultura.png')} style={styles.backgroundVideo} />
+          <Image source= {{ uri: this.state.playbackInstanceThumb}} style={styles.backgroundVideo} />
         </View>
         <View
           style={[
@@ -671,8 +684,9 @@ const styles = StyleSheet.create({
     height: VIDEO_CONTAINER_HEIGHT,
   },
   backgroundVideo: {
-    height: VIDEO_CONTAINER_HEIGHT,
-    maxWidth: DEVICE_WIDTH,
+    resizeMode: 'contain',
+    height: VIDEO_CONTAINER_HEIGHT - FONT_SIZE,
+    width: DEVICE_WIDTH - 20,
   },
   video: {
     maxWidth: DEVICE_WIDTH,
@@ -701,6 +715,14 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZE,
     minHeight: FONT_SIZE,
     color: 'white',
+    textAlign: 'center',
+  },
+  text1: {
+    fontSize: FONT_SIZE,
+    minHeight: FONT_SIZE,
+    color: 'white',
+    textAlign: 'center',
+    marginTop: 10,
   },
   buffering: {
     textAlign: 'left',

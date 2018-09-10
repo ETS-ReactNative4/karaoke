@@ -52,7 +52,7 @@ export default class Lista extends React.Component {
           data={this.state.temas}
           renderItem={({item, separators}) => (  
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Player', {album: item.album, index: item.track_id})}
+              onPress={() => this.props.navigation.navigate('Player', {album: item.album, index: item.track_id, temas: this.state.temas })}
               onShowUnderlay={separators.highlight}
               onHideUnderlay={separators.unhighlight}>
               <View style={styles.lista}>
