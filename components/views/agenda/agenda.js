@@ -33,7 +33,11 @@ export default class Agenda extends React.Component {
     });
 
     this.setState({ fontLoaded: true });
-    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+    
+  }
+
+  async componentWillMount() {
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
   _renderView = () => {

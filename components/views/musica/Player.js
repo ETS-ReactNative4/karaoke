@@ -12,8 +12,6 @@ import { Asset, Audio, Font, Video } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons';
 import ajax from '../../services/fetchMusica';
 
-const URI = 'http://192.168.0.101';
-
 class Icon {
   constructor(module, width, height) {
     this.module = module;
@@ -34,8 +32,9 @@ class PlaylistItem {
   }
 }
 
+//CONSTANTES
 
-
+const URI = 'http://192.168.0.101';
 
 const ICON_THROUGH_EARPIECE = 'speaker-phone';
 const ICON_THROUGH_SPEAKER = 'speaker';
@@ -76,7 +75,7 @@ export default class Player extends React.Component {
     this.isSeeking = false;
     this.shouldPlayAtEndOfSeek = false;
     this.playbackInstance = null;
-    
+    this.mounted = true;
     this.state = {
       showVideo: false,
       playbackInstanceName: LOADING_STRING,
@@ -106,38 +105,37 @@ export default class Player extends React.Component {
   }
 
   async componentDidMount() {
+    if(this.mounted) {
+      this.mounted = false;
 
-    this._isMounted = true;
+      const temas = await ajax.fetchAlbum(this.props.navigation.state.params.album);
+      this.setState({ temas: temas });
 
-    const temas = await ajax.fetchAlbum(this.props.navigation.state.params.album);
-    this.setState({ temas: temas });
+      await this.LoadPlaylist(this.state.temas);
+      
+      Audio.setAudioModeAsync({
+        allowsRecordingIOS: false,
+        interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+        playsInSilentModeIOS: true,
+        shouldDuckAndroid: true,
+        interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+        playThroughEarpieceAndroid: false,
+      });
 
-    await this.LoadPlaylist(this.state.temas);
-    
-    Audio.setAudioModeAsync({
-      allowsRecordingIOS: false,
-      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
-      playsInSilentModeIOS: true,
-      shouldDuckAndroid: true,
-      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-      playThroughEarpieceAndroid: false,
-    });
-    (async () => {
       await Font.loadAsync({
         ...MaterialIcons.font,
         'berlin3': require('../../assets/fonts/berlin3.ttf'),
       });
+
       this.setState({ fontLoaded: true });
-    })();
+    }
   }
 
   componentWillUnmount() {
-    this._isMounted = false;
+    this.mounted = false;
   }
 
   LoadPlaylist(temas) {
-    
-    //this.setState({ PLAYLIST : this.newItem(temas) });
     for(var i=0; i < temas.length; i++) {
       
       this.state.PLAYLIST.push(new PlaylistItem(
@@ -159,7 +157,6 @@ export default class Player extends React.Component {
       this.playbackInstance = null;
     }
 
-    //const source = this.state.PLAYLIST[this.index].uri;
     const source = { uri: this.state.PLAYLIST[this.index].uri };
     //const source = require('../../resources/musica/01_camino_a_mburucuya.mp3');
     const initialStatus = {

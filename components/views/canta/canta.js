@@ -3,25 +3,33 @@ import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image, Dimensions }
 import { SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Font, ScreenOrientation } from 'expo';
+import ajax from '../../services/fetchVideo';
+
+const URI = 'http://192.168.0.101';
 
 export default class Canta extends React.Component {
   
   state = {
     fontLoaded: false,
+    mounted: true,
+    videos: null,
   };
 
-  async componentDidMount() {
-    await Font.loadAsync({
-      'berlin3': require('../../assets/fonts/berlin3.ttf'),
-    });
+  async componentWillMount() {
     await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
-    
-    this.setState({ fontLoaded: true });    
   }
 
-  // async componentWillUnmount() {
-  //   ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
-  // }
+  async componentDidMount() {
+    if(this.state.mounted) {
+      this.state.mounted = false;
+      await Font.loadAsync({
+        'berlin3': require('../../assets/fonts/berlin3.ttf'),
+      });
+      
+      const videos = await ajax.fetchVideos();
+      this.setState({ videos, fontLoaded: true });
+    }   
+  }
 
   _renderView = () => {
     return (
@@ -46,36 +54,20 @@ export default class Canta extends React.Component {
             placeholder='Buscar...' />
           </View>
           <FlatList
-            // ItemSeparatorComponent={(
-            //   <View style={[style.separator, highlighted && {marginLeft: 0}]} />
-            // )}
-            data={[{title: 'Arrebol', autor: 'Félix Chávez y Mateo Villalba', key: 'arrebol'},
-                    {title: 'Ñangapiri', autor: 'Amandayé', key: 'nangapiri'},
-                    {title: 'Yo Que Te Quiero Tanto', autor: 'Mario Bofill', key: 'yo-que-te-quiero-tanto'},
-                    {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item4'},
-                    {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item5'},
-                    {title: 'Kilómetro 11', autor: 'Tránsito Cocomarola', key: 'item6'},
-                    {title: 'Oración del Remanso', autor: 'Amandayé', key: 'item7'},
-                    {title: 'Estudiante del Interior', autor: 'Mario Bofill', key: 'item8'},
-                    {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item9'},
-                    {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item10'},
-                    {title: 'Kilómetro 11', autor: 'Tránsito Cocomarola', key: 'item11'},
-                    {title: 'Oración del Remanso', autor: 'Amandayé', key: 'item12'},
-                    {title: 'Estudiante del Interior', autor: 'Mario Bofill', key: 'item13'},
-                    {title: 'Neike Chamigo', autor: 'Julian Zini', key: 'item14'},
-                    {title: 'Camino a Mburucuya', autor: 'Santiago "Bocha" Sheridan', key: 'item15'}]}
+            data={this.state.videos}
             renderItem={({item, separators}) => (
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('Karaoke', {title: item.title, autor: item.autor, key: item.key})}
+                onPress={() => this.props.navigation.navigate('Karaoke', {id: item.video_id})}
                 onShowUnderlay={separators.highlight}
                 onHideUnderlay={separators.unhighlight}>
                 <View style={styles.lista}>
                 <Image style={styles.imagen}
-                        source={require('../../resources/images/estudiante.jpg')}/>
-                  <Text style={styles.detalles}>{item.title} - {item.autor}</Text>
+                        source={{ uri: URI + item.thumb}}/>
+                  <Text style={styles.detalles}>{item.titulo} - {item.autor}</Text>
                 </View>
               </TouchableOpacity>
             )}
+            keyExtractor={item => item.id.toString()}
           />
       </View>
     )
@@ -88,7 +80,7 @@ export default class Canta extends React.Component {
     //   </View>
     // );
     if(!this.state.fontLoaded) {
-    return ( <View style={styles.container}><Text>'Cargando..'</Text></View> );
+    return ( <View style={styles.container}><Text style={styles.detalles}>Cargando...</Text></View> );
     } else {
     return this._renderView();
     }

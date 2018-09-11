@@ -1,8 +1,7 @@
 import React from 'react';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator, NavigationActions } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import DrawerScreen from './drawerScreen';
 import Inicio from '../views/inicio/inicio';
 import Karaoke from '../views/canta/karaoke/karaoke';
 import Login from '../views/login/login';
@@ -13,8 +12,6 @@ import Musica from '../views/musica/musica';
 import Player from '../views/musica/Player';
 import Lista from '../views/musica/lista';
 
-
-
 const MusicaStack = createStackNavigator({
   Musica: {screen: Musica},
   Lista: {screen: Lista},
@@ -23,26 +20,44 @@ const MusicaStack = createStackNavigator({
   headerMode: 'none'
 });
 
-const VideoStack = createStackNavigator({
-  Canta: {screen: Canta},
-  Karaoke: {screen: Karaoke}
-},{
-  headerMode: 'none'
-});
-
 const tabBarBottom = createBottomTabNavigator(
   {
     Inicio: Inicio,
     Musica: MusicaStack,      
-    Canta: {screen: VideoStack,
-            navigationOptions: () => ({
-              tabBarLabel: 'Karaoke'
-            })},
+    Canta: {screen: Canta,
+              navigationOptions: () => ({
+                tabBarLabel: 'Karaoke'
+              }),
+            },
     Agenda: Agenda,
     Festival: Festival
   },
   {
+    initialRouteName: 'Inicio',
     navigationOptions: ({ navigation }) => ({
+      tabBarBottomOnPress: ({ previousScene, scene, jumpToIndex }) => {
+        const { route, focused, index } = scene;
+        if (focused) {
+          if (route.index > 0) {
+            const tabRoute = route.routeName;
+            const { routeName, key } = route.routes[0];
+            navigation.dispatch(
+              NavigationActions.navigate({ routeName: tabRoute })
+            );
+            navigation.dispatch(
+              NavigationActions.reset({
+                index: 0,
+                key,
+                actions: [NavigationActions.navigate({ routeName })]
+              })
+            );
+          } else {
+            jumpToIndex(index);
+          }
+        } else {
+          jumpToIndex(index);
+        }
+      },
       tabBarIcon: ({}) => {
         const { routeName } = navigation.state;
         let iconName;
@@ -77,7 +92,8 @@ const tabBarBottom = createBottomTabNavigator(
 
 const LoginStack = createStackNavigator({ 
   Login: {screen: Login},
-  tabBarBottom: {screen: tabBarBottom}
+  tabBarBottom: {screen: tabBarBottom},
+  Karaoke: Karaoke,
   },{
     headerMode: 'none'
   });

@@ -19,7 +19,6 @@ export default class Lista extends React.Component {
       'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });
 
-    //const temas = await ajax.fetchMusica();
     const temas = await ajax.fetchAlbum(this.props.navigation.state.params.album);
     this.setState({ temas, fontLoaded: true });
 

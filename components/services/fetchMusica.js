@@ -25,7 +25,7 @@ async fetchAlbum(al) {
 
 async fetchTema(id) {
         try {
-                let response = await fetch(URI + 'temas/' + id);
+                let response = await fetch(URI + 'tema/' + id);
                 let responseJsonData = await response.json();
                 return responseJsonData;
             }

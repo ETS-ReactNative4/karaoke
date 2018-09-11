@@ -27,7 +27,10 @@ export default class Musica extends React.Component {
     
     this.setState({temas, fontLoaded: true});
 
-    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+  }
+
+  async componentWillMount() {
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
   _renderView = () => {

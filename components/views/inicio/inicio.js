@@ -19,9 +19,12 @@ export default class Inicio extends React.Component {
     });
 
     this.setState({ fontLoaded: true });
-    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+    
   }
 
+  async componentWillMount() {
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+  }
 
   componentWillUnmount() {
     this.backHandler.remove();
