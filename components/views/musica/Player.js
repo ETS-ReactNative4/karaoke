@@ -11,6 +11,7 @@ import {
 import { Asset, Audio, Font, Video } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons';
 import ajax from '../../services/fetchMusica';
+import URL from '../../config';
 
 class Icon {
   constructor(module, width, height) {
@@ -34,7 +35,7 @@ class PlaylistItem {
 
 //CONSTANTES
 
-const URI = 'http://192.168.0.101';
+const URI = URL;
 
 const ICON_THROUGH_EARPIECE = 'speaker-phone';
 const ICON_THROUGH_SPEAKER = 'speaker';

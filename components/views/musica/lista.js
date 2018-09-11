@@ -4,8 +4,9 @@ import { SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Font, ScreenOrientation } from 'expo';
 import ajax from '../../services/fetchMusica';
+import URL from '../../config';
 
-const URI = 'http://192.168.0.101';
+const URI = URL;
 
 export default class Lista extends React.Component {
 

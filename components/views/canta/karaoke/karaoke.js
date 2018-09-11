@@ -4,10 +4,9 @@ import { Camera, Permissions, FileSystem, Font, Video, Constants, ScreenOrientat
 import Iconm from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 import ajax from '../../../services/fetchVideo';
+import URL from '../../../config';
 
 const { width, height } = Dimensions.get('window');
-
-const URI = 'http://192.168.0.101';
 
 export default class Karaoke extends React.Component {
   state = {
@@ -155,7 +154,7 @@ onPictureSaved = async video => {
           </View>
           <View style={styles.videoL}>
             <Video
-                source={{uri: URI + this.state.video.url}}
+                source={{uri: URL + this.state.video.url}}
                 ref={(ref) => {
                   this.player = ref;
                 }}

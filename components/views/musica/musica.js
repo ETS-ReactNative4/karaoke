@@ -1,15 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Alert, Dimensions, Image } from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Font, ScreenOrientation } from 'expo';
 import ajax from '../../services/fetchMusica';
-import Player from './Player.js';
+import URL from '../../config';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const SIZE_ICON = 60;
-const URI = 'http://192.168.0.101';
+const URI = URL;
 
 export default class Musica extends React.Component {
 

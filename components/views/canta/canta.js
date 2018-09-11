@@ -1,18 +1,18 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image, Dimensions } from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { Font, ScreenOrientation } from 'expo';
 import ajax from '../../services/fetchVideo';
+import URL from '../../config';
 
-const URI = 'http://192.168.0.101';
+const URI = URL;
 
 export default class Canta extends React.Component {
   
   state = {
     fontLoaded: false,
     mounted: true,
-    videos: null,
+    videos: [],
   };
 
   async componentWillMount() {
@@ -27,7 +27,7 @@ export default class Canta extends React.Component {
       });
       
       const videos = await ajax.fetchVideos();
-      this.setState({ videos, fontLoaded: true });
+      this.setState({ videos: videos, fontLoaded: true });
     }   
   }
 
@@ -74,11 +74,6 @@ export default class Canta extends React.Component {
   }
   
   render() {
-    // return (
-    //   <View style={styles.container}>
-    //     {this.state.fontLoaded ? (this._renderView()) : null}
-    //   </View>
-    // );
     if(!this.state.fontLoaded) {
     return ( <View style={styles.container}><Text style={styles.detalles}>Cargando...</Text></View> );
     } else {
