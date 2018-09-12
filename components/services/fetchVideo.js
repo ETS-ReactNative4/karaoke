@@ -24,5 +24,16 @@ export default {
         catch(e) {
             console.log(e)
         }
+    },
+
+    async fetchLastVideo() {
+        try {
+                let response = await fetch(URI + 'lastVideo/');
+                let responseJsonData = await response.json();
+                return responseJsonData;
+            }
+        catch(e) {
+            console.log(e)
+        }
     }
 }

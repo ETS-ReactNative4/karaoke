@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Vibration, Alert, Dimensions, BackHandler } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Vibration, Alert, Dimensions, BackHandler, CameraRoll } from 'react-native';
 import { Camera, Permissions, FileSystem, Font, Video, Constants, ScreenOrientation } from 'expo';
 import Iconm from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
@@ -7,6 +7,7 @@ import ajax from '../../../services/fetchVideo';
 import URL from '../../../config';
 
 const { width, height } = Dimensions.get('window');
+const QUALITY = '4:3';
 
 export default class Karaoke extends React.Component {
   state = {
@@ -39,14 +40,19 @@ export default class Karaoke extends React.Component {
       this.props.navigation.goBack(); // works best when the goBack is async
     });
 
-    try {
-      await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'videos/',
-        {
-          intermediates: true,
-        }
-      )
-    } catch (e) {
-      console.log(e)
+    const existe = await FileSystem.getInfoAsync(`${FileSystem.documentDirectory}videos/`);
+    console.log(existe);
+
+    if(!existe) {
+      try {
+        await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'videos/',
+          {
+            intermediates: true,
+          }
+        )
+      } catch (e) {
+        console.log(e)
+      }
     }
 
     const video = await ajax.fetchVideo(this.props.navigation.state.params.id);
@@ -61,9 +67,10 @@ export default class Karaoke extends React.Component {
 
   async componentWillMount() {
     await ScreenOrientation.allow(ScreenOrientation.Orientation.LANDSCAPE);
+    const { status2 } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     const { status1 } = await Permissions.askAsync(Permissions.AUDIO_RECORDING);
-    const { status2 } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    
     this.setState({ hasCameraPermission: status === 'granted' });
     this.setState({ hasAudioRecordingPermission: status1 === 'granted' });
     this.setState({ hasCameraRollPermission: status2 === 'granted' });
@@ -80,26 +87,29 @@ export default class Karaoke extends React.Component {
   }
 
  startRecording = async () => {
-    Vibration.vibrate();
-    const { data } = await this.camera.recordAsync({});
-    console.log( data );
-  
-    async data => {
-      await FileSystem.moveAsync({
-        from: data.uri,
-        to: `${FileSystem.documentDirectory}videos/${Date.now()}.mp4`,
-      });
-  }
+      if (this.camera) {
+        Vibration.vibrate();
+        const data = await this.camera.recordAsync({ quality: QUALITY });
+        console.log( data.uri );
+
+        this.setState({ isRecording: false });
+        this.setState({ shouldPlay: false });
+        Vibration.vibrate();
+
+        async data => {
+          await FileSystem.copyAsync({
+            from: data.uri,
+            to: `${FileSystem.documentDirectory}videos/${this.state.video.id + '-' + Date.now()}.mp4`,
+          });
+        }
+      
+      //Guardar en la galeria del teléfono
+      CameraRoll.saveToCameraRoll(data.uri);
+          
+      console.log( data.uri );
+      console.log( `${FileSystem.documentDirectory}videos/${this.state.video.id + '-' + Date.now()}.mp4` );
+    }
 };
-
-handleMountError = ({ message }) => console.error(message);
-
-onPictureSaved = async video => {
-  await FileSystem.copyAsync({
-    from: video.uri,
-    to: `${FileSystem.documentDirectory}videos/${Date.now()}.mp4`,
-  });
-}
 
     //this.setState({ fileUrl: uri });    
     //this.setState({ recording: false, processing: true, shouldPlay: false });
@@ -159,6 +169,7 @@ onPictureSaved = async video => {
                   this.player = ref;
                 }}
                 rate={1.0}
+                volume={0.3}
                 shouldPlay={this.state.shouldPlay}
                 onPlaybackStatusUpdate={this._onPlaybackStatusUpdate}
                 resizeMode="stretch"
