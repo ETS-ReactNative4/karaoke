@@ -210,7 +210,7 @@ export default class Karaoke extends React.Component {
     } else {
       return (
         <View style={styles.container}> 
-          {this.state.fontLoaded ? (this._renderViewL()) : null}
+          {this.state.fontLoaded ? (this._renderViewL()) : (<Text style={styles.titulo}>Cargando...</Text>)}
         </View>
       );
     }

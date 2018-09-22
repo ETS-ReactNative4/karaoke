@@ -56,10 +56,7 @@ export default class Agenda extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        
-        {this.state.fontLoaded ? (this._renderView()) : null}
-        {/* <Image style={styles.imagen} source={require('../../resources/images/festival.jpg')}/>
-        <Text style={styles.subTitulo}>Programa del Día</Text> */}
+        {this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.sectionItemTitle}>Cargando...</Text>)}
       </View>
     );
   }

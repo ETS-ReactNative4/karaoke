@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Alert, Dimensions, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Dimensions, Image } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { Font, ScreenOrientation } from 'expo';
 import ajax from '../../services/fetchMusica';
@@ -35,22 +35,21 @@ export default class Musica extends React.Component {
   _renderView = () => {
     return (
       <View>
-      <View style={{marginBottom: 10}}>
+        <View style={{margin: 5}}>
         <SearchBar
           clearIcon={{ color: 'gray', size: 15 }}
           searchIcon={{size: 55}}
-          // onChangeText={}
-          // onClear={}
           inputStyle={{
             backgroundColor: 'transparent',
-            color: 'gray'
+            color: 'white',
           }}
           containerStyle={{
-            width: Dimensions.get('window').width,
             backgroundColor: 'rgba(255,255,255, 0.40)', 
-            borderWidth: 2, 
-            borderRadius: 5,
-            borderColor: 'gray'
+            borderWidth: 0,
+            borderTopWidth: 0,
+            borderBottomWidth: 0, 
+            borderRadius: 30,
+            borderColor: '#6ABB3A'
           }}
           placeholder='Buscar...' />
         </View>
@@ -60,7 +59,7 @@ export default class Musica extends React.Component {
           data={this.state.temas}
           renderItem={({item, separators}) => (
             <TouchableOpacity style={styles.button}
-              onPress={() => this.props.navigation.navigate('Lista', {album: item.album})}
+              onPress={() => this.props.navigation.push('Lista', {album: item.album})}
               onShowUnderlay={separators.highlight}
               onHideUnderlay={separators.unhighlight}
               >
@@ -80,7 +79,7 @@ export default class Musica extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        { this.state.fontLoaded ? (this._renderView()) : null }
+        { this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.texto}>Cargando...</Text>) }
       </View>
     );
   }
@@ -101,6 +100,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   texto: {
+    flex: 1,
     color: 'white', 
     fontFamily: 'berlin3',
     fontSize: 18, 
@@ -109,6 +109,8 @@ const styles = StyleSheet.create({
   },
   flatList: {
     flex: 1,
+    width: WIDTH,
+    alignContent: 'center'
   },
   cell: {
     flexDirection: 'column',
@@ -122,7 +124,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: WIDTH / 2 - 10,
-    marginVertical: 5,
+    marginLeft: 5,
     backgroundColor: '#6ABB3A',
     borderWidth: 1,
     borderColor: '#6ABB3A',

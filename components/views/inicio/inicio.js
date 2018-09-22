@@ -1,11 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View, BackHandler, Dimensions } from 'react-native';
-import { Font, ScreenOrientation } from 'expo';
+import { StyleSheet, Text, View, BackHandler, Dimensions, ImageBackground, TouchableOpacity } from 'react-native';
+import { Font, ScreenOrientation, Constants } from 'expo';
+import ajax from '../../services/fetchVideo';
+import URL from '../../config';
+
+const { WIDTH, HEIGHT } = Dimensions.get('window');
 
 export default class Inicio extends React.Component {
 
+  
   state = {
     fontLoaded: false,
+    video: [],
   };
 
   async componentDidMount() {
@@ -19,7 +25,9 @@ export default class Inicio extends React.Component {
     });
 
     this.setState({ fontLoaded: true });
-    
+
+    const video = await ajax.fetchLastVideo();
+    this.setState({ video: video });
   }
 
   async componentWillMount() {
@@ -31,12 +39,30 @@ export default class Inicio extends React.Component {
     
   }
 
+  _onPress = () => {
+    this.props.navigation.navigate('Karaoke', {id: this.state.video.id});
+  }
+
   _renderView = () => {
     return (
       <View style={styles.container}>
         <Text style={styles.titulo}>Bienvenido a Karaoke Chamamecero</Text>
         <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raíces chamameceras, tus raíces...</Text>
-        <Text style={styles.texto}>Podrás cantar a karaoke algunos de los chamamé más conocidos y compartirlos.</Text>
+        
+        
+        <TouchableOpacity 
+          onPress={this._onPress.bind(this)}
+          style={styles.button}
+          >
+          <View style={styles.background}>
+          <View style={styles.top}>
+              <Text style={styles.info}>Cantá el nuevo Karaoke</Text>
+              <Text style={styles.info}>{this.state.video.titulo + ' - ' + this.state.video.autor}</Text>
+            </View>
+          <ImageBackground source={{ uri: URL + this.state.video.thumb }} style={styles.thumb} >
+          </ImageBackground>
+          </View>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -44,7 +70,7 @@ export default class Inicio extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        { this.state.fontLoaded ? (this._renderView()) : null }
+        { this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.texto}>Cargando...</Text>) }
       </View>
     )
   }
@@ -53,26 +79,25 @@ export default class Inicio extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 24,
+    paddingTop: Constants.statusBarHeight,
     backgroundColor: '#6ABB3A',
     alignItems: 'center',
     justifyContent: 'center',
   },
   titulo: {
-    flex: 2,
     fontFamily: 'berlin3',
     color: 'white',
-    //fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 28,
     textAlign: 'center',
+    marginBottom: 10,
   },
   texto: {
-    flex: 3,
-    marginHorizontal: 10,
+    marginHorizontal: 50,
     color: 'white',
     fontFamily: 'berlin3',
-    fontSize: 25,
+    fontSize: 20,
     textAlign: 'center',
+    marginBottom: 15,
   },
   texto1: {
     flex: 5,
@@ -81,5 +106,33 @@ const styles = StyleSheet.create({
     fontFamily: 'berlin3',
     fontSize: 20,
     textAlign: 'center',
+  },
+  thumblain: {
+    flex: 7,
+    width: WIDTH,
+    height: HEIGHT / 2,
+  },
+  thumb: {
+    width: 400,
+    height: 400,
+    margin: 0,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+  },
+  info: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    backgroundColor: 'transparent'
+  },
+  top: {
+    backgroundColor: 'rgba(255,255,255, 0.50)',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    height: 50,
+    alignItems: 'center',
+    justifyContent:'center',
+    margin: 0,
   }
 });

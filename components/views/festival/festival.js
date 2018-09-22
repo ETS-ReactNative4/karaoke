@@ -50,7 +50,7 @@ export default class Festival extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.scroll}>
-          {this.state.fontLoaded ? (this._renderView()) : null}
+          {this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.texto}>Cargando...</Text>)}
         </ScrollView>
       </View>
     )

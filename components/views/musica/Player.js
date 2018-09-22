@@ -7,6 +7,7 @@ import {
   Text,
   TouchableHighlight,
   View,
+  BackHandler,
 } from 'react-native';
 import { Asset, Audio, Font, Video } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -100,6 +101,7 @@ export default class Player extends React.Component {
       useNativeControls: false,
       fullscreen: false,
       throughEarpiece: false,
+      album: null,
       temas: [],
       PLAYLIST : [],
     };
@@ -110,7 +112,7 @@ export default class Player extends React.Component {
       this.mounted = false;
 
       const temas = await ajax.fetchAlbum(this.props.navigation.state.params.album);
-      this.setState({ temas: temas });
+      this.setState({ temas: temas, album: this.props.navigation.state.params.album });
 
       await this.LoadPlaylist(this.state.temas);
       
@@ -129,6 +131,11 @@ export default class Player extends React.Component {
       });
 
       this.setState({ fontLoaded: true });
+
+      //Habilito boton fisico atras
+      this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+        this.props.navigation.navigate('Lista'); // works best when the goBack is async
+      });
     }
   }
 
@@ -652,7 +659,7 @@ export default class Player extends React.Component {
               <View />
             </View>
           </View>
-        ) : null}
+        ) : null }
       </View>
     );
   }
