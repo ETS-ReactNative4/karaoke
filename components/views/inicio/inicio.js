@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Image, BackHandler, Dimensions, ImageBackground
 import { Font, ScreenOrientation, Constants } from 'expo';
 import ajax from '../../services/fetchVideo';
 import URL from '../../config';
-//import Fondo from '../../resources/images/fondo.jpeg';
 
 const { WIDTH, HEIGHT } = Dimensions.get('window');
 
@@ -47,7 +46,7 @@ export default class Inicio extends React.Component {
   _renderView = () => {
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../resources/images/fondo.jpg')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
+        <ImageBackground source={require('../../resources/images/fondo2.jpg')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
     justifyContent:'center',}} >
           <Text style={styles.titulo}>Karaoke Chamamecero</Text>
           <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raíces chamameceras, tus raíces...</Text>

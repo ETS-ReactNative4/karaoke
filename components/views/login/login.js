@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image, ImageBackground } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationActions } from 'react-navigation';
@@ -100,8 +100,9 @@ _renderButtonFacebook = () => {
 _renderView = () => {
   return (
     <View style={styles.top}>
-      <Text style={styles.titulo}>Karaoke Chamamecero</Text>
-      <IconM name='microphone-variant' size={70} color='white'/>
+      
+        <Text style={styles.titulo}>Karaoke Chamamecero</Text>
+        <IconM name='microphone-variant' size={70} color='white'/>
     </View>
   )
 }
@@ -109,8 +110,10 @@ _renderView = () => {
 render() {
     return (
       <View style={styles.container}>
+        
         { this.state.fontLoaded ? (this._renderView()) : null }
         {!this.state.userInfo ? (this._renderButtonFacebook()) : (this._renderUserInfo())}
+        
       </View>
     );
   }
