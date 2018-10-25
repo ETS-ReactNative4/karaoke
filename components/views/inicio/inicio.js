@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //paddingTop: Constants.statusBarHeight,
-    //backgroundColor: '#6ABB3A',
+    //backgroundColor: '#6CC159',
     //backgroundImage: `url(require("../../resources/images/fondo.jpeg"))`,
     alignItems: 'center',
     justifyContent: 'center',

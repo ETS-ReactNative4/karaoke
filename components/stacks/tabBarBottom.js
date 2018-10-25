@@ -81,10 +81,10 @@ const tabBarBottom = createBottomTabNavigator(
     tabBarOptions: {
       activeTintColor: 'white',
       inactiveTintColor: 'gray',
-      activeBackgroundColor: '#6ABB3A',
+      activeBackgroundColor: '#6CC159',
       style: {
         backgroundColor: '#133101',
-        borderTopColor: '#6ABB3A', 
+        borderTopColor: '#6CC159', 
       }
     }
   }

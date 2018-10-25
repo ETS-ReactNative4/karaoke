@@ -34,7 +34,7 @@ const DrawerScreen = createDrawerNavigator({
   headerMode: 'none',
   drawerWidth: Dimensions.get('window').width - 50,
   initialRouteName: 'Inicio', //Desabilitar en dev
-  drawerBackgroundColor: '#6ABB3A',
+  drawerBackgroundColor: '#6CC159',
   fontSize: 50,
     fontWeight: 100,
   contentOptions: {

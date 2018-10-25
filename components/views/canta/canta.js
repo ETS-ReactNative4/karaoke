@@ -50,7 +50,7 @@ export default class Canta extends React.Component {
               borderTopWidth: 0,
               borderBottomWidth: 0, 
               borderRadius: 30,
-              borderColor: '#6ABB3A'
+              borderColor: '#6CC159'
             }}
             placeholder='Buscar...' />
           </View>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 24,
-    backgroundColor: '#6ABB3A',
+    backgroundColor: '#6CC159',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -102,9 +102,9 @@ const styles = StyleSheet.create({
   lista: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#6ABB3A',
+    backgroundColor: '#6CC159',
     borderWidth: 1,
-    borderColor: '#6ABB3A',
+    borderColor: '#6CC159',
     borderBottomColor: '#d1d1d1', 
     marginBottom: 5,
     minHeight: 55,
