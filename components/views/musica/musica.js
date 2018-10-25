@@ -49,7 +49,7 @@ export default class Musica extends React.Component {
             borderTopWidth: 0,
             borderBottomWidth: 0, 
             borderRadius: 30,
-            borderColor: '#6CC159'
+            borderColor: '#8CA853'
           }}
           placeholder='Buscar...' />
         </View>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 24,
-    backgroundColor: '#6CC159',
+    backgroundColor: '#8CA853',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -125,18 +125,18 @@ const styles = StyleSheet.create({
   button: {
     width: WIDTH / 2 - 10,
     marginLeft: 5,
-    backgroundColor: '#6CC159',
+    backgroundColor: '#8CA853',
     borderWidth: 1,
-    borderColor: '#6CC159',
+    borderColor: '#8CA853',
     borderBottomColor: '#d1d1d1', 
     marginBottom: 5,
     alignItems: 'center'
   },
   lista: {
     flex: 1,
-    backgroundColor: '#6CC159',
+    backgroundColor: '#8CA853',
     borderWidth: 1,
-    borderColor: '#6CC159',
+    borderColor: '#8CA853',
     borderBottomColor: '#d1d1d1', 
     marginBottom: 5,
     minHeight: 55,
