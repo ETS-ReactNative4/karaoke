@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image, ImageBackg
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationActions } from 'react-navigation';
-import { Font, ScreenOrientation } from 'expo';
+import { Font, ScreenOrientation, Constants } from 'expo';
 
 export default class Login extends React.Component {
 
@@ -100,9 +100,8 @@ _renderButtonFacebook = () => {
 _renderView = () => {
   return (
     <View style={styles.top}>
-      
-        <Text style={styles.titulo}>Karaoke Chamamecero</Text>
-        <IconM name='microphone-variant' size={70} color='white'/>
+          <Text style={styles.titulo}>Karaoke Chamamecero</Text>
+          <IconM name='microphone-variant' size={70} color='white'/>
     </View>
   )
 }
@@ -110,10 +109,11 @@ _renderView = () => {
 render() {
     return (
       <View style={styles.container}>
-        
-        { this.state.fontLoaded ? (this._renderView()) : null }
-        {!this.state.userInfo ? (this._renderButtonFacebook()) : (this._renderUserInfo())}
-        
+        <ImageBackground source={require('../../resources/images/fondo2.jpg')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
+    justifyContent:'center',}} >
+          { this.state.fontLoaded ? (this._renderView()) : null }
+          {!this.state.userInfo ? (this._renderButtonFacebook()) : (this._renderUserInfo())}
+        </ImageBackground>
       </View>
     );
   }
@@ -122,7 +122,6 @@ render() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
     backgroundColor: '#8CA853',
     alignItems: 'center',
     justifyContent: 'center',
