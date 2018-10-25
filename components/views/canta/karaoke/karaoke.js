@@ -45,7 +45,8 @@ export default class Karaoke extends React.Component {
 
     if(!existe) {
       try {
-        await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'videos/',
+        await FileSystem.makeDirectoryAsync(`${FileSystem.documentDirectory}videos/`,
+        //await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'videos/',
           {
             intermediates: true,
           }
@@ -91,6 +92,8 @@ export default class Karaoke extends React.Component {
         Vibration.vibrate();
         const data = await this.camera.recordAsync({ quality: QUALITY });
         console.log( data.uri );
+        const path = `${FileSystem.documentDirectory}videos/${this.state.video.id + '-' + Date.now()}.mp4`;
+        console.log( path );
 
         this.setState({ isRecording: false });
         this.setState({ shouldPlay: false });
@@ -99,6 +102,7 @@ export default class Karaoke extends React.Component {
         async data => {
           await FileSystem.copyAsync({
             from: data.uri,
+            //to: `${FileSystem.documentDirectory}${this.state.video.id}.mp4`,
             to: `${FileSystem.documentDirectory}videos/${this.state.video.id + '-' + Date.now()}.mp4`,
           });
         }

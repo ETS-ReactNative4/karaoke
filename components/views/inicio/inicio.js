@@ -48,7 +48,7 @@ export default class Inicio extends React.Component {
       <View style={styles.container}>
         <Text style={styles.titulo}>Karaoke Chamamecero</Text>
         <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raíces chamameceras, tus raíces...</Text>
-        <Text style={styles.infoTop}>Cantá el nuevo Karaoke</Text>
+        <Text style={styles.infoTop}>Cantá el nuevo tema!</Text>
         
         <TouchableOpacity 
           onPress={this._onPress.bind(this)}
@@ -61,6 +61,8 @@ export default class Inicio extends React.Component {
           </View>
           <ImageBackground source={{ uri: URL + this.state.video.thumb }} style={styles.thumb} >
           </ImageBackground>
+          </View>
+          <View style={styles.bottom}>
           </View>
         </TouchableOpacity>
       </View>
@@ -85,15 +87,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   titulo: {
-    flex: 2,
+    flex: 1,
     fontFamily: 'berlin3',
     color: 'white',
     fontSize: 30,
     textAlign: 'center',
   },
   texto: {
-    flex: 2,
-    marginHorizontal: 50,
+    marginHorizontal: 10,
+    marginBottom: 95,
     color: 'white',
     fontFamily: 'berlin3',
     fontSize: 20,
@@ -116,8 +118,8 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
     margin: 0,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    //borderTopLeftRadius: 30,
+    //borderTopRightRadius: 30,
   },
   info: {
     color: 'white',
@@ -128,6 +130,7 @@ const styles = StyleSheet.create({
   },
   infoTop: {
     color: 'white',
+    marginBottom: 10,
     fontSize: 24,
     fontStyle: 'italic',
     //fontWeight: 'bold',
@@ -139,6 +142,15 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     height: 50,
+    alignItems: 'center',
+    justifyContent:'center',
+    margin: 0,
+  },
+  bottom: {
+    backgroundColor: 'rgba(255,255,255, 0.50)',
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    height: 10,
     alignItems: 'center',
     justifyContent:'center',
     margin: 0,
