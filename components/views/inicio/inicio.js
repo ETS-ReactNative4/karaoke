@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, BackHandler, Dimensions, ImageBackground, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, BackHandler, Dimensions, ImageBackground, TouchableOpacity } from 'react-native';
 import { Font, ScreenOrientation, Constants } from 'expo';
 import ajax from '../../services/fetchVideo';
 import URL from '../../config';
+//import Fondo from '../../resources/images/fondo.jpeg';
 
 const { WIDTH, HEIGHT } = Dimensions.get('window');
 
@@ -46,25 +47,28 @@ export default class Inicio extends React.Component {
   _renderView = () => {
     return (
       <View style={styles.container}>
-        <Text style={styles.titulo}>Karaoke Chamamecero</Text>
-        <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raíces chamameceras, tus raíces...</Text>
-        <Text style={styles.infoTop}>Cantá el nuevo tema!</Text>
-        
-        <TouchableOpacity 
-          onPress={this._onPress.bind(this)}
-          style={styles.button}
-          >
-          <View style={styles.background}>
-          <View style={styles.top}>
-              
-              <Text style={styles.info}>{this.state.video.titulo + ' - ' + this.state.video.autor}</Text>
-          </View>
-          <ImageBackground source={{ uri: URL + this.state.video.thumb }} style={styles.thumb} >
-          </ImageBackground>
-          </View>
-          <View style={styles.bottom}>
-          </View>
-        </TouchableOpacity>
+        <ImageBackground source={require('../../resources/images/fondo.jpg')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
+    justifyContent:'center',}} >
+          <Text style={styles.titulo}>Karaoke Chamamecero</Text>
+          <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raíces chamameceras, tus raíces...</Text>
+          <Text style={styles.infoTop}>Cantá el nuevo tema!</Text>
+          
+          <TouchableOpacity 
+            onPress={this._onPress.bind(this)}
+            style={styles.button}
+            >
+            <View style={styles.background}>
+            <View style={styles.top}>
+                
+                <Text style={styles.info}>{this.state.video.titulo + ' - ' + this.state.video.autor}</Text>
+            </View>
+            <ImageBackground source={{ uri: URL + this.state.video.thumb }} style={styles.thumb} >
+            </ImageBackground>
+            </View>
+            <View style={styles.bottom}>
+            </View>
+          </TouchableOpacity>
+        </ImageBackground>
       </View>
     )
   }
@@ -81,8 +85,9 @@ export default class Inicio extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#6ABB3A',
+    //paddingTop: Constants.statusBarHeight,
+    //backgroundColor: '#6ABB3A',
+    //backgroundImage: `url(require("../../resources/images/fondo.jpeg"))`,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -157,5 +162,8 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 8,
+    width: 300,
+    height: 300,
+    
   }
 });
