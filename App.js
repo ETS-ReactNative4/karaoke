@@ -16,6 +16,8 @@ export default class App extends React.Component {
       'berlin3': require('./components/assets/fonts/berlin3.ttf'),
     });
 
+      //Deshabilito warnings
+    console.disableYellowBox = true;
     this.setState({ fontLoaded: true });
     ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }

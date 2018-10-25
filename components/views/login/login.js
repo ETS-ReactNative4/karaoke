@@ -15,6 +15,7 @@ export default class Login extends React.Component {
   async componentDidMount() {
 
     await Font.loadAsync({
+      'podo': require('../../assets/fonts/podo.otf'),
       'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });
 
@@ -100,7 +101,7 @@ _renderButtonFacebook = () => {
 _renderView = () => {
   return (
     <View style={styles.top}>
-          <Text style={styles.titulo}>Karaoke Chamamecero</Text>
+          <Text style={styles.titulo}>KARAOKE CHAMAMÉ</Text>
           <IconM name='microphone-variant' size={70} color='white'/>
     </View>
   )
@@ -109,7 +110,7 @@ _renderView = () => {
 render() {
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../resources/images/fondo2.jpg')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
+        <ImageBackground source={require('../../resources/images/fondo3.jpg')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
     justifyContent:'center',}} >
           { this.state.fontLoaded ? (this._renderView()) : null }
           {!this.state.userInfo ? (this._renderButtonFacebook()) : (this._renderUserInfo())}
@@ -136,10 +137,11 @@ const styles = StyleSheet.create({
   titulo: {
     color: 'white',
     fontSize: 30,
+    marginTop: 10,
     textAlign: 'center',
     height: 50,
     marginBottom: 30,
-    fontFamily: 'berlin3',
+    fontFamily: 'podo',
   },
   button: {
     width: Dimensions.get('window').width - 5,

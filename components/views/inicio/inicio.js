@@ -21,7 +21,7 @@ export default class Inicio extends React.Component {
     });
 
     await Font.loadAsync({
-      'berlin3': require('../../assets/fonts/berlin3.ttf'),
+      'berlin3': require('../../assets/fonts/IndieFest.ttf'),
     });
 
     this.setState({ fontLoaded: true });
@@ -46,9 +46,9 @@ export default class Inicio extends React.Component {
   _renderView = () => {
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../resources/images/fondo2.jpg')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
+        <ImageBackground source={require('../../resources/images/fondo3.jpg')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
     justifyContent:'center',}} >
-          <Text style={styles.titulo}>Karaoke Chamamecero</Text>
+          <Text style={styles.titulo}>KARAOKE CHAMAMÉ</Text>
           <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raíces chamameceras, tus raíces...</Text>
           <Text style={styles.infoTop}>Cantá el nuevo tema!</Text>
           
@@ -92,9 +92,10 @@ const styles = StyleSheet.create({
   },
   titulo: {
     flex: 1,
-    fontFamily: 'berlin3',
+    fontFamily: 'podo',
     color: 'white',
-    fontSize: 30,
+    fontSize: 32,
+    marginBottom: 10,
     textAlign: 'center',
   },
   texto: {
@@ -102,6 +103,7 @@ const styles = StyleSheet.create({
     marginBottom: 95,
     color: 'white',
     fontFamily: 'berlin3',
+    //fontStyle: 'italic',
     fontSize: 20,
     textAlign: 'center',
   },
