@@ -46,9 +46,9 @@ export default class Inicio extends React.Component {
   _renderView = () => {
     return (
       <View style={styles.container}>
-        <Text style={styles.titulo}>Bienvenido a Karaoke Chamamecero</Text>
+        <Text style={styles.titulo}>Karaoke Chamamecero</Text>
         <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raíces chamameceras, tus raíces...</Text>
-        
+        <Text style={styles.infoTop}>Cantá el nuevo Karaoke</Text>
         
         <TouchableOpacity 
           onPress={this._onPress.bind(this)}
@@ -56,9 +56,9 @@ export default class Inicio extends React.Component {
           >
           <View style={styles.background}>
           <View style={styles.top}>
-              <Text style={styles.info}>Cantá el nuevo Karaoke</Text>
+              
               <Text style={styles.info}>{this.state.video.titulo + ' - ' + this.state.video.autor}</Text>
-            </View>
+          </View>
           <ImageBackground source={{ uri: URL + this.state.video.thumb }} style={styles.thumb} >
           </ImageBackground>
           </View>
@@ -85,19 +85,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   titulo: {
+    flex: 2,
     fontFamily: 'berlin3',
     color: 'white',
-    fontSize: 28,
+    fontSize: 30,
     textAlign: 'center',
-    marginBottom: 10,
   },
   texto: {
+    flex: 2,
     marginHorizontal: 50,
     color: 'white',
     fontFamily: 'berlin3',
     fontSize: 20,
     textAlign: 'center',
-    marginBottom: 15,
   },
   texto1: {
     flex: 5,
@@ -113,8 +113,8 @@ const styles = StyleSheet.create({
     height: HEIGHT / 2,
   },
   thumb: {
-    width: 400,
-    height: 400,
+    width: 300,
+    height: 300,
     margin: 0,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
@@ -126,6 +126,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: 'transparent'
   },
+  infoTop: {
+    color: 'white',
+    fontSize: 24,
+    fontStyle: 'italic',
+    //fontWeight: 'bold',
+    textAlign: 'center',
+    backgroundColor: 'transparent'
+  },
   top: {
     backgroundColor: 'rgba(255,255,255, 0.50)',
     borderTopLeftRadius: 30,
@@ -134,5 +142,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent:'center',
     margin: 0,
+  },
+  button: {
+    flex: 8,
   }
 });

@@ -1,8 +1,8 @@
 {
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 7784,
+  "expoServerNgrokUrl": "https://gy-58k.dusgab.karaoke.exp.direct",
+  "packagerNgrokUrl": "https://packager.gy-58k.dusgab.karaoke.exp.direct",
+  "ngrokPid": 13212
 }
