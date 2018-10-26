@@ -24,11 +24,7 @@ const MusicaStack = createStackNavigator({
 
 const GaleriaStack = createStackNavigator({
   Galeria: {screen: Galeria},
-  VideoKar: {screen: VideoKar,
-    navigationOptions: () => ({
-      tabBarVisible: false
-    }),
-  }
+  VideoKar: {screen: VideoKar}
 },
 {
   headerMode: 'none'

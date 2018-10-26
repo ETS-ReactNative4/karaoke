@@ -179,7 +179,7 @@ export default class Karaoke extends React.Component {
                 onPlaybackStatusUpdate={this._onPlaybackStatusUpdate}
                 resizeMode="stretch"
                 useNativeControls={this.state.control}
-                style={{ width: height / 2, height: width * 0.8, alignSelf: 'center'}}
+                style={{ width: height / 2, height: width * 0.7, alignSelf: 'center'}}
             />
             </View>
         </View>
