@@ -24,7 +24,19 @@ const MusicaStack = createStackNavigator({
 
 const GaleriaStack = createStackNavigator({
   Galeria: {screen: Galeria},
-  VideoKar: {screen: VideoKar},
+  VideoKar: {screen: VideoKar,
+    navigationOptions: () => ({
+      tabBarVisible: false
+    }),
+  }
+},
+{
+  headerMode: 'none'
+});
+
+const CantaStack = createStackNavigator({
+  Canta: {screen: Canta},
+  Karaoke: {screen: Karaoke},
 },{
   headerMode: 'none'
 });
@@ -33,7 +45,7 @@ const tabBarBottom = createBottomTabNavigator(
   {
     Inicio: Inicio,
     Musica: MusicaStack,      
-    Canta: {screen: Canta,
+    Canta: {screen: CantaStack,
               navigationOptions: () => ({
                 tabBarLabel: 'Karaoke'
               }),
@@ -104,10 +116,9 @@ const tabBarBottom = createBottomTabNavigator(
 
 const LoginStack = createStackNavigator({ 
   Login: {screen: Login},
-  tabBarBottom: {screen: tabBarBottom},
-  Karaoke: Karaoke,
-  },{
-    headerMode: 'none'
-  });
+  tabBarBottom: {screen: tabBarBottom}
+},{
+  headerMode: 'none'
+});
 
 export default LoginStack;
