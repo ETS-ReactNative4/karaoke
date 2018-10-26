@@ -1,5 +1,6 @@
 import URL from '../config';
-const URI = URL + '/ApiKaraoke/public/api/';
+//const URI = URL + '/ApiKaraoke/public/api/';
+const URI = URL + '/public/api/';
 //const URI = 'http://192.168.0.101/ApiKaraoke/public/api/';
 
 export default {
@@ -29,6 +30,17 @@ export default {
     async fetchLastVideo() {
         try {
                 let response = await fetch(URI + 'lastVideo/');
+                let responseJsonData = await response.json();
+                return responseJsonData;
+            }
+        catch(e) {
+            console.log(e)
+        }
+    },
+
+    async fetchVideoKaraoke() {
+        try {
+                let response = await fetch(URI + 'videoKaraoke/');
                 let responseJsonData = await response.json();
                 return responseJsonData;
             }

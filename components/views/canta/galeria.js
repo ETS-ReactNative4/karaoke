@@ -1,19 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Alert, Dimensions, BackHandler } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Dimensions, Image } from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { Font, ScreenOrientation } from 'expo';
 import ajax from '../../services/fetchMusica';
 import URL from '../../config';
 
 const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
+const SIZE_ICON = 60;
 const URI = URL;
 
 export default class Galeria extends React.Component {
 
   state = {
     fontLoaded: false,
-    temas: []
+    videos: []
   };
 
   async componentDidMount() {
@@ -21,52 +22,57 @@ export default class Galeria extends React.Component {
       'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });
 
-    const temas = await ajax.fetchAlbum(this.props.navigation.state.params.album);
-    this.setState({ temas, fontLoaded: true });
+    //const videos = await ajax.fetchMusica();
+    
+    //this.setState({videos, fontLoaded: true});
 
-    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+  }
 
-    //Habilito boton fisico atras
-    this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.navigation.goBack(); // works best when the goBack is async
-    });
+  async componentWillMount() {
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
   _renderView = () => {
     return (
       <View>
-      <View style={{margin: 5}}>
-          <SearchBar
-            clearIcon={{ color: 'gray', size: 15 }}
-            searchIcon={{size: 55}}
-            inputStyle={{
-              backgroundColor: 'transparent',
-              color: 'white',
-            }}
-            containerStyle={{
-              backgroundColor: 'rgba(255,255,255, 0.40)', 
-              borderWidth: 0,
-              borderTopWidth: 0,
-              borderBottomWidth: 0, 
-              borderRadius: 30,
-              borderColor: '#8CA853'
-            }}
-            placeholder='Buscar...' />
-          </View>
-        <FlatList
-          data={this.state.temas}
-          renderItem={({item, separators}) => (  
+        <View style={{margin: 5}}>
+        <SearchBar
+          clearIcon={{ color: 'gray', size: 15 }}
+          searchIcon={{size: 55}}
+          inputStyle={{
+            backgroundColor: 'transparent',
+            color: 'white',
+          }}
+          containerStyle={{
+            backgroundColor: 'rgba(255,255,255, 0.40)', 
+            borderWidth: 0,
+            borderTopWidth: 0,
+            borderBottomWidth: 0, 
+            borderRadius: 30,
+            borderColor: '#8CA853'
+          }}
+          placeholder='Buscar...' />
+        </View>
+        <FlatList style={styles.flatList}
+          horizontal= {false}
+          numColumns= {2}
+          //data={this.state.videos}
+          renderItem={({item, separators}) => (
             <TouchableOpacity style={styles.button}
-              onPress={() => this.props.navigation.push('Player', {album: item.album, index: item.track_id, temas: this.state.temas })}
+              onPress={() => this.props.navigation.push('Video', {id: item.id})}
               onShowUnderlay={separators.highlight}
-              onHideUnderlay={separators.unhighlight}>
-              <View style={styles.lista}>
-                <Icon name='play-circle' size={40} color={'white'}/>
-                <Text style={styles.texto}>{item.titulo} - {item.autor}</Text>
+              onHideUnderlay={separators.unhighlight}
+              >
+              <View style={styles.cell}>                    
+                {/* <Image style={styles.thumb} source= {{uri: URI + item.thumb}} /> */}
+                <Image style={styles.thumb} source= {require('../../resources/videos/galeria.mp4')} />
+                {/* <Text style={styles.texto}>{item.album} - {item.autor}</Text> */}
+                <Text style={styles.texto}>Arrebol - Dustin Gassmann</Text>
               </View>
+              
             </TouchableOpacity>
-          )}
-          keyExtractor={item => item.id.toString()}
+            )}
+            keyExtractor={item => item.id.toString()}
         />
         </View>
     )
@@ -100,23 +106,43 @@ const styles = StyleSheet.create({
     color: 'white', 
     fontFamily: 'berlin3',
     fontSize: 18, 
-    marginLeft: 10, 
-    textAlign: 'auto'
+    marginHorizontal: 5, 
+    textAlign: 'center'
+  },
+  flatList: {
+    flex: 1,
+    width: WIDTH,
+    alignContent: 'center'
+  },
+  cell: {
+    flexDirection: 'column',
+    width: WIDTH / 2 - 12,
+    alignItems: 'center'
+  },
+  thumb: {
+    resizeMode: 'contain',
+    width: WIDTH / 2 - 12,
+    height: HEIGHT / 2 - (SIZE_ICON * 3),
   },
   button: {
-    width: WIDTH,
+    width: WIDTH / 2 - 10,
+    marginLeft: 5,
+    backgroundColor: '#8CA853',
+    borderWidth: 1,
+    borderColor: '#8CA853',
+    borderBottomColor: '#d1d1d1', 
+    marginBottom: 5,
+    alignItems: 'center'
   },
   lista: {
     flex: 1,
-    flexDirection: 'row',
     backgroundColor: '#8CA853',
     borderWidth: 1,
     borderColor: '#8CA853',
     borderBottomColor: '#d1d1d1', 
     marginBottom: 5,
     minHeight: 55,
-    marginHorizontal: 5,
-    justifyContent: 'flex-start',
     alignItems: 'center',
+    marginHorizontal: 5
   },
 });
