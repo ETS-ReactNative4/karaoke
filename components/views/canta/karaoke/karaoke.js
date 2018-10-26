@@ -45,8 +45,8 @@ export default class Karaoke extends React.Component {
 
     if(!existe) {
       try {
-        await FileSystem.makeDirectoryAsync(`${FileSystem.documentDirectory}videos/`,
-        //await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'videos/',
+        //await FileSystem.makeDirectoryAsync(`${FileSystem.documentDirectory}videos/`,
+        await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'videos/',
           {
             intermediates: true,
           }
@@ -81,7 +81,7 @@ export default class Karaoke extends React.Component {
 
   async componentWillUnmount() {
     await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
-    this.backHandler.remove();
+    //this.backHandler.remove();
 
     await this.setState({ isRecording: false });
     await this.setState({ shouldPlay: false });
@@ -89,7 +89,7 @@ export default class Karaoke extends React.Component {
 
  startRecording = async () => {
       if (this.camera) {
-        Vibration.vibrate();
+        
         const data = await this.camera.recordAsync({ quality: QUALITY });
         console.log( data.uri );
         const path = `${FileSystem.documentDirectory}videos/${this.state.video.id + '-' + Date.now()}.mp4`;
@@ -110,8 +110,8 @@ export default class Karaoke extends React.Component {
       //Guardar en la galeria del teléfono
       CameraRoll.saveToCameraRoll(data.uri);
           
-      console.log( data.uri );
-      console.log( `${FileSystem.documentDirectory}videos/${this.state.video.id + '-' + Date.now()}.mp4` );
+      // console.log( data.uri );
+      // console.log( `${FileSystem.documentDirectory}videos/${this.state.video.id + '-' + Date.now()}.mp4` );
     }
 };
 
@@ -147,8 +147,9 @@ export default class Karaoke extends React.Component {
   }
 
   playRecording = function() {
-    this.setState({ isRecording: true });
+    Vibration.vibrate();
     this.setState({ shouldPlay: true });
+    this.setState({ isRecording: true });
     this.startRecording();
   }
 

@@ -25,6 +25,7 @@ export default class Galeria extends React.Component {
     //const videos = await ajax.fetchMusica();
     
     //this.setState({videos, fontLoaded: true});
+    this.setState({fontLoaded: true});
 
   }
 
@@ -34,8 +35,8 @@ export default class Galeria extends React.Component {
 
   _renderView = () => {
     return (
-      <View>
-        <View style={{margin: 5}}>
+      <View style={{flex: 1}}>
+        <View style={{height: 50, margin: 5, width: WIDTH - 5}}>
         <SearchBar
           clearIcon={{ color: 'gray', size: 15 }}
           searchIcon={{size: 55}}
@@ -53,10 +54,10 @@ export default class Galeria extends React.Component {
           }}
           placeholder='Buscar...' />
         </View>
-        <FlatList style={styles.flatList}
+        {/* <FlatList style={styles.flatList}
           horizontal= {false}
           numColumns= {2}
-          //data={this.state.videos}
+          data={this.state.videos}
           renderItem={({item, separators}) => (
             <TouchableOpacity style={styles.button}
               onPress={() => this.props.navigation.push('Video', {id: item.id})}
@@ -64,17 +65,24 @@ export default class Galeria extends React.Component {
               onHideUnderlay={separators.unhighlight}
               >
               <View style={styles.cell}>                    
-                {/* <Image style={styles.thumb} source= {{uri: URI + item.thumb}} /> */}
+                <Image style={styles.thumb} source= {{uri: URI + item.thumb}} />
                 <Image style={styles.thumb} source= {require('../../resources/videos/galeria.mp4')} />
-                {/* <Text style={styles.texto}>{item.album} - {item.autor}</Text> */}
+                <Text style={styles.texto}>{item.album} - {item.autor}</Text>
                 <Text style={styles.texto}>Arrebol - Dustin Gassmann</Text>
               </View>
               
             </TouchableOpacity>
             )}
             keyExtractor={item => item.id.toString()}
-        />
-        </View>
+          /> */}
+          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.push('VideoKar')} >
+              <View style={styles.cell}>                    
+                <Image style={styles.thumb} source= {require('../../resources/videos/arrebol-dustin.png')} />
+                <Text style={styles.texto}>Arrebol - Dustin Gassmann</Text>
+              </View>
+              
+            </TouchableOpacity>
+      </View>
     )
   }
 
@@ -102,11 +110,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   texto: {
-    flex: 1,
+    //flex: 1,
     color: 'white', 
     fontFamily: 'berlin3',
     fontSize: 18, 
-    marginHorizontal: 5, 
+    //marginHorizontal: 5, 
     textAlign: 'center'
   },
   flatList: {
@@ -125,13 +133,15 @@ const styles = StyleSheet.create({
     height: HEIGHT / 2 - (SIZE_ICON * 3),
   },
   button: {
+    //flex: 9,
+    //marginTop: 10,
     width: WIDTH / 2 - 10,
-    marginLeft: 5,
+    marginLeft: 10,
     backgroundColor: '#8CA853',
-    borderWidth: 1,
+    //borderWidth: 1,
     borderColor: '#8CA853',
     borderBottomColor: '#d1d1d1', 
-    marginBottom: 5,
+    //marginBottom: 5,
     alignItems: 'center'
   },
   lista: {

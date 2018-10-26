@@ -11,11 +11,20 @@ import Agenda from '../views/agenda/agenda';
 import Musica from '../views/musica/musica';
 import Player from '../views/musica/Player';
 import Lista from '../views/musica/lista';
+import Galeria from '../views/canta/galeria';
+import VideoKar from '../views/canta/video';
 
 const MusicaStack = createStackNavigator({
   Musica: {screen: Musica},
   Lista: {screen: Lista},
   Player: {screen: Player}
+},{
+  headerMode: 'none'
+});
+
+const GaleriaStack = createStackNavigator({
+  Galeria: {screen: Galeria},
+  VideoKar: {screen: VideoKar},
 },{
   headerMode: 'none'
 });
@@ -29,6 +38,7 @@ const tabBarBottom = createBottomTabNavigator(
                 tabBarLabel: 'Karaoke'
               }),
             },
+    Galeria: GaleriaStack,
     Agenda: Agenda,
     Festival: Festival
   },
@@ -68,6 +78,8 @@ const tabBarBottom = createBottomTabNavigator(
         } else if (routeName === 'Agenda') {
           iconName = 'event-note';
         } else if (routeName === 'Canta') {
+          iconName = 'videocam';
+        } else if (routeName === 'Galeria') {
           iconName = 'videocam';
         } else if (routeName === 'Festival') {
           iconName = 'book';
