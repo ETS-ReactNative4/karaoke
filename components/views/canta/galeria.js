@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Dimensions, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Dimensions, Image, ImageBackground } from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import { Font, ScreenOrientation } from 'expo';
+import { Font, ScreenOrientation, Constants } from 'expo';
 import ajax from '../../services/fetchMusica';
 import URL from '../../config';
 
@@ -35,8 +35,9 @@ export default class Galeria extends React.Component {
 
   _renderView = () => {
     return (
-      <View style={{flex: 1}}>
-        <View style={{height: 50, margin: 5, width: WIDTH - 5}}>
+      // <View style={{flex: 1}}>
+        <ImageBackground source={require('../../resources/images/fondo3.jpg')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight}} >
+          <View style={{height: 50, margin: 5, width: WIDTH - 5}}>
         <SearchBar
           clearIcon={{ color: 'gray', size: 15 }}
           searchIcon={{size: 55}}
@@ -82,7 +83,8 @@ export default class Galeria extends React.Component {
               </View>
               
             </TouchableOpacity>
-      </View>
+        </ImageBackground>
+      // </View>
     )
   }
 
@@ -98,8 +100,6 @@ export default class Galeria extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 24,
-    backgroundColor: '#8CA853',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -137,7 +137,6 @@ const styles = StyleSheet.create({
     //marginTop: 10,
     width: WIDTH / 2 - 10,
     marginLeft: 10,
-    backgroundColor: '#8CA853',
     //borderWidth: 1,
     borderColor: '#8CA853',
     borderBottomColor: '#d1d1d1', 

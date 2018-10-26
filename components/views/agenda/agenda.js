@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, SectionList, Image, Dimensions } from 'react-native';
-import { Font, ScreenOrientation } from 'expo';
+import { StyleSheet, Text, View, ScrollView, SectionList, Image, Dimensions, ImageBackground} from 'react-native';
+import { Font, ScreenOrientation, Constants  } from 'expo';
 import { ListItem, Divider, Header } from 'react-native-elements';
 
+const WIDTH = Dimensions.get('window').width;
 function keyExtractor(item) {
   return item.key
 }
@@ -42,7 +43,7 @@ export default class Agenda extends React.Component {
 
   _renderView = () => {
     return (
-      <View>
+      <ImageBackground source={require('../../resources/images/fondo3.jpg')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
         <SectionList
           keyExtractor={keyExtractor}
           renderSectionHeader={renderSectionHeader}
@@ -50,7 +51,7 @@ export default class Agenda extends React.Component {
           sections={SECTIONS}
           style={styles.list}
         />
-      </View>
+      </ImageBackground>
     )
   }
   render() {
@@ -65,13 +66,12 @@ export default class Agenda extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 24,
-    backgroundColor: '#8CA853',
     alignItems: 'center',
     justifyContent: 'center',
   },
   list: {
     flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.50)',
     width: Dimensions.get('window').width,
   },
   sectionContainer: {
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     margin: 4,
   },
   sectionItemDate: {
-    color: 'gray',
+    color: 'white',
     fontFamily: 'berlin3',
     fontSize: 12,
     margin: 4,

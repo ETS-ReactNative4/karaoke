@@ -1,13 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Vibration, Alert, Dimensions, BackHandler, CameraRoll } from 'react-native';
-import { Camera, Permissions, FileSystem, Font, Video, Constants, ScreenOrientation } from 'expo';
+import { StyleSheet, Text, View, Vibration, Dimensions, BackHandler, ImageBackground } from 'react-native';
+import { Font, Video, Constants } from 'expo';
 import Iconm from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
-//import ajax from '../../../services/fetchVideo';
-//import URL from '../../../config';
 
-const { WIDTH, HEIGHT } = Dimensions.get('window');
-const QUALITY = '4:3';
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 export default class VideoKar extends React.Component {
   state = {
@@ -16,7 +14,6 @@ export default class VideoKar extends React.Component {
     control: true,
     key: "",
     like: false,
-    //video: null,
   };
 
   async componentDidMount() {
@@ -65,12 +62,11 @@ export default class VideoKar extends React.Component {
   //Render view LANDSCAPE
   _renderViewL = () => {
     return (
-      <View style={{flex: 1, width: WIDTH}}>
-        <View style={styles.top}>
+        <ImageBackground source={require('../../resources/images/fondo3.jpg')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
+          <View style={styles.top}>
               {/* <Text style={styles.tituloL}>{this.state.video.titulo} - </Text>
               <Text style={styles.subTituloL}>{this.state.video.autor}</Text> */}
               <Text style={styles.tituloL}>Arrebol - Dustin Gassmann</Text>
-              
         </View>
         {/* <View style={styles.center}> */}
           <View style={styles.video}>
@@ -109,7 +105,7 @@ export default class VideoKar extends React.Component {
                 }
           </View>
         </View>
-      </View>
+        </ImageBackground>
     )
   }
 
@@ -125,24 +121,16 @@ export default class VideoKar extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 24,
-    backgroundColor: '#8CA853',
     alignItems: 'center',
     justifyContent: 'center',
   },
   top: {
     flex: 2,
     width: WIDTH,
-    backgroundColor: '#8CA853'
   },
   center: { 
     flex: 5,
     width: WIDTH,
-  },
-  camera: {
-    flex: 5,
-    backgroundColor: 'transparent',
-    justifyContent: 'center',
   },
   video: {
     flex: 5,
@@ -193,7 +181,6 @@ const styles = StyleSheet.create({
   bottom: { 
     flex: 3,
     flexDirection: 'row',
-    backgroundColor: '#8CA853',
   },
   bottomLeft: {
     flex: 4,

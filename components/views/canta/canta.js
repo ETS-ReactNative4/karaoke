@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image, Dimensions, ImageBackground } from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import { Font, ScreenOrientation } from 'expo';
+import { Font, ScreenOrientation, Constants } from 'expo';
 import ajax from '../../services/fetchVideo';
 import URL from '../../config';
 
@@ -35,7 +35,8 @@ export default class Canta extends React.Component {
 
   _renderView = () => {
     return (
-      <View>
+      <ImageBackground source={require('../../resources/images/fondo3.jpg')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
+        <View style={styles.fondo}>
         <View style={{margin: 5}}>
           <SearchBar
             clearIcon={{ color: 'gray', size: 15 }}
@@ -70,6 +71,7 @@ export default class Canta extends React.Component {
             keyExtractor={item => item.id.toString()}
           />
       </View>
+      </ImageBackground>
     )
   }
   
@@ -85,10 +87,13 @@ export default class Canta extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 24,
-    backgroundColor: '#8CA853',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  fondo: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.50)',
+    width: WIDTH,
   },
   titulo: {
     color: 'white',
@@ -102,9 +107,9 @@ const styles = StyleSheet.create({
   lista: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#8CA853',
-    borderWidth: 1,
-    borderColor: '#8CA853',
+    //backgroundColor: '#8CA853',
+    borderBottomWidth: 1,
+    //borderColor: '#8CA853',
     borderBottomColor: '#d1d1d1', 
     marginBottom: 5,
     minHeight: 55,
