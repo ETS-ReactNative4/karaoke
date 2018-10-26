@@ -78,7 +78,7 @@ export default class Canta extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        { this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.detalles}>Cargando...</Text>) }
+        { this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.cargando}>Cargando...</Text>) }
       </View>
     );
   }
@@ -94,6 +94,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.50)',
     width: WIDTH,
+  },
+  cargando: {
+    flex: 1,
+    paddingTop: Constants.statusBarHeight,
+    color: 'white', 
+    fontFamily: 'berlin3',
+    fontSize: 28, 
+    marginHorizontal: 5, 
+    textAlign: 'center'
   },
   titulo: {
     color: 'white',

@@ -112,7 +112,7 @@ export default class VideoKar extends React.Component {
   render() {
       return (
         <View style={styles.container}> 
-          {this.state.fontLoaded ? (this._renderViewL()) : (<Text style={styles.titulo}>Cargando...</Text>)}
+          {this.state.fontLoaded ? (this._renderViewL()) : (<Text style={styles.cargando}>Cargando...</Text>)}
         </View>
       );
     }
@@ -123,6 +123,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  cargando: {
+    flex: 1,
+    paddingTop: Constants.statusBarHeight,
+    color: 'white', 
+    fontFamily: 'berlin3',
+    fontSize: 28, 
+    marginHorizontal: 5, 
+    textAlign: 'center'
   },
   top: {
     flex: 2,

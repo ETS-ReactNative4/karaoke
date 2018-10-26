@@ -91,7 +91,7 @@ export default class Galeria extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        { this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.texto}>Cargando...</Text>) }
+        { this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.cargando}>Cargando...</Text>) }
       </View>
     );
   }
@@ -108,6 +108,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 30,
     textAlign: 'center',
+  },
+  cargando: {
+    flex: 1,
+    paddingTop: Constants.statusBarHeight,
+    color: 'white', 
+    fontFamily: 'berlin3',
+    fontSize: 28, 
+    marginHorizontal: 5, 
+    textAlign: 'center'
   },
   texto: {
     //flex: 1,
