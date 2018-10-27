@@ -43,7 +43,6 @@ export default class Canta extends React.Component {
             searchIcon={{size: 55}}
             inputStyle={{
               backgroundColor: 'transparent',
-              color: 'white',
             }}
             containerStyle={{
               backgroundColor: 'rgba(255,255,255, 0.40)', 

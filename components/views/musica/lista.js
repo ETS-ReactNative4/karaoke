@@ -51,7 +51,6 @@ export default class Lista extends React.Component {
               borderBottomWidth: 0, 
               borderRadius: 30,
               borderColor: '#8CA853',
-              color: 'white',
             }}
             placeholder='Buscar...' />
           </View>

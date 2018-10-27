@@ -678,7 +678,6 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     backgroundColor: BACKGROUND_COLOR,
   },
-  wrapper: {},
   nameContainer: {
     height: FONT_SIZE,
   },

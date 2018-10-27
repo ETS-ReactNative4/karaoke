@@ -2,6 +2,7 @@
   "expo": {
     "sdkVersion": "27.0.0",
     "name": "karaoke",
+    "version": "1.0.0",
     "facebookScheme": "fb1755097877936704",
     "facebookAppId": "1755097877936704",
     "facebookDisplayName": "karaoke",
