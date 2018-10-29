@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "expoServerPort": 19000,
   "packagerPort": 19001,
 <<<<<<< HEAD
@@ -12,5 +13,13 @@
   "packagerNgrokUrl": "https://packager.gy-58k.dusgab.karaoke.exp.direct",
   "ngrokPid": 2972,
 >>>>>>> parent of 8e48cca... build apk
+=======
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+>>>>>>> parent of c58ad99... nptificaciones push
   "devToolsPort": 19002
 }

@@ -3,12 +3,15 @@ package com.karaoke;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import guichaguri.trackplayer.TrackPlayer;
+import org.reactnative.camera.RNCameraPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import guichaguri.trackplayer.TrackPlayer;
 import org.reactnative.camera.RNCameraPackage;
 import guichaguri.trackplayer.TrackPlayer;
 import com.brentvatne.react.ReactVideoPackage;
-
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -29,7 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List getPackages() {
       return Arrays.asList(
           new MainReactPackage(),
-            new ReactNativeOneSignalPackage(),
+            new VectorIconsPackage(),
             new TrackPlayer(),
             new RNCameraPackage(),
             new ReactVideoPackage(),

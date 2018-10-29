@@ -1,13 +1,3 @@
-buildscript {
-    repositories {
-        maven { url 'https://plugins.gradle.org/m2/' } // Gradle Plugin Portal 
-    }
-    dependencies {
-        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.10.0, 0.99.99]'
-    }
-}
-
-apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 apply plugin: "com.android.application"
 
 import com.android.build.OutputFile
@@ -104,8 +94,8 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
         applicationId "com.karaoke"
@@ -116,8 +106,6 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
-        manifestPlaceholders = [onesignal_app_id: "0ec4a132-f5c1-488d-baff-cf2e40596d58",
-        onesignal_google_project_number: "REMOTE"]
     }
     splits {
         abi {
