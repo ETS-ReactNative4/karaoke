@@ -48,7 +48,7 @@ export default class Inicio extends React.Component {
       <View style={styles.container}>
         <ImageBackground source={require('../../resources/images/fondo3.jpg')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
     justifyContent:'center',}} >
-          <Text style={styles.titulo}>CHAMAMÉ 2.0</Text>
+          <Text style={styles.titulo}>KARAOKE CHAMAMÉ</Text>
           <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raíces chamameceras, tus raíces...</Text>
           <Text style={styles.infoTop}>Cantá el nuevo tema!</Text>
           

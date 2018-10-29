@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import DrawerStack from './components/stacks/drawerStack';
 import LoginStack from './components/stacks/tabBarBottom';
+import TabBarBottom from './components/stacks/tabBarBottom';
 import { Font, ScreenOrientation } from 'expo';
 import OneSignal from 'react-native-onesignal';
 

@@ -1,9 +1,16 @@
 {
   "expoServerPort": 19000,
   "packagerPort": 19001,
+<<<<<<< HEAD
   "packagerPid": 4604,
   "expoServerNgrokUrl": "https://gy-58k.dusgab.karaoke.exp.direct",
   "packagerNgrokUrl": "https://packager.gy-58k.dusgab.karaoke.exp.direct",
   "ngrokPid": 216,
+=======
+  "packagerPid": 6908,
+  "expoServerNgrokUrl": "https://gy-58k.dusgab.karaoke.exp.direct",
+  "packagerNgrokUrl": "https://packager.gy-58k.dusgab.karaoke.exp.direct",
+  "ngrokPid": 2972,
+>>>>>>> parent of 8e48cca... build apk
   "devToolsPort": 19002
 }

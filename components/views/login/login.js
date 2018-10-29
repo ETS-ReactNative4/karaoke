@@ -101,7 +101,7 @@ _renderButtonFacebook = () => {
 _renderView = () => {
   return (
     <View style={styles.top}>
-          <Text style={styles.titulo}>CHAMAMÉ 2.0</Text>
+          <Text style={styles.titulo}>KARAOKE CHAMAMÉ</Text>
           <IconM name='microphone-variant' size={70} color='white'/>
     </View>
   )
