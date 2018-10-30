@@ -1,33 +1,9 @@
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-<<<<<<< HEAD
-  "packagerPid": 4604,
-  "expoServerNgrokUrl": "https://gy-58k.dusgab.karaoke.exp.direct",
-  "packagerNgrokUrl": "https://packager.gy-58k.dusgab.karaoke.exp.direct",
-  "ngrokPid": 216,
-=======
-=======
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
->>>>>>> parent of 8e48cca... build apk
-  "packagerPid": 6908,
-  "expoServerNgrokUrl": "https://gy-58k.dusgab.karaoke.exp.direct",
-  "packagerNgrokUrl": "https://packager.gy-58k.dusgab.karaoke.exp.direct",
-  "ngrokPid": 2972,
-<<<<<<< HEAD
->>>>>>> parent of 8e48cca... build apk
-=======
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
+  "devToolsPort": 19002,
   "expoServerNgrokUrl": null,
   "packagerNgrokUrl": null,
-  "ngrokPid": null,
->>>>>>> parent of c58ad99... nptificaciones push
-=======
->>>>>>> parent of 8e48cca... build apk
-  "devToolsPort": 19002
+  "ngrokPid": null
 }

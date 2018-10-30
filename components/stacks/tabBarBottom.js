@@ -76,7 +76,7 @@ const tabBarBottom = createBottomTabNavigator(
           jumpToIndex(index);
         }
       },
-      tabBarIcon: ({}) => {
+      tabBarIcon: () => {
         const { routeName } = navigation.state;
         let iconName;
         if (routeName === 'Inicio') {
