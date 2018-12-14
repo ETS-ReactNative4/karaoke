@@ -5,6 +5,8 @@ import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationActions } from 'react-navigation';
 import { Font, ScreenOrientation, Constants } from 'expo';
 
+const WIDTH = Dimensions.get('window').width;
+
 export default class Login extends React.Component {
 
   constructor(props) {
@@ -101,7 +103,7 @@ _renderButtonFacebook = () => {
 _renderView = () => {
   return (
     <View style={styles.top}>
-          <Text style={styles.titulo}>KARAOKE CHAMAMÉ</Text>
+          <Text style={styles.titulo}>CHAMAMÉ 2.0</Text>
           <IconM name='microphone-variant' size={70} color='white'/>
     </View>
   )
@@ -110,10 +112,14 @@ _renderView = () => {
 render() {
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../resources/images/fondo3.jpg')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
-    justifyContent:'center',}} >
+        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
+    justifyContent:'center'}} >
+        <View style={styles.fondo}>
           { this.state.fontLoaded ? (this._renderView()) : null }
           {!this.state.userInfo ? (this._renderButtonFacebook()) : (this._renderUserInfo())}
+        <Image style={styles.imagen} source={require('../../resources/images/logo.png')}/>
+        <Text style={styles.texto}>Gobierno de Corrientes</Text>
+        </View>
         </ImageBackground>
       </View>
     );
@@ -127,12 +133,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  fondo: {
+    flex: 1,
+    justifyContent:'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.50)',
+    width: WIDTH,
+  },
   top: {
     flex: 3,
     alignItems: 'center',
   },
   bottom: {
-    flex: 5,
+    flex: 3,
   },
   titulo: {
     color: 'white',
@@ -146,7 +159,7 @@ const styles = StyleSheet.create({
   button: {
     width: Dimensions.get('window').width - 5,
     height: 70,
-    backgroundColor: '#6893d4',
+    backgroundColor: '#3a589e',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 5,
@@ -168,6 +181,12 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontWeight: 'bold',
   },
+  texto: {
+    fontSize: 25,
+    color: 'white',
+    marginBottom: 20,
+    fontWeight: 'bold',
+  },
   avatar: {
     width: 100, 
     height: 100, 
@@ -180,6 +199,10 @@ const styles = StyleSheet.create({
     textAlign: 'center', 
     marginBottom: 10,
     color: 'white'
+  },
+  imagen: {
+    flex: 2,
+    resizeMode: 'center',
   }
 
 });

@@ -62,8 +62,9 @@ export default class VideoKar extends React.Component {
   //Render view LANDSCAPE
   _renderViewL = () => {
     return (
-        <ImageBackground source={require('../../resources/images/fondo3.jpg')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
-          <View style={styles.top}>
+        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
+        <View style={styles.fondo}>
+        <View style={styles.top}>
               {/* <Text style={styles.tituloL}>{this.state.video.titulo} - </Text>
               <Text style={styles.subTituloL}>{this.state.video.autor}</Text> */}
               <Text style={styles.tituloL}>Arrebol - Dustin Gassmann</Text>
@@ -71,7 +72,7 @@ export default class VideoKar extends React.Component {
         {/* <View style={styles.center}> */}
           <View style={styles.video}>
             <Video
-                //source={{uri: URL + this.state.video.url}}
+                //source={{uri: 'https://www.youtube.com/watch?v=Or4otjCGXio'}}
                 source={require('../../resources/videos/arrebol-dustin.mp4')}
                 ref={(ref) => {
                   this.player = ref;
@@ -105,6 +106,7 @@ export default class VideoKar extends React.Component {
                 }
           </View>
         </View>
+        </View>
         </ImageBackground>
     )
   }
@@ -132,6 +134,11 @@ const styles = StyleSheet.create({
     fontSize: 28, 
     marginHorizontal: 5, 
     textAlign: 'center'
+  },
+  fondo: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.50)',
+    width: WIDTH,
   },
   top: {
     flex: 2,

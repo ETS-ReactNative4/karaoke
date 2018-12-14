@@ -25,7 +25,7 @@ export default class Festival extends React.Component {
 
   _renderView = () => {
     return (
-      <ImageBackground source={require('../../resources/images/fondo3.jpg')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
+      <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
         <ScrollView style={styles.scroll}>
         <View style={styles.fondo}>
           <Text style={styles.titulo}>Fiesta Nacional del Chamamé</Text>
@@ -34,8 +34,6 @@ export default class Festival extends React.Component {
           <Text style={styles.texto}>La Fiesta Nacional del Chamamé 2019 ya tiene fecha. Se realizará del 11 al 20 de enero y se llamará “Chamamé de la Humanidad”, como correlato de la postulación ante la Unesco que impulsa el Gobierno Provincial con el apoyo de la Nación para que el género
           obtenga el reconocimiento internacional.</Text>
           <Image style={styles.imagen} source={require('../../resources/images/festival.jpg')}/>
-          <Text style={styles.subTitulo}>Programa del Día</Text>
-          <Image style={styles.imagen} source={require('../../resources/images/programa.jpeg')}/>
           <Text style={styles.subTitulo}>FIESTA DEL CHAMAMÉ</Text>
           <Text style={styles.texto}>La Fiesta del Chamamé se celebra en la ciudad de Corrientes, Argentina, específicamente en el Anfiteatro Cocomarola y en el Puente Pexoa, donde cada año durante varios días del mes de enero, suena y se baila el chamamé, un género musical de origen folclórico
           característico de la región oriental de Argentina, el Paraguay, Río Grande del Sur y algunos pueblos del sur de Brasil y Uruguay.</Text>

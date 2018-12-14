@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, BackHandler, Dimensions, ImageBackground, TouchableOpacity } from 'react-native';
-import { Font, ScreenOrientation, Constants } from 'expo';
+import { StyleSheet, Text, View, Image, BackHandler, Dimensions, ImageBackground, TouchableOpacity, Linking } from 'react-native';
+import { Font, ScreenOrientation, Video, Constants } from 'expo';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import ajax from '../../services/fetchVideo';
 import URL from '../../config';
 
@@ -11,6 +12,8 @@ export default class Inicio extends React.Component {
   
   state = {
     fontLoaded: false,
+    shouldPlay: false,
+    control: true,
     video: [],
   };
 
@@ -26,8 +29,8 @@ export default class Inicio extends React.Component {
 
     this.setState({ fontLoaded: true });
 
-    const video = await ajax.fetchLastVideo();
-    this.setState({ video: video });
+    //const video = await ajax.fetchLastVideo();
+    //this.setState({ video: video });
   }
 
   async componentWillMount() {
@@ -46,27 +49,79 @@ export default class Inicio extends React.Component {
   _renderView = () => {
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../resources/images/fondo3.jpg')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
+        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
     justifyContent:'center',}} >
-          <Text style={styles.titulo}>KARAOKE CHAMAMÉ</Text>
+      <View style={styles.fondo}>
+          <Text style={styles.titulo}>CHAMAMÉ 2.0</Text>
           <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raíces chamameceras, tus raíces...</Text>
-          <Text style={styles.infoTop}>Cantá el nuevo tema!</Text>
+          <Text style={styles.infoTop}>#FNCH2019</Text>
           
-          <TouchableOpacity 
-            onPress={this._onPress.bind(this)}
-            style={styles.button}
-            >
-            <View style={styles.background}>
-            <View style={styles.top}>
-                
-                <Text style={styles.info}>{this.state.video.titulo + ' - ' + this.state.video.autor}</Text>
+          <Video
+                //source={{uri: 'https://www.youtube.com/watch?v=Or4otjCGXio'}}
+                source={require('../../resources/videos/spot.mp4')}
+                ref={(ref) => {
+                  this.player = ref;
+                }}
+                rate={1.0}
+                volume={1}
+                shouldPlay={this.state.shouldPlay}
+                onPlaybackStatusUpdate={this._onPlaybackStatusUpdate}
+                resizeMode="stretch"
+                useNativeControls={this.state.control}
+                //style={{ width: height / 2, height: width * 0.8, alignSelf: 'center'}}
+                style={{ width: 400, height: 300, alignSelf: 'center'}}
+            />
+
+            <View style={styles.footer}>
+            <TouchableOpacity
+              onPress={ ()=> Linking.openURL('https://www.facebook.com/FNChamame') }
+              style={styles.btnClickContain}>
+              <View
+                style={styles.btnContainer}>
+                <Icon
+                  name='facebook-square'
+                  size={50}
+                  color='white'/>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={ ()=> Linking.openURL('https://www.instagram.com/FNChamame/') }
+              style={styles.btnClickContain}>
+              <View
+                style={styles.btnContainer}>
+                <Icon
+                  name='instagram'
+                  size={50}
+                  color='white'/>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={ ()=> Linking.openURL('https://www.youtube.com/channel/UC_gkRuW_H3CWVeNPUbB9Ehw') }
+              style={styles.btnClickContain}>
+              <View
+                style={styles.btnContainer}>
+                <Icon
+                  name='youtube'
+                  size={50}
+                  color='white'/>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={ ()=> Linking.openURL('https://twitter.com/FNChamame') }
+              style={styles.btnClickContain}>
+              <View
+                style={styles.btnContainer}>
+                <Icon
+                  name='twitter-square'
+                  size={50}
+                  color='white'/>
+              </View>
+            </TouchableOpacity>
             </View>
-            <ImageBackground source={{ uri: URL + this.state.video.thumb }} style={styles.thumb} >
-            </ImageBackground>
-            </View>
-            <View style={styles.bottom}>
-            </View>
-          </TouchableOpacity>
+          </View> 
         </ImageBackground>
       </View>
     )
@@ -97,6 +152,26 @@ const styles = StyleSheet.create({
     fontSize: 32,
     marginBottom: 10,
     textAlign: 'center',
+  },
+  btnClickContain: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  btnContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  fondo: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.50)',
+    width: WIDTH,
+  },
+  footer: {
+    flexDirection: 'row',
+    marginBottom: 10,
+    marginTop: 10,
   },
   texto: {
     marginHorizontal: 10,

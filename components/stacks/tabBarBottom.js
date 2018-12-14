@@ -47,7 +47,7 @@ const tabBarBottom = createBottomTabNavigator(
               }),
             },
     Galeria: GaleriaStack,
-    Agenda: Agenda,
+    Grilla: Agenda,
     Festival: Festival
   },
   {
@@ -83,7 +83,7 @@ const tabBarBottom = createBottomTabNavigator(
           iconName = 'home';
         } else if (routeName === 'Musica') {
           iconName = 'library-music';
-        } else if (routeName === 'Agenda') {
+        } else if (routeName === 'Grilla') {
           iconName = 'event-note';
         } else if (routeName === 'Canta') {
           iconName = 'videocam';

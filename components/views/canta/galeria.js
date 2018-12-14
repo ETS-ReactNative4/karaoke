@@ -36,8 +36,10 @@ export default class Galeria extends React.Component {
   _renderView = () => {
     return (
       // <View style={{flex: 1}}>
-        <ImageBackground source={require('../../resources/images/fondo3.jpg')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight}} >
+        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight}} >
+          <View style={styles.fondo}>
           <View style={{height: 50, margin: 5, width: WIDTH - 5}}>
+          
         <SearchBar
           clearIcon={{ color: 'gray', size: 15 }}
           searchIcon={{size: 55}}
@@ -83,6 +85,7 @@ export default class Galeria extends React.Component {
               </View>
               
             </TouchableOpacity>
+            </View>
         </ImageBackground>
       // </View>
     )
@@ -108,6 +111,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 30,
     textAlign: 'center',
+  },
+  fondo: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.50)',
+    width: WIDTH,
   },
   cargando: {
     flex: 1,

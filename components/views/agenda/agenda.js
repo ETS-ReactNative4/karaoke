@@ -43,7 +43,8 @@ export default class Agenda extends React.Component {
 
   _renderView = () => {
     return (
-      <ImageBackground source={require('../../resources/images/fondo3.jpg')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
+      <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
+        <Text style={styles.titulo}>#FNCH2019 Grilla</Text>
         <SectionList
           keyExtractor={keyExtractor}
           renderSectionHeader={renderSectionHeader}
@@ -69,6 +70,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  titulo: {
+    color: 'white',
+    fontFamily: 'berlin3',
+    fontSize: 30,
+    textAlign: 'center',
+    marginBottom: 5,
+  },
   list: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.50)',
@@ -82,7 +90,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     color: 'white',
     fontFamily: 'berlin3',
-    fontSize: 18,
+    fontSize: 22,
     marginBottom: 8,
     marginLeft: 16,
     marginRight: 16,
@@ -97,13 +105,13 @@ const styles = StyleSheet.create({
   sectionItemTitle: {
     color: 'white',
     fontFamily: 'berlin3',
-    fontSize: 14,
+    fontSize: 16,
     margin: 4,
   },
   sectionItemDate: {
     color: 'white',
     fontFamily: 'berlin3',
-    fontSize: 12,
+    fontSize: 14,
     margin: 4,
   },
   imagen: {
@@ -115,73 +123,48 @@ const styles = StyleSheet.create({
 
 const SECTIONS = [
   {
+    title: 'Viernes 11 de Enero',
     data: [
       {
-        title: '2da Feria del Libro', date: '5 al 12 de Julio', key: 0,
+        title: 'Ballet Museo Artesanías', key: 0,
       },
       {
-        title: 'El Orden Frente al Caos', date: '8 al 15 de Julio', key: 1,
+        title: 'Melody', key: 1,
       },
       {
-        title: '2da Feria del Libro', date: '5 al 12 de Julio', key: 2,
+        title: 'Los Mellizos Coronel', key: 2,
       },
       {
-        title: 'El Orden Frente al Caos', date: '8 al 15 de Julio', key: 3,
+        title: 'Nuevo Tiempo', date: 'Chaco', key: 3,
+      },
+    ]
+  },
+  {
+    title: 'Sabado 12 de Enero',
+    data: [
+      {
+        title: 'APERTURA Bendición Padre Julián Zini', date: 'Ingreso de la Virgen', key: 4,
+      },
+      {
+        title: 'Coquimarola y su Conjunto-Centenario de Cocomarola', key: 5,
+      },
+      {
+        title: 'Delegación de Paraguay', key: 6,
       },
     ],
-    title: 'Julio',
   },
   {
     data: [
       {
-        title: 'Feria Itinerante del Libro', date: '1 al 3 de Agosto', key: 4,
+        title: 'Blas Martínez Riera Grupo', date: 'Buenos Aires', key: 7,
       },
       {
-        title: 'Orquesta Sinfónica de Corrientes', date: '5 al 12 de Agosto', key: 5,
+        title: 'Conjunto Nuevo Horizonte', date: 'Ituzaingó', key: 8,
       },
       {
-        title: 'Encuentro Internacional de Escultores', date: '15 al 22 de Agosto', key: 6,
+        title: 'Pre-Fiesta: Solista Vocal Masculino: Rodrigo D. González – SUBSEDE Victoria', date: 'Entre Ríos', key: 9,
       },
     ],
-    title: 'Agosto',
-  },
-  {
-    data: [
-      {
-        title: 'Feria Itinerante del Libro', date: '1 al 3 de Septiembre', key: 7,
-      },
-      {
-        title: 'Orquesta Sinfónica de Corrientes', date: '5 al 12 de Septiembre', key: 8,
-      },
-      {
-        title: 'Encuentro Internacional de Escultores', date: '15 al 22 de Septiembre', key: 9,
-      },
-    ],
-    title: 'Septiembre',
-  },
-  {
-    data: [
-      {
-        title: '2da Feria del Libro', date: '5 al 12 de Octubre', key: 10,
-      },
-      {
-        title: 'El Orden Frente al Caos', date: '8 al 15 de Octubre', key: 11,
-      },
-      {
-        title: '2da Feria del Libro', date: '5 al 12 de Octubre', key: 12,
-      },
-      {
-        title: 'El Orden Frente al Caos', date: '8 al 15 de Octubre', key: 13,
-      },
-      {
-        title: 'Feria Itinerante del Libro', date: '1 al 3 de Octubre', key: 14,
-      },
-      {
-        title: 'Orquesta Sinfónica de Corrientes', date: '5 al 12 de Octubre', key: 15,
-      },
-      {
-        title: 'Encuentro Internacional de Escultores', date: '15 al 22 de Octubre', key: 16,
-      },
-    ],
-    title: 'Octubre',
-  },]
+    title: 'Domingo 13 de Enero',
+  }
+]

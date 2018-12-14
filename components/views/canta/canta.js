@@ -35,7 +35,7 @@ export default class Canta extends React.Component {
 
   _renderView = () => {
     return (
-      <ImageBackground source={require('../../resources/images/fondo3.jpg')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
+      <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
         <View style={styles.fondo}>
         <View style={{margin: 5}}>
           <SearchBar
