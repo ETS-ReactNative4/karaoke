@@ -1,31 +1,24 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, SectionList, Image, Dimensions, ImageBackground} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SectionList, Image, Dimensions, ImageBackground, Alert, TouchableOpacity} from 'react-native';
 import { Font, ScreenOrientation, Constants  } from 'expo';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Dialog, { SlideAnimation, DialogTitle, DialogContent } from 'react-native-popup-dialog';
 import { ListItem, Divider, Header } from 'react-native-elements';
+import ajax from '../../services/fetchGrilla';
+import URL from '../../config';
 
 const WIDTH = Dimensions.get('window').width;
-function keyExtractor(item) {
-  return item.key
-}
-
-const renderSectionHeader = ({ section }) =>
-  <View style={styles.sectionContainer}>
-    <Text style={styles.sectionTitle}>{section.title}</Text>
-  </View>
-
-const renderItem = ({ item }) => 
-  <View style={styles.sectionItem}>
-    <Image style={styles.imagen} source={require('../../resources/images/cultura.png')}/>
-    <View>
-      <Text style={styles.sectionItemTitle}>{item.title}</Text>
-      <Text style={styles.sectionItemDate}>{item.date}</Text>
-    </View>
-  </View>
 
 export default class Agenda extends React.Component {
 
   state = {
     fontLoaded: false,
+    visible: false,
+    grilla: []
+  }
+
+  setVisible = () => {
+    this.setState({visible: true});
   }
 
   async componentDidMount() {
@@ -33,7 +26,8 @@ export default class Agenda extends React.Component {
       'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });
 
-    this.setState({ fontLoaded: true });
+    const grilla = await ajax.fetchGrilla();
+    this.setState({ grilla, fontLoaded: true });
     
   }
 
@@ -41,20 +35,68 @@ export default class Agenda extends React.Component {
     await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
+
   _renderView = () => {
     return (
       <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
         <Text style={styles.titulo}>#FNCH2019 Grilla</Text>
         <SectionList
-          keyExtractor={keyExtractor}
-          renderSectionHeader={renderSectionHeader}
-          renderItem={renderItem}
+          renderItem={({ item }) => 
+            <View style={styles.sectionItem}>
+                <TouchableOpacity 
+                  onPress={() => {
+                    this.setState({ visible: true});
+                  }} >
+                  <View style={styles.lista}>
+                    <Icon name='check-square' size={40} color={'white'}/>
+                    <Text style={styles.sectionItemTitle}>{item.title}</Text>
+                  </View>
+                </TouchableOpacity>
+            </View>
+          }
+          renderSectionHeader={({ section }) => 
+            <View style={styles.sectionContainer}>
+              <Text style={styles.sectionTitle}>{section.title}</Text>
+            </View>
+          }
           sections={SECTIONS}
+          keyExtractor={(item, index) => item + index}
           style={styles.list}
         />
+        <Dialog
+          visible={this.state.visible}
+          onTouchOutside={() => {
+            this.setState({ visible: false });
+          }}
+          dialogAnimation={new SlideAnimation({
+            slideFrom: 'bottom',
+          })}
+          dialogTitle={<DialogTitle title="Vota un tema!" />}
+        >
+          <DialogContent>
+            <View>
+            <TouchableOpacity onPress={() => {
+              Alert.alert('Tu voto fué registrado!!');
+            }}>
+              <Text style={styles.titulo1} >Viejo Caa Cati</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+              Alert.alert('Tu voto fué registrado!!');
+            }}>
+                <Text style={styles.titulo1} >Nostalgia Chaqueña</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+               Alert.alert('Tu voto fué registrado!!');
+            }}>
+                <Text style={styles.titulo1} >Pagos del Litoral</Text>
+            </TouchableOpacity>
+            </View>
+          </DialogContent>
+        </Dialog>
       </ImageBackground>
     )
   }
+
   render() {
     return (
       <View style={styles.container}>
@@ -76,6 +118,22 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
     marginBottom: 5,
+  },
+  titulo1: {
+    color: 'black',
+    fontFamily: 'berlin3',
+    fontSize: 24,
+    textAlign: 'center',
+    marginTop: 10,
+  },
+  lista: {
+    flex: 1,
+    flexDirection: 'row',
+    marginBottom: 5,
+    minHeight: 55,
+    marginHorizontal: 5,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   list: {
     flex: 1,
@@ -126,7 +184,7 @@ const SECTIONS = [
     title: 'Viernes 11 de Enero',
     data: [
       {
-        title: 'Ballet Museo Artesanías', key: 0,
+        title: 'Santiago "Bocha" Sheridan', key: 0,
       },
       {
         title: 'Melody', key: 1,
@@ -137,7 +195,7 @@ const SECTIONS = [
       {
         title: 'Nuevo Tiempo', date: 'Chaco', key: 3,
       },
-    ]
+    ],
   },
   {
     title: 'Sabado 12 de Enero',
