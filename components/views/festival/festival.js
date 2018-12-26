@@ -75,12 +75,12 @@ const styles = StyleSheet.create({
     width: WIDTH,
   },
   cargando: {
-    flex: 1,
-    paddingTop: Constants.statusBarHeight,
-    color: 'white', 
+    color: 'white',
     fontFamily: 'berlin3',
-    fontSize: 28, 
-    marginHorizontal: 5, 
+    fontSize: 16,
+    margin: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
     textAlign: 'center'
   },
   titulo: {

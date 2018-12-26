@@ -29,6 +29,7 @@
     "react-native-thumbnail-video": "^0.1.1",
     "react-native-vector-icons": "^4.6.0",
     "react-native-video": "^3.2.0",
+    "react-native-youtube": "^1.1.0",
     "react-navigation": "^2.8.0"
   },
   "rnpm": {

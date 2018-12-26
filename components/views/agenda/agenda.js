@@ -38,7 +38,7 @@ export default class Agenda extends React.Component {
 
   _renderView = () => {
     return (
-      <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
+      <View style={styles.fondo}>
         <Text style={styles.titulo}>#FNCH2019 Grilla</Text>
         <SectionList
           renderItem={({ item }) => 
@@ -93,14 +93,16 @@ export default class Agenda extends React.Component {
             </View>
           </DialogContent>
         </Dialog>
-      </ImageBackground>
+      </View>
     )
   }
 
   render() {
     return (
       <View style={styles.container}>
-        {this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.sectionItemTitle}>Cargando...</Text>)}
+      <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
+        {this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.cargando}>Cargando...</Text>)}
+      </ImageBackground>
       </View>
     );
   }
@@ -111,6 +113,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#133101'
+  },
+  fondo: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.50)',
+    width: WIDTH,
   },
   titulo: {
     color: 'white',
@@ -137,7 +145,7 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.50)',
+    //backgroundColor: 'rgba(0, 0, 0, 0.50)',
     width: Dimensions.get('window').width,
   },
   sectionContainer: {
@@ -165,6 +173,15 @@ const styles = StyleSheet.create({
     fontFamily: 'berlin3',
     fontSize: 16,
     margin: 4,
+  },
+  cargando: {
+    color: 'white',
+    fontFamily: 'berlin3',
+    fontSize: 16,
+    margin: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center'
   },
   sectionItemDate: {
     color: 'white',

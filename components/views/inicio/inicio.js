@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, BackHandler, Dimensions, ImageBackground, TouchableOpacity, Linking } from 'react-native';
-import { Font, ScreenOrientation, Video, Constants } from 'expo';
+import { StyleSheet, Text, View, Image, BackHandler, Dimensions, ImageBackground, TouchableOpacity, Linking, WebView } from 'react-native';
+import { Font, ScreenOrientation, Constants, Video } from 'expo';
+//import Video from 'react-native-video';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import ajax from '../../services/fetchVideo';
-import URL from '../../config';
+import YouTube from 'react-native-youtube';
 
 const { WIDTH, HEIGHT } = Dimensions.get('window');
 
@@ -12,25 +12,24 @@ export default class Inicio extends React.Component {
   
   state = {
     fontLoaded: false,
-    shouldPlay: false,
+    shouldPlay: true,
     control: true,
     video: [],
+    isReady: false,
   };
 
   async componentDidMount() {
-    this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.navigation.goBack(); // works best when the goBack is async
-      return true;
-    });
+    // this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+    //   this.props.navigation.goBack(); // works best when the goBack is async
+    //   return true;
+    // });
 
     await Font.loadAsync({
-      'berlin3': require('../../assets/fonts/IndieFest.ttf'),
+      'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });
 
     this.setState({ fontLoaded: true });
 
-    //const video = await ajax.fetchLastVideo();
-    //this.setState({ video: video });
   }
 
   async componentWillMount() {
@@ -43,34 +42,38 @@ export default class Inicio extends React.Component {
   }
 
   _onPress = () => {
-    this.props.navigation.navigate('Karaoke', {id: this.state.video.id});
+    //this.props.navigation.navigate('Karaoke', {id: this.state.video.id});
   }
 
   _renderView = () => {
     return (
-      <View style={styles.container}>
-        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
-    justifyContent:'center',}} >
       <View style={styles.fondo}>
           <Text style={styles.titulo}>CHAMAMÉ 2.0</Text>
+          <Text style={styles.subtitulo}>Sembrando Chamamé...</Text>
           <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raíces chamameceras, tus raíces...</Text>
           <Text style={styles.infoTop}>#FNCH2019</Text>
-          
-          <Video
-                //source={{uri: 'https://www.youtube.com/watch?v=Or4otjCGXio'}}
-                source={require('../../resources/videos/spot.mp4')}
+
+          {/* <Video
+                source={ {uri: "http://dustingassmann.ddns.net/resources/videos/arrebol.mp4"} }
+                //source={require('../../resources/videos/spot.mp4')}
                 ref={(ref) => {
                   this.player = ref;
                 }}
                 rate={1.0}
                 volume={1}
                 shouldPlay={this.state.shouldPlay}
-                onPlaybackStatusUpdate={this._onPlaybackStatusUpdate}
                 resizeMode="stretch"
                 useNativeControls={this.state.control}
-                //style={{ width: height / 2, height: width * 0.8, alignSelf: 'center'}}
                 style={{ width: 400, height: 300, alignSelf: 'center'}}
-            />
+            /> */}
+
+          <View style={{ flex: 3, width: WIDTH}}>
+          <WebView
+              style={{ flex: 1, resizeMode: "cover"}}
+              javaScriptEnabled={true}
+              source={{uri: 'https://www.youtube.com/embed/Or4otjCGXio?rel=0&autoplay=1&showinfo=1&controls=1'}}
+          />
+          </View>
 
             <View style={styles.footer}>
             <TouchableOpacity
@@ -121,16 +124,17 @@ export default class Inicio extends React.Component {
               </View>
             </TouchableOpacity>
             </View>
-          </View> 
-        </ImageBackground>
-      </View>
+          </View>
     )
   }
 
   render() {
     return (
       <View style={styles.container}>
-        { this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.texto}>Cargando...</Text>) }
+        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
+    justifyContent:'center',}} >
+        { this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.cargando}>Cargando...</Text>) }
+        </ImageBackground>
       </View>
     )
   }
@@ -139,19 +143,33 @@ export default class Inicio extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //paddingTop: Constants.statusBarHeight,
-    //backgroundColor: '#8CA853',
-    //backgroundImage: `url(require("../../resources/images/fondo.jpeg"))`,
     alignItems: 'center',
     justifyContent: 'center',
   },
   titulo: {
-    flex: 1,
-    fontFamily: 'podo',
+    flex: 0.5,
+    fontFamily: 'berlin3',
     color: 'white',
     fontSize: 32,
     marginBottom: 10,
     textAlign: 'center',
+  },
+  subtitulo: {
+    flex: 0.5,
+    fontFamily: 'berlin3',
+    color: 'white',
+    fontSize: 30,
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  cargando: {
+    color: 'white',
+    fontFamily: 'berlin3',
+    fontSize: 16,
+    margin: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center'
   },
   btnClickContain: {
     flex: 1,
@@ -174,8 +192,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   texto: {
+    flex: 0.5,
     marginHorizontal: 10,
-    marginBottom: 95,
+    marginBottom: 5,
     color: 'white',
     fontFamily: 'berlin3',
     //fontStyle: 'italic',
@@ -210,11 +229,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   infoTop: {
+    flex: 0.5,
     color: 'white',
     marginBottom: 10,
     fontSize: 24,
-    fontStyle: 'italic',
-    //fontWeight: 'bold',
+    fontFamily: 'berlin3',
     textAlign: 'center',
     backgroundColor: 'transparent'
   },

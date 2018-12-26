@@ -10,7 +10,7 @@ const HEIGHT = Dimensions.get('window').height;
 const SIZE_ICON = 60;
 const URI = URL;
 
-export default class Galeria extends React.Component {
+export default class Karaoke extends React.Component {
 
   state = {
     fontLoaded: false,
@@ -34,25 +34,28 @@ export default class Galeria extends React.Component {
   }
 
   _renderView = () => {
-    return (  
-      <View style={styles.fondo}>
-        <View style={{height: 50, margin: 5, width: WIDTH - 5}}>
-          <SearchBar
-            clearIcon={{ color: 'gray', size: 15 }}
-            searchIcon={{size: 55}}
-            inputStyle={{
-              backgroundColor: 'transparent',
-              color: 'white',
-            }}
-            containerStyle={{
-              backgroundColor: 'rgba(255,255,255, 0.40)', 
-              borderWidth: 0,
-              borderTopWidth: 0,
-              borderBottomWidth: 0, 
-              borderRadius: 30,
-              borderColor: '#8CA853'
-            }}
-            placeholder='Buscar...' />
+    return (
+      // <View style={{flex: 1}}>
+        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight}} >
+          <View style={styles.fondo}>
+          <View style={{height: 50, margin: 5, width: WIDTH - 5}}>
+          
+        <SearchBar
+          clearIcon={{ color: 'gray', size: 15 }}
+          searchIcon={{size: 55}}
+          inputStyle={{
+            backgroundColor: 'transparent',
+            color: 'white',
+          }}
+          containerStyle={{
+            backgroundColor: 'rgba(255,255,255, 0.40)', 
+            borderWidth: 0,
+            borderTopWidth: 0,
+            borderBottomWidth: 0, 
+            borderRadius: 30,
+            borderColor: '#8CA853'
+          }}
+          placeholder='Buscar...' />
         </View>
         {/* <FlatList style={styles.flatList}
           horizontal= {false}
@@ -80,17 +83,18 @@ export default class Galeria extends React.Component {
                 <Image style={styles.thumb} source= {require('../../resources/videos/arrebol-dustin.png')} />
                 <Text style={styles.texto}>Arrebol - Dustin Gassmann</Text>
               </View>
-          </TouchableOpacity>
-      </View>
+              
+            </TouchableOpacity>
+            </View>
+        </ImageBackground>
+      // </View>
     )
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight}} >
         { this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.cargando}>Cargando...</Text>) }
-        </ImageBackground>
       </View>
     );
   }
@@ -114,12 +118,12 @@ const styles = StyleSheet.create({
     width: WIDTH,
   },
   cargando: {
-    color: 'white',
+    flex: 1,
+    paddingTop: Constants.statusBarHeight,
+    color: 'white', 
     fontFamily: 'berlin3',
-    fontSize: 16,
-    margin: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
+    fontSize: 28, 
+    marginHorizontal: 5, 
     textAlign: 'center'
   },
   texto: {

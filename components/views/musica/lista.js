@@ -27,16 +27,15 @@ export default class Lista extends React.Component {
     ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
 
     //Habilito boton fisico atras
-    this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.navigation.goBack(); // works best when the goBack is async
-    });
+    // this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+    //   this.props.navigation.goBack(); // works best when the goBack is async
+    // });
   }
 
   _renderView = () => {
     return (
-      <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
       <View style={styles.fondo}>
-      <View style={{margin: 5}}>
+        <View style={{margin: 5}}>
           <SearchBar
             clearIcon={{ color: 'gray', size: 15 }}
             searchIcon={{size: 55}}
@@ -50,8 +49,7 @@ export default class Lista extends React.Component {
               borderTopWidth: 0,
               borderBottomWidth: 0, 
               borderRadius: 30,
-              borderColor: '#8CA853',
-              color: 'white',
+              borderColor: '#8CA853'
             }}
             placeholder='Buscar...' />
           </View>
@@ -71,14 +69,15 @@ export default class Lista extends React.Component {
           keyExtractor={item => item.id.toString()}
         />
         </View>
-      </ImageBackground>
     )
   }
 
   render() {
     return (
       <View style={styles.container}>
+        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
         { this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.cargando}>Cargando...</Text>) }
+        </ImageBackground>
       </View>
     );
   }
@@ -89,6 +88,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#133101'
   },
   fondo: {
     flex: 1,
@@ -102,12 +102,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   cargando: {
-    flex: 1,
-    paddingTop: Constants.statusBarHeight,
-    color: 'white', 
+    color: 'white',
     fontFamily: 'berlin3',
-    fontSize: 28, 
-    marginHorizontal: 5, 
+    fontSize: 16,
+    margin: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
     textAlign: 'center'
   },
   texto: {

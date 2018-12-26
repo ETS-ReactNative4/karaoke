@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import DrawerStack from './components/stacks/drawerStack';
-import LoginStack from './components/stacks/tabBarBottom';
+//import LoginStack from './components/stacks/tabBarBottom';
 import TabBarBottom from './components/stacks/tabBarBottom';
-import { Font, ScreenOrientation } from 'expo';
+import { Font, AppLoading, ScreenOrientation } from 'expo';
 
 export default class App extends React.Component {
 
@@ -12,20 +11,16 @@ export default class App extends React.Component {
   };
 
   async componentDidMount() {
-    await Font.loadAsync({
-      'berlin3': require('./components/assets/fonts/berlin3.ttf'),
-    });
 
-      //Deshabilito warnings
+    //Deshabilito warnings
     console.disableYellowBox = true;
-    this.setState({ fontLoaded: true });
     ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
  
   render() {
     return (
-        <LoginStack style={styles.container} />
+        <TabBarBottom style={styles.container} />
     )
   }
 }

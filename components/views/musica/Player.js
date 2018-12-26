@@ -133,9 +133,9 @@ export default class Player extends React.Component {
       this.setState({ fontLoaded: true });
 
       //Habilito boton fisico atras
-      this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-        this.props.navigation.navigate('Lista'); // works best when the goBack is async
-      });
+      // this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      //   this.props.navigation.navigate('Lista'); // works best when the goBack is async
+      // });
     }
   }
 
