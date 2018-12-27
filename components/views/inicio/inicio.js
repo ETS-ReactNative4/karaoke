@@ -1,9 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, BackHandler, Dimensions, ImageBackground, TouchableOpacity, Linking, WebView } from 'react-native';
 import { Font, ScreenOrientation, Constants, Video } from 'expo';
-//import Video from 'react-native-video';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import YouTube from 'react-native-youtube';
 
 const { WIDTH, HEIGHT } = Dimensions.get('window');
 
@@ -37,7 +35,7 @@ export default class Inicio extends React.Component {
   }
 
   componentWillUnmount() {
-    this.backHandler.remove();
+    //this.backHandler.remove();
     
   }
 

@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Font, AppLoading, ScreenOrientation } from 'expo';
+import { View, StyleSheet, Text, Dimensions, TouchableOpacity, ImageBackground } from 'react-native';
+import { Font, AppLoading, ScreenOrientation, Constants } from 'expo';
+
+const WIDTH = Dimensions.get('window').width;
 
 export default class Radio extends React.Component {
 
@@ -18,7 +20,18 @@ export default class Radio extends React.Component {
     ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
- 
+  _renderView = () => {
+    return (
+        <View style={styles.fondo}>
+        
+          <View style={styles.botones}>
+            
+                <Text style={styles.texto}>RADIO</Text>
+          </View>       
+        </View>
+    )
+  }
+
   render() {
     return (
         <View style={styles.container}>
@@ -33,12 +46,41 @@ export default class Radio extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
+    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  fondo: {
+    flex: 1,
+    width: WIDTH,
+    backgroundColor: 'rgba(0, 0, 0, 0.50)'
+  },
   cargando: {
+    color: 'white',
+    fontFamily: 'berlin3',
+    fontSize: 16,
+    margin: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center'
+  },
+  button: {
+    width: WIDTH,
+    height: 100,
+    margin: 10,
+    borderColor: 'white',
+    borderBottomColor: '#d1d1d1',
+    alignItems: 'center'
+  },
+  botones: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    //justifyContent: 'space-between',
+    width: WIDTH
+  },
+  texto: {
     color: 'white',
     fontFamily: 'berlin3',
     fontSize: 16,

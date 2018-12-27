@@ -146,14 +146,10 @@ const styles = StyleSheet.create({
     height: HEIGHT / 2 - (SIZE_ICON * 3),
   },
   button: {
-    //flex: 9,
-    //marginTop: 10,
     width: WIDTH / 2 - 10,
     marginLeft: 10,
-    //borderWidth: 1,
     borderColor: '#8CA853',
-    borderBottomColor: '#d1d1d1', 
-    //marginBottom: 5,
+    borderBottomColor: '#d1d1d1',
     alignItems: 'center'
   },
   lista: {
