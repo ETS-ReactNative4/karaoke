@@ -69,7 +69,7 @@ export default class Inicio extends React.Component {
 
           <View style={{ flex: 3, width: WIDTH}}>
           <WebView
-              style={{ flex: 1, resizeMode: "cover"}}
+              style={{ flex: 1}}
               javaScriptEnabled={true}
               source={{uri: 'https://www.youtube.com/embed/Or4otjCGXio?rel=0&autoplay=1&showinfo=1&controls=1'}}
           />

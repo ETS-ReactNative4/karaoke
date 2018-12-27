@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Inicio from '../views/inicio/inicio';
 import Karaoke from '../views/karaoke/karaoke';
 import Documentales from '../views/documentales/documentales';
+import Biblioteca from '../views/biblioteca/biblioteca';
 import Radio from '../views/radio/radio';
 import Festival from '../views/festival/festival';
 import Agenda from '../views/agenda/agenda';
@@ -21,8 +22,9 @@ const MusicaStack = createStackNavigator({
 });
 
 const BiblioStack = createStackNavigator({
+  Biblioteca: {screen: Biblioteca},
   Musica: {screen: MusicaStack},
-  Documentales: {screen: Lista},
+  Documentales: {screen: Documentales},
   Radio: {screen: Radio}
 },{
   headerMode: 'none',
@@ -56,7 +58,7 @@ const tabBarBottom = createBottomTabNavigator(
   {
     Inicio: InicioStack,
     Karaoke: KaraokeStack,
-    Musica: BiblioStack,
+    Biblioteca: BiblioStack,
     Grilla: AgendaStack,
     Festival: FestivalStack
   },
@@ -71,7 +73,7 @@ const tabBarBottom = createBottomTabNavigator(
           iconName = 'home';
         } else if (routeName === 'Karaoke') {
           iconName = 'videocam';
-        } else if (routeName === 'Musica') {
+        } else if (routeName === 'Biblioteca') {
           iconName = 'library-music';
         } else if (routeName === 'Grilla') {
           iconName = 'event-note';
