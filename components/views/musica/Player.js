@@ -111,6 +111,7 @@ export default class Player extends React.Component {
     if(this.mounted) {
       this.mounted = false;
 
+      //const temas = await ajax.fetchAlbum(this.props.navigation.state.params.album);
       const temas = await ajax.fetchAlbum(this.props.navigation.state.params.album);
       this.setState({ temas: temas, album: this.props.navigation.state.params.album });
 

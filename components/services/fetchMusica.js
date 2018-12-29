@@ -26,6 +26,17 @@ async fetchAlbum(al) {
         }
     },
 
+async fetchRadio() {
+        try {
+                let response = await fetch(URI + 'radio');
+                let responseJsonData = await response.json();
+                return responseJsonData;
+            }
+        catch(e) {
+            console.log(e)
+        }
+    },
+
 async fetchTema(id) {
         try {
                 let response = await fetch(URI + 'tema/' + id);
