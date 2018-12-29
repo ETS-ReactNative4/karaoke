@@ -21,15 +21,10 @@ export default class Lista extends React.Component {
       'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });
 
-    const temas = await ajax.fetchAlbum(this.props.navigation.state.params.album);
+    const temas = await ajax.fetchAutor(this.props.navigation.state.params.autor);
     this.setState({ temas, fontLoaded: true });
 
     ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
-
-    //Habilito boton fisico atras
-    // this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-    //   this.props.navigation.goBack(); // works best when the goBack is async
-    // });
   }
 
   _renderView = () => {
@@ -57,7 +52,7 @@ export default class Lista extends React.Component {
           data={this.state.temas}
           renderItem={({item, separators}) => (  
             <TouchableOpacity style={styles.button}
-              onPress={() => this.props.navigation.push('Player', {autor: item.autor, index: item.track_id, temas: this.state.temas })}
+              onPress={() => this.props.navigation.push('Player', {autor: item.autor, track_id: item.track_id})}
               onShowUnderlay={separators.highlight}
               onHideUnderlay={separators.unhighlight}>
               <View style={styles.lista}>

@@ -59,7 +59,7 @@ export default class Musica extends React.Component {
           data={this.state.temas}
           renderItem={({item, separators}) => (
             <TouchableOpacity style={styles.button}
-              onPress={() => this.props.navigation.push('Lista', {album: item.autor})}
+              onPress={() => this.props.navigation.push('Lista', {autor: item.autor})}
               onShowUnderlay={separators.highlight}
               onHideUnderlay={separators.unhighlight}
               >

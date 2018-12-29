@@ -6,7 +6,7 @@ const URI = URL + '/public/api/';
 export default {
     async fetchMusica() {
         try {
-                let response = await fetch(URI + 'temas');
+                let response = await fetch(URI + 'musica');
                 let responseJsonData = await response.json();
                 return responseJsonData;
             }
@@ -15,9 +15,20 @@ export default {
         }
     },
 
-async fetchAlbum(al) {
+async fetchTemas(au, id) {
         try {
-                let response = await fetch(URI + 'album/' + al);
+                let response = await fetch(URI + 'temas/' + au + '/' + id);
+                let responseJsonData = await response.json();
+                return responseJsonData;
+            }
+        catch(e) {
+            console.log(e)
+        }
+    },
+
+async fetchAutor(au) {
+        try {
+                let response = await fetch(URI + 'autor/' + au);
                 let responseJsonData = await response.json();
                 return responseJsonData;
             }

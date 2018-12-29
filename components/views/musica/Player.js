@@ -6,8 +6,7 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
-  View,
-  BackHandler,
+  View
 } from 'react-native';
 import { Asset, Audio, Font, Video } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -112,7 +111,7 @@ export default class Player extends React.Component {
       this.mounted = false;
 
       //const temas = await ajax.fetchAlbum(this.props.navigation.state.params.album);
-      const temas = await ajax.fetchAlbum(this.props.navigation.state.params.autor);
+      const temas = await ajax.fetchTemas(this.props.navigation.state.params.autor, this.props.navigation.state.params.track_id);
       this.setState({ temas: temas, album: this.props.navigation.state.params.autor });
 
       await this.LoadPlaylist(this.state.temas);
@@ -145,6 +144,7 @@ export default class Player extends React.Component {
   }
 
   LoadPlaylist(temas) {
+    this.state.temas = this.state.temas.reverse();
     for(var i=0; i < temas.length; i++) {
       
       this.state.PLAYLIST.push(new PlaylistItem(
