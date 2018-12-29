@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, SectionList, Image, Dimensions, ImageBackground, Alert, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SectionList, Image, Dimensions, ImageBackground, Alert, TouchableOpacity, WebView} from 'react-native';
 import { Font, ScreenOrientation, Constants  } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Dialog, { SlideAnimation, DialogTitle, DialogContent } from 'react-native-popup-dialog';
@@ -35,34 +35,38 @@ export default class Agenda extends React.Component {
     await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
+  _renderItem = ({item, section}) => 
+    (<View style={styles.sectionItem}>
+    <TouchableOpacity 
+      onPress={() => {
+        this.setState({ visible: true});
+      }} >
+      <View style={styles.lista}>
+        <Icon name='check-square' size={40} color={'white'}/>
+        <Text style={styles.sectionItemTitle}>{`${item.titulo}(${section.fecha})`}</Text>
+      </View>
+        </TouchableOpacity>
+    </View>)
+
+  _renderSectionHeader = ({section}) => {
+      return (
+        <View style={styles.sectionHeader}>
+          <Text style={styles.header}>{section.fecha}</Text>
+        </View>
+      )
+  }
 
   _renderView = () => {
     return (
       <View style={styles.fondo}>
         <Text style={styles.titulo}>#FNCH2019 Grilla</Text>
-        <SectionList
-          renderItem={({ item }) => 
-            <View style={styles.sectionItem}>
-                <TouchableOpacity 
-                  onPress={() => {
-                    this.setState({ visible: true});
-                  }} >
-                  <View style={styles.lista}>
-                    <Icon name='check-square' size={40} color={'white'}/>
-                    <Text style={styles.sectionItemTitle}>{item.title}</Text>
-                  </View>
-                </TouchableOpacity>
-            </View>
-          }
-          renderSectionHeader={({ section }) => 
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>{section.title}</Text>
-            </View>
-          }
-          sections={SECTIONS}
-          keyExtractor={(item, index) => item + index}
-          style={styles.list}
-        />
+        <View style={{ flex: 9, width: WIDTH}}>
+          <WebView
+              style={{ backgroundColor: 'transparent'}}
+              javaScriptEnabled={true}
+              source={{uri: 'http://dustingassmann.ddns.net/public/'}}
+          />
+          </View>
         <Dialog
           visible={this.state.visible}
           onTouchOutside={() => {
