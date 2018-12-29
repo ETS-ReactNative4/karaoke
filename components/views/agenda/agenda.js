@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, SectionList, Image, Dimensions, ImageBackground, Alert, TouchableOpacity, WebView} from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Dimensions, ImageBackground, Alert, TouchableOpacity, WebView} from 'react-native';
 import { Font, ScreenOrientation, Constants  } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Dialog, { SlideAnimation, DialogTitle, DialogContent } from 'react-native-popup-dialog';
@@ -105,7 +105,7 @@ export default class Agenda extends React.Component {
     return (
       <View style={styles.container}>
       <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
-        {this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.cargando}>Cargando...</Text>)}
+        {this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />)}
       </ImageBackground>
       </View>
     );

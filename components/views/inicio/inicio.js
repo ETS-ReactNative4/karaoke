@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, BackHandler, Dimensions, ImageBackground, TouchableOpacity, Linking, WebView } from 'react-native';
-import { Font, ScreenOrientation, Constants, Video } from 'expo';
+import { StyleSheet, Text, View, Dimensions, ActivityIndicator, ImageBackground, TouchableOpacity, Linking, WebView } from 'react-native';
+import { Font, ScreenOrientation, Constants } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const { WIDTH, HEIGHT } = Dimensions.get('window');
@@ -131,7 +131,7 @@ export default class Inicio extends React.Component {
       <View style={styles.container}>
         <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
     justifyContent:'center',}} >
-        { this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.cargando}>Cargando...</Text>) }
+        { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
         </ImageBackground>
       </View>
     )

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Dimensions, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, ActivityIndicator, Dimensions, ImageBackground } from 'react-native';
 import { Font, ScreenOrientation, Constants } from 'expo';
 
 const WIDTH = Dimensions.get('window').width;
@@ -53,7 +53,7 @@ export default class Festival extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-          {this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.cargando}>Cargando...</Text>)}
+          {this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />)}
       </View>
     )
   }

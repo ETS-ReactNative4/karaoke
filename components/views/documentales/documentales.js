@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Text, Dimensions, TouchableOpacity, ImageBackground } from 'react-native';
-import { Font, AppLoading, ScreenOrientation, Constants } from 'expo';
+import { View, StyleSheet, Text, Dimensions, ActivityIndicator, ImageBackground } from 'react-native';
+import { Font, ScreenOrientation, Constants } from 'expo';
 
 const WIDTH = Dimensions.get('window').width;
 
@@ -37,7 +37,7 @@ export default class Documentales extends React.Component {
         <View style={styles.container}>
         <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
     justifyContent:'center',}} >
-        { this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.cargando}>Cargando...</Text>) }
+        { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
         </ImageBackground>
       </View>
     )

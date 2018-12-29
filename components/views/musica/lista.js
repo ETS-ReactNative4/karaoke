@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Alert, Dimensions, BackHandler, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, FlatList, Dimensions, ImageBackground } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Font, ScreenOrientation, Constants } from 'expo';
@@ -57,12 +57,12 @@ export default class Lista extends React.Component {
           data={this.state.temas}
           renderItem={({item, separators}) => (  
             <TouchableOpacity style={styles.button}
-              onPress={() => this.props.navigation.push('Player', {album: item.album, index: item.track_id, temas: this.state.temas })}
+              onPress={() => this.props.navigation.push('Player', {autor: item.autor, index: item.track_id, temas: this.state.temas })}
               onShowUnderlay={separators.highlight}
               onHideUnderlay={separators.unhighlight}>
               <View style={styles.lista}>
                 <Icon name='play-circle' size={40} color={'white'}/>
-                <Text style={styles.texto}>{item.titulo} - {item.autor}</Text>
+                <Text style={styles.texto}>{item.titulo}</Text>
               </View>
             </TouchableOpacity>
           )}
@@ -76,7 +76,7 @@ export default class Lista extends React.Component {
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
-        { this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.cargando}>Cargando...</Text>) }
+        { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
         </ImageBackground>
       </View>
     );

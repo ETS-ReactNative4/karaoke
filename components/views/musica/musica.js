@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Dimensions, Image, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, FlatList, Dimensions, Image, ImageBackground } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { Font, ScreenOrientation, Constants } from 'expo';
 import ajax from '../../services/fetchMusica';
@@ -59,13 +59,13 @@ export default class Musica extends React.Component {
           data={this.state.temas}
           renderItem={({item, separators}) => (
             <TouchableOpacity style={styles.button}
-              onPress={() => this.props.navigation.push('Lista', {album: item.album})}
+              onPress={() => this.props.navigation.push('Lista', {album: item.autor})}
               onShowUnderlay={separators.highlight}
               onHideUnderlay={separators.unhighlight}
               >
               <View style={styles.cell}>                    
                 <Image style={styles.thumb} source= {{uri: URI + item.thumb}} />
-                <Text style={styles.texto}>{item.album} - {item.autor}</Text>
+                <Text style={styles.texto}>{item.autor}</Text>
               </View>
               
             </TouchableOpacity>
@@ -80,7 +80,7 @@ export default class Musica extends React.Component {
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
-        { this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.cargando}>Cargando...</Text>) }
+        { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
         </ImageBackground>
       </View>
     );

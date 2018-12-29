@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Text, Dimensions, TouchableOpacity, ImageBackground } from 'react-native';
-import { Font, AppLoading, ScreenOrientation, Constants } from 'expo';
+import { View, StyleSheet, Text, Dimensions, TouchableOpacity, ActivityIndicator, ImageBackground } from 'react-native';
+import { Font, ScreenOrientation, Constants } from 'expo';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -56,7 +56,7 @@ export default class Biblioteca extends React.Component {
     return (
         <View style={styles.container}>
             <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
-            { this.state.fontLoaded ? (this._renderView()) : (<Text style={styles.cargando}>Cargando...</Text>) }
+            { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
             </ImageBackground>
         </View>
     )
