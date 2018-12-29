@@ -2,8 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View, Dimensions, ActivityIndicator, ImageBackground, TouchableOpacity, Linking, WebView } from 'react-native';
 import { Font, ScreenOrientation, Constants } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import IconMat from 'react-native-vector-icons/MaterialIcons';
 
-const { WIDTH, HEIGHT } = Dimensions.get('window');
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 export default class Inicio extends React.Component {
 
@@ -40,9 +42,59 @@ export default class Inicio extends React.Component {
           <Text style={styles.titulo}>CHAMAMÉ 2.0</Text>
           <Text style={styles.subtitulo}>Sembrando Chamamé...</Text>
           <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raíces chamameceras, tus raíces...</Text>
-          <Text style={styles.infoTop}>#FNCH2019</Text>
 
-            <View style={styles.footer}>
+          <View style={styles.centro}>
+            <View style={styles.top}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.push('Karaoke')}
+              style={styles.btnLink}>
+              <View style={styles.btnContainer}>
+              <IconMat
+                  name='videocam'
+                  size={30}
+                  color='white'/>
+                <Text style={styles.botones}>Karaoke Chamamecero</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.push('Biblioteca')}
+              style={styles.btnLink}>
+              <View style={styles.btnContainer}>
+              <IconMat
+                  name='library-music'
+                  size={30}
+                  color='white'/>
+                <Text style={styles.botones}>Escuchá Chamamé</Text>
+              </View>
+            </TouchableOpacity>
+            </View>
+            <View style={styles.bottom}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.push('Fiesta')}
+              style={styles.btnLink}>
+              <View style={styles.btnContainer}>
+              <IconMat
+                  name='event-note'
+                  size={30}
+                  color='white'/>
+                <Text style={styles.botones}>Fiesta del Chamamé</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.push('Chamamecito')}
+              style={styles.btnLink}>
+              <View style={styles.btnContainer}>
+              <Icon
+                  name='gamepad'
+                  size={30}
+                  color='white'/>
+                <Text style={styles.botones}>Chamamecito</Text>
+              </View>
+            </TouchableOpacity>
+            </View>
+          </View> 
+
+          <View style={styles.footer}>
             <TouchableOpacity
               onPress={ ()=> Linking.openURL('https://www.facebook.com/FNChamame') }
               style={styles.btnClickContain}>
@@ -90,8 +142,8 @@ export default class Inicio extends React.Component {
                   color='white'/>
               </View>
             </TouchableOpacity>
-            </View>
           </View>
+        </View>
     )
   }
 
@@ -129,22 +181,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     textAlign: 'center',
   },
-  cargando: {
-    color: 'white',
-    fontFamily: 'berlin3',
-    fontSize: 16,
-    margin: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center'
-  },
   btnClickContain: {
     flex: 1,
     flexDirection: 'row',
   },
   btnContainer: {
     flex: 1,
-    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -155,8 +197,10 @@ const styles = StyleSheet.create({
   },
   footer: {
     flexDirection: 'row',
-    marginBottom: 10,
-    marginTop: 10,
+    marginBottom: 5,
+    marginTop: 5,
+    backgroundColor: 'rgba(0, 0, 0, 0.30)',
+    padding: 5,
   },
   texto: {
     flex: 0.5,
@@ -168,64 +212,42 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
   },
-  texto1: {
-    flex: 5,
-    marginHorizontal: 10,
-    color: 'white',
-    fontFamily: 'berlin3',
-    fontSize: 20,
-    textAlign: 'center',
-  },
-  thumblain: {
-    flex: 7,
-    width: WIDTH,
-    height: HEIGHT / 2,
-  },
-  thumb: {
-    width: 300,
-    height: 300,
-    margin: 0,
-    //borderTopLeftRadius: 30,
-    //borderTopRightRadius: 30,
-  },
-  info: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    backgroundColor: 'transparent'
-  },
-  infoTop: {
-    flex: 0.5,
-    color: 'white',
-    marginBottom: 10,
-    fontSize: 24,
-    fontFamily: 'berlin3',
-    textAlign: 'center',
-    backgroundColor: 'transparent'
+  centro: {
+    flex: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   top: {
-    backgroundColor: 'rgba(255,255,255, 0.50)',
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    height: 50,
+    flex: 5,
+    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent:'center',
-    margin: 0,
   },
   bottom: {
-    backgroundColor: 'rgba(255,255,255, 0.50)',
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-    height: 10,
+    flex: 5,
+    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent:'center',
-    margin: 0,
   },
-  button: {
-    flex: 8,
-    width: 300,
-    height: 300,
-    
+  botones: {
+    color: 'white',
+    textAlign: 'center',
+    fontFamily: 'berlin3',
+    fontSize: 25,
+  },
+  btnLink: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#133101',
+    borderColor: 'gray',
+    borderWidth: 1,
+    height: HEIGHT / 4,
+    width: WIDTH / 2 - 10,
+    marginLeft: 5,
+    marginRight: 5,
+    marginBottom: 5,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
