@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, ActivityIndicator, Dimensions, ImageBackground } from 'react-native';
-import { Font, ScreenOrientation, Constants } from 'expo';
+import { StyleSheet, Text, View, Image, ScrollView, ActivityIndicator, Dimensions, ImageBackground, WebView,  } from 'react-native';
+import { Font, ScreenOrientation, Constants, Video } from 'expo';
 
 const WIDTH = Dimensions.get('window').width;
 
@@ -8,6 +8,8 @@ export default class Festival extends React.Component {
   
   state = {
     fontLoaded: false,
+    shouldPlay: false,
+    control: true,
   }
 
   async componentDidMount() {
@@ -20,12 +22,13 @@ export default class Festival extends React.Component {
   }
 
   async componentWillMount() {
-    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
   }
 
   _renderView = () => {
     return (
       <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
+        
         <ScrollView style={styles.scroll}>
         <View style={styles.fondo}>
           <Text style={styles.titulo}>Fiesta Nacional del Chamamé</Text>
@@ -33,8 +36,19 @@ export default class Festival extends React.Component {
           <Text style={styles.subTitulo}>15° FIESTA DEL CHAMAMÉ DEL MERCOSUR</Text>
           <Text style={styles.texto}>La Fiesta Nacional del Chamamé 2019 ya tiene fecha. Se realizará del 11 al 20 de enero y se llamará “Chamamé de la Humanidad”, como correlato de la postulación ante la Unesco que impulsa el Gobierno Provincial con el apoyo de la Nación para que el género
           obtenga el reconocimiento internacional.</Text>
-          <Image style={styles.imagen} source={require('../../resources/images/festival.jpg')}/>
+
+          <Video
+                source={require('../../resources/videos/spot.mp4')}
+                rate={1.0}
+                volume={1}
+                shouldPlay
+                resizeMode="contain"
+                useNativeControls={true}
+                style={{ width: WIDTH, height: 250, alignSelf: 'center', marginBottom: 20 }}
+            />
+
           <Text style={styles.subTitulo}>FIESTA DEL CHAMAMÉ</Text>
+          <Image style={styles.imagen} source={require('../../resources/images/festival.jpg')}/>
           <Text style={styles.texto}>La Fiesta del Chamamé se celebra en la ciudad de Corrientes, Argentina, específicamente en el Anfiteatro Cocomarola y en el Puente Pexoa, donde cada año durante varios días del mes de enero, suena y se baila el chamamé, un género musical de origen folclórico
           característico de la región oriental de Argentina, el Paraguay, Río Grande del Sur y algunos pueblos del sur de Brasil y Uruguay.</Text>
           <Text style={styles.subTitulo}>CHAMAMÉ</Text>
@@ -120,5 +134,6 @@ const styles = StyleSheet.create({
     height: 250, 
     resizeMode: 'stretch',
     marginBottom: 10,
+    marginTop: 10,
   }
 });

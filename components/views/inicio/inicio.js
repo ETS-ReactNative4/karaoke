@@ -17,10 +17,6 @@ export default class Inicio extends React.Component {
   };
 
   async componentDidMount() {
-    // this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-    //   this.props.navigation.goBack(); // works best when the goBack is async
-    //   return true;
-    // });
 
     await Font.loadAsync({
       'berlin3': require('../../assets/fonts/berlin3.ttf'),
@@ -35,12 +31,7 @@ export default class Inicio extends React.Component {
   }
 
   componentWillUnmount() {
-    //this.backHandler.remove();
     
-  }
-
-  _onPress = () => {
-    //this.props.navigation.navigate('Karaoke', {id: this.state.video.id});
   }
 
   _renderView = () => {
@@ -50,28 +41,6 @@ export default class Inicio extends React.Component {
           <Text style={styles.subtitulo}>Sembrando Chamamé...</Text>
           <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raíces chamameceras, tus raíces...</Text>
           <Text style={styles.infoTop}>#FNCH2019</Text>
-
-          {/* <Video
-                source={ {uri: "http://dustingassmann.ddns.net/resources/videos/arrebol.mp4"} }
-                //source={require('../../resources/videos/spot.mp4')}
-                ref={(ref) => {
-                  this.player = ref;
-                }}
-                rate={1.0}
-                volume={1}
-                shouldPlay={this.state.shouldPlay}
-                resizeMode="stretch"
-                useNativeControls={this.state.control}
-                style={{ width: 400, height: 300, alignSelf: 'center'}}
-            /> */}
-
-          <View style={{ flex: 3, width: WIDTH}}>
-          <WebView
-              style={{ flex: 1}}
-              javaScriptEnabled={true}
-              source={{uri: 'https://www.youtube.com/embed/Or4otjCGXio?rel=0&autoplay=1&showinfo=1&controls=1'}}
-          />
-          </View>
 
             <View style={styles.footer}>
             <TouchableOpacity
