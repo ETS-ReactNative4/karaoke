@@ -57,5 +57,16 @@ async fetchTema(id) {
         catch(e) {
             console.log(e)
         }
+},
+
+async fetchVideos() {
+    try {
+            let response = await fetch(URI + 'videos/');
+            let responseJsonData = await response.json();
+            return responseJsonData;
+        }
+    catch(e) {
+        console.log(e)
+    }
 }
 }

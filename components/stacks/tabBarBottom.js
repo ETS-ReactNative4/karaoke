@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Inicio from '../views/inicio/inicio';
 import Karaoke from '../views/karaoke/karaoke';
+import VideoKaraoke from '../views/karaoke/video';
 import Documentales from '../views/documentales/documentales';
 import Biblioteca from '../views/biblioteca/biblioteca';
 import Radio from '../views/radio/radio';
@@ -49,7 +50,8 @@ const FestivalStack = createStackNavigator({
 });
 
 const KaraokeStack = createStackNavigator({
-  Karaoke: {screen: Karaoke}
+  Karaoke: {screen: Karaoke},
+  Video: {screen: VideoKaraoke}
 },{
   headerMode: 'none',
 });

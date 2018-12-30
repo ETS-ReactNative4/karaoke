@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 //import LoginStack from './components/stacks/tabBarBottom';
 import TabBarBottom from './components/stacks/tabBarBottom';
-import { Font, AppLoading, ScreenOrientation } from 'expo';
+import { ScreenOrientation } from 'expo';
 
 export default class App extends React.Component {
 
@@ -20,16 +20,16 @@ export default class App extends React.Component {
  
   render() {
     return (
-        <TabBarBottom style={styles.container} />
+        <TabBarBottom style={styles.container}/>        
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
-    backgroundColor: '#fff',
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    alignContent: 'center'
   }
 });

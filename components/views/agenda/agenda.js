@@ -8,6 +8,7 @@ import ajax from '../../services/fetchGrilla';
 import URL from '../../config';
 
 const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 export default class Agenda extends React.Component {
 
@@ -123,6 +124,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.50)',
     width: WIDTH,
+    height: HEIGHT,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center'
   },
   titulo: {
     color: 'white',

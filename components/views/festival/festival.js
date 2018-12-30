@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, ScrollView, ActivityIndicator, Dimension
 import { Font, ScreenOrientation, Constants, Video } from 'expo';
 
 const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 export default class Festival extends React.Component {
   

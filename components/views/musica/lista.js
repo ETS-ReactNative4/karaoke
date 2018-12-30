@@ -7,6 +7,8 @@ import ajax from '../../services/fetchMusica';
 import URL from '../../config';
 
 const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
+
 const URI = URL;
 
 export default class Lista extends React.Component {
@@ -29,7 +31,8 @@ export default class Lista extends React.Component {
 
   _renderView = () => {
     return (
-      <View style={styles.fondo}>
+      <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center', justifyContent: 'center', alignContent: 'center',}} >
+        <View style={styles.fondo}>
         <View style={{margin: 5}}>
           <SearchBar
             clearIcon={{ color: 'gray', size: 15 }}
@@ -64,15 +67,14 @@ export default class Lista extends React.Component {
           keyExtractor={item => item.id.toString()}
         />
         </View>
+        </ImageBackground>
     )
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
-        { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
-        </ImageBackground>
+          { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" justifyContent='center' alignContent="center" />) }
       </View>
     );
   }
@@ -83,12 +85,17 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    alignContent: 'center',
     backgroundColor: '#133101'
   },
   fondo: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.50)',
     width: WIDTH,
+    height: HEIGHT,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center'
   },
   titulo: {
     color: 'white',

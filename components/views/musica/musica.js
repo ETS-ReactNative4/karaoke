@@ -97,6 +97,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.50)',
     width: WIDTH,
+    height: HEIGHT,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center'
   },
   titulo: {
     color: 'white',

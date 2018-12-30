@@ -72,8 +72,12 @@ const styles = StyleSheet.create({
   },
   fondo: {
     flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.50)',
     width: WIDTH,
-    backgroundColor: 'rgba(0, 0, 0, 0.50)'
+    height: HEIGHT,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center'
   },
   cargando: {
     color: 'white',

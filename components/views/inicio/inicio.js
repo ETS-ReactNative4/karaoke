@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, ActivityIndicator, ImageBackground, TouchableOpacity, Linking, WebView } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, ActivityIndicator, ImageBackground, TouchableOpacity, Linking } from 'react-native';
 import { Font, ScreenOrientation, Constants } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
@@ -26,10 +26,12 @@ export default class Inicio extends React.Component {
 
     this.setState({ fontLoaded: true });
 
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+
   }
 
   async componentWillMount() {
-    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+    
   }
 
   componentWillUnmount() {
@@ -46,7 +48,7 @@ export default class Inicio extends React.Component {
           <View style={styles.centro}>
             <View style={styles.top}>
             <TouchableOpacity
-              onPress={() => this.props.navigation.push('Karaoke')}
+              onPress={() => this.props.navigation.navigate('Karaoke')}
               style={styles.btnLink}>
               <View style={styles.btnContainer}>
               <IconMat
@@ -57,7 +59,7 @@ export default class Inicio extends React.Component {
               </View>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.props.navigation.push('Biblioteca')}
+              onPress={() => this.props.navigation.navigate('Biblioteca')}
               style={styles.btnLink}>
               <View style={styles.btnContainer}>
               <IconMat
@@ -70,7 +72,7 @@ export default class Inicio extends React.Component {
             </View>
             <View style={styles.bottom}>
             <TouchableOpacity
-              onPress={() => this.props.navigation.push('Fiesta')}
+              onPress={() => this.props.navigation.navigate('Fiesta')}
               style={styles.btnLink}>
               <View style={styles.btnContainer}>
               <IconMat
@@ -81,7 +83,7 @@ export default class Inicio extends React.Component {
               </View>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.props.navigation.push('Chamamecito')}
+              onPress={() => this.props.navigation.navigate('Chamamecito')}
               style={styles.btnLink}>
               <View style={styles.btnContainer}>
               <Icon
@@ -162,8 +164,11 @@ export default class Inicio extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: WIDTH,
+    height: HEIGHT,
     alignItems: 'center',
     justifyContent: 'center',
+    alignContent: 'center'
   },
   titulo: {
     flex: 0.5,
@@ -194,6 +199,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.50)',
     width: WIDTH,
+    height: HEIGHT,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center'
   },
   footer: {
     flexDirection: 'row',
