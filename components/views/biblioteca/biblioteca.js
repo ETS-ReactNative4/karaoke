@@ -23,8 +23,7 @@ export default class Biblioteca extends React.Component {
 
   _renderView = () => {
     return (
-        <View style={styles.fondo}>
-        
+        <View >
           <View style={styles.botones}>
             <TouchableOpacity style={styles.button}
               onPress={() => this.props.navigation.navigate('Musica')}
@@ -54,11 +53,14 @@ export default class Biblioteca extends React.Component {
  
   render() {
     return (
-        <View style={styles.container}>
-            <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
-            { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
-            </ImageBackground>
-        </View>
+      <View style={styles.container}>
+      <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
+  justifyContent:'center',}} >
+      <View style={styles.fondo}>
+        { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
+      </View>
+      </ImageBackground>
+    </View>
     )
   }
 }

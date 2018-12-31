@@ -28,10 +28,8 @@ export default class Festival extends React.Component {
 
   _renderView = () => {
     return (
-      <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
-        
         <ScrollView style={styles.scroll}>
-        <View style={styles.fondo}>
+          <View style={{flex: 1, width: WIDTH}}>
           <Text style={styles.titulo}>Fiesta Nacional del Chamamé</Text>
           <Text style={styles.subTitulo}>29° FIESTA NACIONAL DEL CHAMAMÉ</Text>
           <Text style={styles.subTitulo}>15° FIESTA DEL CHAMAMÉ DEL MERCOSUR</Text>
@@ -61,14 +59,18 @@ export default class Festival extends React.Component {
           <Text style={styles.texto2}>Chamamé Orillero: en el que se notan muchas influencias del tango.</Text>
         </View>
         </ScrollView>
-      </ImageBackground>
     )
   }
 
   render() {
     return (
       <View style={styles.container}>
-          {this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />)}
+        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
+    justifyContent:'center',}} >
+        <View style={styles.fondo}>
+          { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
+        </View>
+        </ImageBackground>
       </View>
     )
   }

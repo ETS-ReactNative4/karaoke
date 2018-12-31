@@ -13,7 +13,8 @@
     },
     "splash": {
       "image": "./components/resources/images/splash.png",
-      "backgroundColor": "#7FB847"
+      "backgroundColor": "#7FB847",
+      "resizeMode": "contain"
     }
   }
 }

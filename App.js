@@ -1,19 +1,25 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 //import LoginStack from './components/stacks/tabBarBottom';
 import TabBarBottom from './components/stacks/tabBarBottom';
-import { ScreenOrientation } from 'expo';
+import { ScreenOrientation, SplashScreen   } from 'expo';
 
 export default class App extends React.Component {
 
   state = {
     fontLoaded: false,
+    isSplashReady: false,
+    isReady: false,
   };
 
   async componentDidMount() {
 
+    
     //Deshabilito warnings
     console.disableYellowBox = true;
+
+    SplashScreen.Hide();
+
     ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
@@ -23,6 +29,7 @@ export default class App extends React.Component {
         <TabBarBottom style={styles.container}/>        
     )
   }
+    
 }
 
 const styles = StyleSheet.create({

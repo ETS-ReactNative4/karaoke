@@ -36,13 +36,10 @@ export default class VideoKaraoke extends React.Component {
     
     ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
-
-
-  //Render view LANDSCAPE
-  _renderViewL = () => {
+  
+  _renderView = () => {
     return (
-        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
-        <View style={styles.fondo}>
+        <View >
             <Text style={styles.titulo}>{this.state.video.titulo} - {this.state.video.autor}</Text>
             <Video
                 source={{ uri: URL + this.state.video.url }}
@@ -54,15 +51,19 @@ export default class VideoKaraoke extends React.Component {
                 style={{ width: WIDTH, minHeight: 200, alignSelf: 'center' }}
             />
         </View>
-        </ImageBackground>
     )
   }
 
   render() {
       return (
-        <View style={styles.container}> 
-          {this.state.fontLoaded ? (this._renderViewL()) : (<ActivityIndicator size="large" color="#ffff" />)}
+        <View style={styles.container}>
+        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
+    justifyContent:'center',}} >
+        <View style={styles.fondo}>
+          { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
         </View>
+        </ImageBackground>
+      </View>
       );
     }
 }

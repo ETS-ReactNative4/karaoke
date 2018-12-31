@@ -31,8 +31,7 @@ export default class Lista extends React.Component {
 
   _renderView = () => {
     return (
-      <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center', justifyContent: 'center', alignContent: 'center',}} >
-        <View style={styles.fondo}>
+      <View >
         <View style={{width: WIDTH, margin: 5}}>
           <SearchBar
             clearIcon={{ color: 'gray', size: 15 }}
@@ -66,15 +65,19 @@ export default class Lista extends React.Component {
           )}
           keyExtractor={item => item.id.toString()}
         />
-        </View>
-        </ImageBackground>
+      </View>
     )
   }
 
   render() {
     return (
       <View style={styles.container}>
-          { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" justifyContent='center' alignContent="center" />) }
+        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
+    justifyContent:'center',}} >
+        <View style={styles.fondo}>
+          { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
+        </View>
+        </ImageBackground>
       </View>
     );
   }

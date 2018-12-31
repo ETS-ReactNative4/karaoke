@@ -23,7 +23,7 @@ export default class Juego extends React.Component {
 
   _renderView = () => {
     return (
-        <View style={styles.fondo}>
+        <View >
             <View style={styles.top}>
                 <Text style={styles.titulo}>
                 ¡Descargá el nuevo juego del Chamamecito y aventurate junto a "Chamiguito" en los diferentes paisajes de nuestro querido Corrientes!
@@ -55,11 +55,14 @@ export default class Juego extends React.Component {
  
   render() {
     return (
-        <View style={styles.container}>
-            <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
-            { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
-            </ImageBackground>
-        </View>
+      <View style={styles.container}>
+      <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
+  justifyContent:'center',}} >
+      <View style={styles.fondo}>
+        { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
+      </View>
+      </ImageBackground>
+    </View>
     )
   }
 }

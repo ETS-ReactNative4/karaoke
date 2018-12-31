@@ -34,7 +34,7 @@ export default class Musica extends React.Component {
 
   _renderView = () => {
     return (
-      <View style={styles.fondo}>
+      <View >
         <View style={{width: WIDTH, margin: 5}}>
         <SearchBar
           clearIcon={{ color: 'gray', size: 15 }}
@@ -79,8 +79,11 @@ export default class Musica extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight}} >
-        { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
+        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
+    justifyContent:'center',}} >
+        <View style={styles.fondo}>
+          { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
+        </View>
         </ImageBackground>
       </View>
     );
