@@ -35,7 +35,7 @@ export default class Musica extends React.Component {
   _renderView = () => {
     return (
       <View style={styles.fondo}>
-        <View style={{margin: 5}}>
+        <View style={{width: WIDTH, margin: 5}}>
         <SearchBar
           clearIcon={{ color: 'gray', size: 15 }}
           searchIcon={{size: 55}}
@@ -59,7 +59,7 @@ export default class Musica extends React.Component {
           data={this.state.temas}
           renderItem={({item, separators}) => (
             <TouchableOpacity style={styles.button}
-              onPress={() => this.props.navigation.push('Lista', {autor: item.autor})}
+              onPress={() => this.props.navigation.navigate('Lista', {autor: item.autor})}
               onShowUnderlay={separators.highlight}
               onHideUnderlay={separators.unhighlight}
               >

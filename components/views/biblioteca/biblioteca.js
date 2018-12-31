@@ -27,21 +27,21 @@ export default class Biblioteca extends React.Component {
         
           <View style={styles.botones}>
             <TouchableOpacity style={styles.button}
-              onPress={() => this.props.navigation.push('Musica')}
+              onPress={() => this.props.navigation.navigate('Musica')}
                >
                 <ImageBackground source={require('../../resources/images/acordeon.png')} style={{flex: 1, width: WIDTH, margin: 0}}>
                   <Text style={styles.texto}>MÚSICA</Text>
                 </ImageBackground>
             </TouchableOpacity >
             <TouchableOpacity style={styles.button}
-              onPress={() => this.props.navigation.push('Documentales')}
+              onPress={() => this.props.navigation.navigate('Documentales')}
                >
                 <ImageBackground source={require('../../resources/images/documentales.png')} style={{flex: 1, width: WIDTH, margin: 0}}>
                   <Text style={styles.texto}>DOCUMENTALES</Text>
                 </ImageBackground>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}
-              onPress={() => this.props.navigation.push('Radio')}
+              onPress={() => this.props.navigation.navigate('Radio')}
                >
                 <ImageBackground source={require('../../resources/images/radio-gif1.gif')} style={{flex: 1, width: WIDTH, margin: 0, backgroundColor: "black"}}>
                   <Text style={styles.texto}>RADIO</Text>

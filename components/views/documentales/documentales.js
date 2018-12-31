@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, FlatList, Dimensions, ImageBackground } from 'react-native';
-import { SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Font, ScreenOrientation, Constants } from 'expo';
 import ajax from '../../services/fetchMusica';
@@ -35,7 +34,7 @@ export default class Lista extends React.Component {
           data={this.state.temas}
           renderItem={({item, separators}) => (  
             <TouchableOpacity style={styles.button}
-              onPress={() => this.props.navigation.push('Video', {id: item.id})}
+              onPress={() => this.props.navigation.navigate('Video', {id: item.id})}
               onShowUnderlay={separators.highlight}
               onHideUnderlay={separators.unhighlight}>
               <View style={styles.lista}>

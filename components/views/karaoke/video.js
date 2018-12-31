@@ -30,13 +30,11 @@ export default class VideoKaraoke extends React.Component {
   async componentWillMount() {
 
     await ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
-
   }
 
-  async componentWillUnmount() {
+  componentWillUnmount() {
     
-    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
-    await this.setState({ shouldPlay: false });
+    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
 

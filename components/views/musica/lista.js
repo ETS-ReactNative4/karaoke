@@ -33,7 +33,7 @@ export default class Lista extends React.Component {
     return (
       <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center', justifyContent: 'center', alignContent: 'center',}} >
         <View style={styles.fondo}>
-        <View style={{margin: 5}}>
+        <View style={{width: WIDTH, margin: 5}}>
           <SearchBar
             clearIcon={{ color: 'gray', size: 15 }}
             searchIcon={{size: 55}}
@@ -55,7 +55,7 @@ export default class Lista extends React.Component {
           data={this.state.temas}
           renderItem={({item, separators}) => (  
             <TouchableOpacity style={styles.button}
-              onPress={() => this.props.navigation.push('Player', {autor: item.autor, track_id: item.track_id})}
+              onPress={() => this.props.navigation.navigate('Player', {autor: item.autor, track_id: item.track_id})}
               onShowUnderlay={separators.highlight}
               onHideUnderlay={separators.unhighlight}>
               <View style={styles.lista}>

@@ -35,7 +35,7 @@ export default class Lista extends React.Component {
           data={this.state.videos}
           renderItem={({item, separators}) => (  
             <TouchableOpacity style={styles.button}
-              onPress={() => this.props.navigation.push('Video', {id: item.id})}
+              onPress={() => this.props.navigation.navigate('Video', {id: item.id})}
               onShowUnderlay={separators.highlight}
               onHideUnderlay={separators.unhighlight}>
               <View style={styles.lista}>
