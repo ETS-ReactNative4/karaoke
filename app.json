@@ -10,6 +10,10 @@
     },
     "android": {
       "package": "host.exp.Exponent"
+    },
+    "splash": {
+      "image": "./components/resources/images/splash.png",
+      "backgroundColor": "#7FB847"
     }
   }
 }

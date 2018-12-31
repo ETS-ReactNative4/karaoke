@@ -27,22 +27,11 @@ export default class Inicio extends React.Component {
     });
 
     this.setState({ fontLoaded: true });
-
-    
-
-  }
-
-  async componentWillMount() {
-    
-  }
-
-  componentWillUnmount() {
-    
   }
 
   _renderView = () => {
     return (
-      <View style={styles.fondo}>
+      <View>
           <Text style={styles.titulo}>CHAMAMÉ 2.0</Text>
           <Text style={styles.subtitulo}>Sembrando Chamamé...</Text>
           <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raíces chamameceras, tus raíces...</Text>
@@ -154,9 +143,11 @@ export default class Inicio extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
+        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
     justifyContent:'center',}} >
-        { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
+        <View style={styles.fondo}>
+          { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
+        </View>
         </ImageBackground>
       </View>
     )
@@ -199,7 +190,7 @@ const styles = StyleSheet.create({
   },
   fondo: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.50)',
+    backgroundColor: 'rgba(0, 0, 0, 0.70)',
     width: WIDTH,
     height: HEIGHT,
     alignItems: 'center',

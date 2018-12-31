@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   fondo: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.50)',
+    backgroundColor: 'rgba(0, 0, 0, 0.70)',
     width: WIDTH,
   },
   cargando: {
