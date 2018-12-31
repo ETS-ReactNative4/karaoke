@@ -129,11 +129,10 @@ const styles = StyleSheet.create({
   lista: {
     flex: 1,
     flexDirection: 'row',
-    //backgroundColor: '#8CA853',
     borderBottomWidth: 1,
-    //borderColor: '#8CA853',
     borderBottomColor: '#d1d1d1', 
     marginBottom: 5,
+    marginLeft: 5,
     minHeight: 55,
     marginHorizontal: 5,
     justifyContent: 'flex-start',

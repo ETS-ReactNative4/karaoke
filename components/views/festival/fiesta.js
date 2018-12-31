@@ -28,7 +28,7 @@ export default class Fiesta extends React.Component {
             <TouchableOpacity style={styles.button}
               onPress={() => this.props.navigation.navigate('Festival')}
                >
-                <ImageBackground source={require('../../resources/images/festival1.png')} style={{flex: 1, width: WIDTH, margin: 0}}>
+                <ImageBackground source={require('../../resources/images/festival1.jpg')} style={{flex: 1, width: WIDTH, margin: 0}}>
                   <Text style={styles.texto}>Festival</Text>
                 </ImageBackground>
             </TouchableOpacity >

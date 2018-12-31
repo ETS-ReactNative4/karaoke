@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-//import LoginStack from './components/stacks/tabBarBottom';
 import TabBarBottom from './components/stacks/tabBarBottom';
 import { ScreenOrientation, SplashScreen   } from 'expo';
 

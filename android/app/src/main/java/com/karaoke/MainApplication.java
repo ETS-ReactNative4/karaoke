@@ -3,6 +3,11 @@ package com.karaoke;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.github.yamill.orientation.OrientationPackage;
+import org.reactnative.camera.RNCameraPackage;
+import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import com.github.yamill.orientation.OrientationPackage;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -36,6 +41,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List getPackages() {
       return Arrays.asList(
           new MainReactPackage(),
+            new ReactNativeYouTube(),
+            new VectorIconsPackage(),
+            new OrientationPackage(),
+            new RNCameraPackage(),
+            new ReactNativeYouTube(),
             new OrientationPackage(),
             new ReactNativeYouTube(),
             new VectorIconsPackage(),

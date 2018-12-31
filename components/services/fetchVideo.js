@@ -38,6 +38,17 @@ export default {
         }
     },
 
+    async fetchVivo() {
+        try {
+                let response = await fetch(URI + 'vivo/');
+                let responseJsonData = await response.json();
+                return responseJsonData;
+            }
+        catch(e) {
+            console.log(e)
+        }
+    },
+
     async fetchVideoKaraoke() {
         try {
                 let response = await fetch(URI + 'videoKaraoke/');

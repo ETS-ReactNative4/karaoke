@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, ActivityIndicator, ImageBackground, TouchableOpacity, Linking } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, ActivityIndicator, ImageBackground, TouchableOpacity, Linking, Alert, Image } from 'react-native';
 import { Font, ScreenOrientation, Constants } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
@@ -27,15 +27,27 @@ export default class Inicio extends React.Component {
     });
 
     this.setState({ fontLoaded: true });
+
+    this._renderAlert();
+  }
+
+  _renderAlert = () => {
+    Alert.alert(
+      '¡Votá tu canción favorita!',
+      'Ingresá a la grilla y votá que canción te gustaría que cante el Bocha Sheridan',
+      [
+        {text: 'Ir a la Grilla', onPress: () => this.props.navigation.navigate('Agenda')},
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+      ],
+      { cancelable: false }
+    )
   }
 
   _renderView = () => {
     return (
-      <View>
+      <View style={{width: WIDTH, flex: 1}}>
           <Text style={styles.titulo}>CHAMAMÉ 2.0</Text>
-          <Text style={styles.subtitulo}>Sembrando Chamamé...</Text>
-          <Text style={styles.texto}>La aplicación donde te mostraremos nuestras raíces chamameceras, tus raíces...</Text>
-
+          
           <View style={styles.centro}>
             <View style={styles.top}>
             <TouchableOpacity
@@ -74,18 +86,40 @@ export default class Inicio extends React.Component {
               </View>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Chamamecito')}
+              onPress={() => this.props.navigation.navigate('Chamiguito')}
               style={styles.btnLink}>
               <View style={styles.btnContainer}>
               <Icon
                   name='gamepad'
                   size={30}
                   color='white'/>
-                <Text style={styles.botones}>Chamamecito</Text>
+                <Text style={styles.botones}>Chamiguito</Text>
               </View>
             </TouchableOpacity>
             </View>
           </View> 
+
+          <View style={styles.centro1}>  
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Vivo')}
+              style={{
+                  borderWidth:1,
+                  borderColor:'rgba(0,0,0,0.2)',
+                  alignItems:'center',
+                  justifyContent:'center',
+                  width:250,
+                  height:50,
+                  position: 'relative',
+                  backgroundColor:'rgba(0,0,0,0.5)',
+                  borderRadius:50,
+                }}
+            >
+            <View style={{flexDirection:'row'}}>
+              <Image style={styles.imagen} source={require('../../resources/images/rec.png')}/>
+              <Text style={styles.info}>#FNCH VER EN VIVO</Text>
+            </View>
+            </TouchableOpacity>
+          </View>
 
           <View style={styles.footer}>
             <TouchableOpacity
@@ -164,11 +198,11 @@ const styles = StyleSheet.create({
     alignContent: 'center'
   },
   titulo: {
-    flex: 0.5,
+    flex: 1,
     fontFamily: 'berlin3',
     color: 'white',
     fontSize: 32,
-    marginBottom: 10,
+    margin: 10,
     textAlign: 'center',
   },
   subtitulo: {
@@ -198,6 +232,7 @@ const styles = StyleSheet.create({
     alignContent: 'center'
   },
   footer: {
+    flex: 1,
     flexDirection: 'row',
     marginBottom: 5,
     marginTop: 5,
@@ -215,7 +250,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   centro: {
-    flex: 4,
+    flex: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  centro1: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -237,6 +277,13 @@ const styles = StyleSheet.create({
     fontFamily: 'berlin3',
     fontSize: 25,
   },
+  info: {
+    color: 'white',
+    textAlign: 'center',
+    fontFamily: 'berlin3',
+    fontSize: 18,
+    marginLeft: 5,
+  },
   btnLink: {
     flex: 1,
     flexDirection: 'row',
@@ -251,5 +298,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  imagen: { 
+    width: 20,
+    height: 20,
+    margin: 2,
   }
 });

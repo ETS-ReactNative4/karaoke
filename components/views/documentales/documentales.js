@@ -9,7 +9,7 @@ const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const URI = URL;
 
-export default class Lista extends React.Component {
+export default class Documentales extends React.Component {
 
   state = {
     fontLoaded: false,
@@ -21,16 +21,17 @@ export default class Lista extends React.Component {
       'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });
 
-    const temas = await ajax.fetchVideos();
-    this.setState({ temas, fontLoaded: true });
+    //const temas = await ajax.fetchVideos();
+    this.setState({ fontLoaded: true });
 
     ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
   _renderView = () => {
     return (
-      <View >
-        <FlatList
+      <View style={{flex: 1, width: WIDTH, height: HEIGHT, alignContent: 'center', justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={styles.texto}>Proximamente...</Text>
+        {/* <FlatList
           data={this.state.temas}
           renderItem={({item, separators}) => (  
             <TouchableOpacity style={styles.button}
@@ -44,7 +45,7 @@ export default class Lista extends React.Component {
             </TouchableOpacity>
           )}
           keyExtractor={item => item.id.toString()}
-        />
+        /> */}
       </View>
     )
   }
@@ -85,22 +86,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
   },
-  cargando: {
-    color: 'white',
-    fontFamily: 'berlin3',
-    fontSize: 16,
-    margin: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center'
-  },
   texto: {
     flex: 1,
     color: 'white', 
     fontFamily: 'berlin3',
-    fontSize: 18, 
-    marginLeft: 10, 
-    textAlign: 'auto'
+    fontSize: 28, 
+    marginTop: 30, 
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center'
   },
   button: {
     width: WIDTH,

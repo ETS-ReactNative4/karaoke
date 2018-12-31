@@ -64,7 +64,7 @@ export default class Musica extends React.Component {
               onHideUnderlay={separators.unhighlight}
               >
               <View style={styles.cell}>                    
-                <Image style={styles.thumb} source= {{uri: URI + item.thumb}} />
+                <Image style={styles.thumb} source= {require('../../resources/images/acordeon.jpg')} />
                 <Text style={styles.texto}>{item.autor}</Text>
               </View>
               

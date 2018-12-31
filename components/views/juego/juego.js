@@ -26,7 +26,7 @@ export default class Juego extends React.Component {
         <View >
             <View style={styles.top}>
                 <Text style={styles.titulo}>
-                ¡Descargá el nuevo juego del Chamamecito y aventurate junto a "Chamiguito" en los diferentes paisajes de nuestro querido Corrientes!
+                ¡Descargá el nuevo juego de Chamiguito y aventurate en los diferentes paisajes de nuestro querido Corrientes!
                 </Text>
             </View>
             <View style={styles.center}>

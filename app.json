@@ -1,10 +1,13 @@
 {
   "expo": {
     "sdkVersion": "27.0.0",
-    "name": "karaoke",
+    "name": "Chamamé 2.0",
+    "privacy": "public",
     "facebookScheme": "fb1755097877936704",
     "facebookAppId": "1755097877936704",
     "facebookDisplayName": "karaoke",
+    "slug": "Chamame",
+    "icon": "./components/resources/images/icono.png",
     "ios": {
       "bundleIdentifier": "host.exp.Exponent"
     },

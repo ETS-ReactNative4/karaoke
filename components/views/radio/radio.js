@@ -112,6 +112,7 @@ export default class Player extends React.Component {
       this.mounted = false;
 
       const temas = await ajax.fetchRadio();
+      
       this.setState({ temas: temas });
 
       await this.LoadPlaylist(this.state.temas);
@@ -164,7 +165,6 @@ export default class Player extends React.Component {
     }
 
     const source = { uri: this.state.PLAYLIST[this.index].uri };
-    //const source = require('../../resources/musica/01_camino_a_mburucuya.mp3');
     const initialStatus = {
       shouldPlay: playing,
       rate: this.state.rate,
@@ -485,7 +485,7 @@ export default class Player extends React.Component {
             onReadyForDisplay={this._onReadyForDisplay}
             useNativeControls={this.state.useNativeControls}
           />
-          <Image source= {{ uri: this.state.playbackInstanceThumb}} style={styles.backgroundVideo} />
+          <Image source= {require('../../resources/images/icono.png')} style={styles.backgroundVideo} />
         </View>
         <View
           style={[

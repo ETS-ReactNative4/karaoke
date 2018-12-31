@@ -35,7 +35,7 @@ export default class Biblioteca extends React.Component {
             <TouchableOpacity style={styles.button}
               onPress={() => this.props.navigation.navigate('Documentales')}
                >
-                <ImageBackground source={require('../../resources/images/documentales.png')} style={{flex: 1, width: WIDTH, margin: 0}}>
+                <ImageBackground source={require('../../resources/images/documentales.jpg')} style={{flex: 1, width: WIDTH, margin: 0}}>
                   <Text style={styles.texto}>DOCUMENTALES</Text>
                 </ImageBackground>
             </TouchableOpacity>

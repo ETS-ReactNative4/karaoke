@@ -1,7 +1,6 @@
 import React from 'react';
-import { createStackNavigator, createBottomTabNavigator, NavigationActions } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import IconMat from 'react-native-vector-icons/MaterialIcons';
 
 import Inicio from '../views/inicio/inicio';
 import Karaoke from '../views/karaoke/karaoke';
@@ -11,11 +10,12 @@ import Biblioteca from '../views/biblioteca/biblioteca';
 import Radio from '../views/radio/radio';
 import Fiesta from '../views/festival/fiesta';
 import Festival from '../views/festival/festival';
+import Vivo from '../views/festival/vivo';
 import Agenda from '../views/agenda/agenda';
 import Musica from '../views/musica/musica';
 import Player from '../views/musica/Player';
 import Lista from '../views/musica/lista';
-import Chamamecito from '../views/juego/juego';
+import Chamiguito from '../views/juego/juego';
 
 const MusicaStack = createStackNavigator({
   Musica: {screen: Musica},
@@ -43,7 +43,8 @@ const InicioStack = createStackNavigator({
 const FestivalStack = createStackNavigator({
   Fiesta: {screen: Fiesta},
   Festival: {screen: Festival},
-  Agenda: {screen: Agenda}
+  Agenda: {screen: Agenda},
+  Vivo: {screen: Vivo}
 },{
   headerMode: 'none',
 });
@@ -56,7 +57,7 @@ const KaraokeStack = createStackNavigator({
 });
 
 const JuegoStack = createStackNavigator({
-  Chamamecito: {screen: Chamamecito}
+  Chamiguito: {screen: Chamiguito}
 },{
   headerMode: 'none',
 });
@@ -67,7 +68,7 @@ const tabBarBottom = createBottomTabNavigator(
     Karaoke: KaraokeStack,
     Biblioteca: BiblioStack,
     Fiesta: FestivalStack,
-    Chamamecito: JuegoStack
+    Chamiguito: JuegoStack
   },
   {
     initialRouteName: 'Inicio',
@@ -84,7 +85,7 @@ const tabBarBottom = createBottomTabNavigator(
           iconName = 'library-music';
         } else if (routeName === 'Fiesta') {
           iconName = 'event-note';
-        } else if (routeName === 'Chamamecito') {
+        } else if (routeName === 'Chamiguito') {
           iconName = 'gamepad';
         }
 
