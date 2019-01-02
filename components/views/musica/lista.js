@@ -36,7 +36,7 @@ export default class Lista extends React.Component {
     });
 
     const temas = await ajax.fetchAutor(this.props.navigation.state.params.autor);
-    //this.setState({ temas, fontLoaded: true });
+    
     this.setState({ data: temas, loading: false, fontLoaded: true });
 
     this.arrayholder = temas; 
