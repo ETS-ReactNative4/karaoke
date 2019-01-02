@@ -13,10 +13,22 @@ const URI = URL;
 
 export default class Lista extends React.Component {
 
-  state = {
+  constructor(props) {
+ 
+    super(props);
+ 
+    this.state = {
+ 
     fontLoaded: false,
+    loading: false,      
+    data: [],      
+    error: null, 
     temas: []
-  };
+    
+    }
+ 
+    this.arrayholder = [] ;
+  }
 
   async componentDidMount() {
     await Font.loadAsync({
@@ -24,10 +36,26 @@ export default class Lista extends React.Component {
     });
 
     const temas = await ajax.fetchAutor(this.props.navigation.state.params.autor);
-    this.setState({ temas, fontLoaded: true });
+    //this.setState({ temas, fontLoaded: true });
+    this.setState({ data: temas, loading: false, fontLoaded: true });
+
+    this.arrayholder = temas; 
 
     ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
+	
+  SearchFilterFunction = text => {    
+    const newData = this.arrayholder.filter(item => {      
+      const itemData = `${item.titulo.toUpperCase()}   
+      ${item.autor.toUpperCase()}`;
+  
+       const textData = text.toUpperCase();
+        
+       return itemData.indexOf(textData) > -1;    
+    });    
+  
+    this.setState({ data: newData });  
+  };
 
   _renderView = () => {
     return (
@@ -40,6 +68,7 @@ export default class Lista extends React.Component {
               backgroundColor: 'transparent',
               color: 'white',
             }}
+            onChangeText={(text) => this.SearchFilterFunction(text)}
             containerStyle={{
               backgroundColor: 'rgba(255,255,255, 0.40)', 
               borderWidth: 0,
@@ -51,7 +80,7 @@ export default class Lista extends React.Component {
             placeholder='Buscar...' />
           </View>
         <FlatList
-          data={this.state.temas}
+          data={this.state.data}
           renderItem={({item, separators}) => (  
             <TouchableOpacity style={styles.button}
               onPress={() => this.props.navigation.navigate('Player', {autor: item.autor, track_id: item.track_id})}
