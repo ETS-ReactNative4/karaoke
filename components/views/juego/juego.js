@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, Dimensions, TouchableOpacity, ActivityIndicator, ImageBackground, Linking, Image } from 'react-native';
+import { View, StyleSheet, Text, Dimensions, TouchableOpacity, ActivityIndicator, ImageBackground, Linking, Image, Alert } from 'react-native';
 import { Font, ScreenOrientation, Constants } from 'expo';
 
 const WIDTH = Dimensions.get('window').width;
@@ -19,6 +19,17 @@ export default class Juego extends React.Component {
       this.setState({ fontLoaded: true });
     
     ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+  }
+
+  _renderAlert = () => {
+    Alert.alert(
+      'Chamiguito Chamamecero',
+      'Proximamente disponible en App Store',
+      [
+        {text: 'Ok', onPress: () => console.log('Ok'), style: 'ok'},
+      ],
+      { cancelable: false }
+    )
   }
 
   _renderView = () => {
@@ -43,7 +54,7 @@ export default class Juego extends React.Component {
                     
                 </TouchableOpacity >
                 <TouchableOpacity style={styles.button}
-                onPress={()=> Linking.openURL('https://play.google.com/store/apps/details?id=com.goodbarber.chamame')}
+                onPress={()=> this._renderAlert()}
                 >
                     <Image source={require('../../resources/images/appstore.png')} style={styles.imagen} />
                     
