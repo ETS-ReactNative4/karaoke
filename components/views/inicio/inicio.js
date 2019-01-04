@@ -37,7 +37,7 @@ export default class Inicio extends React.Component {
       'Ingresá a la grilla y votá que canción te gustaría que cante el Bocha Sheridan',
       [
         {text: 'Ir a la Grilla', onPress: () => this.props.navigation.navigate('Agenda')},
-        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'Cancelar', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
       ],
       { cancelable: false }
     )
@@ -103,11 +103,12 @@ export default class Inicio extends React.Component {
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('Vivo')}
               style={{
+                  flex: 6,
                   borderWidth:1,
                   borderColor:'rgba(0,0,0,0.2)',
                   alignItems:'center',
                   justifyContent:'center',
-                  width:250,
+                  width: WIDTH / 2 - 2,
                   height:50,
                   position: 'relative',
                   backgroundColor:'rgba(0,0,0,0.5)',
@@ -115,10 +116,33 @@ export default class Inicio extends React.Component {
                 }}
             >
             <View style={{flexDirection:'row'}}>
-              <Image style={styles.imagen} source={require('../../resources/images/rec.png')}/>
-              <Text style={styles.info}>#FNCH VER EN VIVO</Text>
+                <Image style={styles.imagen} source={require('../../resources/images/rec.png')}/>
+                <Text style={styles.info}>#FNCH VER EN VIVO</Text>
             </View>
             </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Agenda')}
+              style={{
+                  flex: 4,
+                  borderWidth:1,
+                  borderColor:'rgba(0,0,0,0.2)',
+                  alignItems:'center',
+                  justifyContent:'center',
+                  width: WIDTH / 2 - 2,
+                  height:50,
+                  position: 'relative',
+                  backgroundColor:'rgba(0,0,0,0.5)',
+                  borderRadius:50,
+                }}
+            >
+            <View style={{flexDirection:'row'}}>
+            <View style={{flexDirection:'row'}}>
+                <Text style={styles.info1}>¡Votá al Bocha!</Text>
+              </View>
+            </View>
+            </TouchableOpacity>
+            
           </View>
 
           <View style={styles.footer}>
@@ -256,6 +280,8 @@ const styles = StyleSheet.create({
   },
   centro1: {
     flex: 1,
+    flexDirection:'row',
+    width: WIDTH,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -279,6 +305,13 @@ const styles = StyleSheet.create({
   },
   info: {
     color: 'white',
+    textAlign: 'center',
+    fontFamily: 'berlin3',
+    fontSize: 18,
+    marginLeft: 5,
+  },
+  info1: {
+    color: '#e7c600',
     textAlign: 'center',
     fontFamily: 'berlin3',
     fontSize: 18,
