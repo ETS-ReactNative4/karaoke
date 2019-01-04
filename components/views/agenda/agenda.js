@@ -5,6 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ajax from '../../services/fetchGrilla';
 import URL from '../../config';
 
+const URI = URL + '/public';
+
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
@@ -43,7 +45,7 @@ export default class Agenda extends React.Component {
           <WebView
               style={{ backgroundColor: 'transparent'}}
               javaScriptEnabled={true}
-              source={{uri: 'http://dustingassmann.ddns.net/public/'}}
+              source={{uri: URI}}
           />
           </View>
       </View>

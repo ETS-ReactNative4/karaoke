@@ -12,7 +12,8 @@
       "bundleIdentifier": "host.exp.Exponent"
     },
     "android": {
-      "package": "host.exp.Exponent"
+      "package": "host.exp.Exponent",
+      "versionCode": 4
     },
     "splash": {
       "image": "./components/resources/images/splash.png",

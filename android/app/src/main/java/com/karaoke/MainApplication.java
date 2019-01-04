@@ -45,17 +45,8 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new OrientationPackage(),
             new RNCameraPackage(),
-            new ReactNativeYouTube(),
-            new OrientationPackage(),
-            new ReactNativeYouTube(),
-            new VectorIconsPackage(),
-            new RNCameraPackage(),
-            new VectorIconsPackage(),
             new TrackPlayer(),
-            new RNCameraPackage(),
-            new ReactVideoPackage(),
-            new VectorIconsPackage(),
-            new TrackPlayer()
+            new ReactVideoPackage()
       );
     }
 

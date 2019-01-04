@@ -48,7 +48,7 @@ export default class Juego extends React.Component {
             </View>
             <View style={styles.bottom}>
                 <TouchableOpacity style={styles.button}
-                onPress={()=> Linking.openURL('https://play.google.com/store/apps/details?id=com.goodbarber.chamame')}
+                onPress={()=> Linking.openURL('https://play.google.com/store/apps/details?id=com.sambrana.chamamesito')}
                 >
                     <Image source={require('../../resources/images/google.png')} style={styles.imagen} />
                     

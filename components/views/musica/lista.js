@@ -46,8 +46,7 @@ export default class Lista extends React.Component {
 	
   SearchFilterFunction = text => {    
     const newData = this.arrayholder.filter(item => {      
-      const itemData = `${item.titulo.toUpperCase()}   
-      ${item.autor.toUpperCase()}`;
+      const itemData = `${item.titulo.toUpperCase()}`;
   
        const textData = text.toUpperCase();
         
@@ -62,15 +61,18 @@ export default class Lista extends React.Component {
       <View >
         <View style={{width: WIDTH, margin: 5}}>
           <SearchBar
-            clearIcon={{ color: 'gray', size: 15 }}
-            searchIcon={{size: 55}}
+            clearIcon={{ color: 'gray', size: 30 }}
+            searchIcon={{
+              size: 60,
+              color: 'black',
+            }}
             inputStyle={{
-              backgroundColor: 'transparent',
-              color: 'white',
+              backgroundColor: 'white',
+              color: 'black',
             }}
             onChangeText={(text) => this.SearchFilterFunction(text)}
             containerStyle={{
-              backgroundColor: 'rgba(255,255,255, 0.40)', 
+              backgroundColor: 'white',
               borderWidth: 0,
               borderTopWidth: 0,
               borderBottomWidth: 0, 
@@ -154,6 +156,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: WIDTH,
+    marginLeft: 5,
   },
   lista: {
     flex: 1,

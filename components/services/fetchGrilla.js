@@ -1,7 +1,7 @@
 import URL from '../config';
 //const URI = 'http://192.168.0.101/ApiKaraoke/public/api/';
 //const URI = URL + '/ApiKaraoke/public/api/';
-const URI = URL + '/public/api/';
+const URI = URL + 'public/api/';
 
 export default {
     async fetchGrilla() {

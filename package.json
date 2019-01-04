@@ -1,6 +1,6 @@
 {
   "name": "karaoke",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "private": true,
   "devDependencies": {
     "react-native-scripts": "1.14.0",
@@ -22,15 +22,12 @@
     "expo": "^27.0.1",
     "react": "16.3.1",
     "react-native": "~0.55.2",
-    "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera.git",
     "react-native-elements": "^0.19.1",
     "react-native-orientation": "^3.1.3",
-    "react-native-popup-dialog": "^0.16.6",
     "react-native-slider": "^0.11.0",
     "react-native-thumbnail-video": "^0.1.1",
     "react-native-vector-icons": "^4.6.0",
     "react-native-video": "^3.2.0",
-    "react-native-youtube": "^1.1.0",
     "react-navigation": "^2.8.0"
   },
   "rnpm": {

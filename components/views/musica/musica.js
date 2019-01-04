@@ -49,8 +49,7 @@ export default class Musica extends React.Component {
 
   SearchFilterFunction = text => {    
     const newData = this.arrayholder.filter(item => {      
-      const itemData = `${item.titulo.toUpperCase()}   
-      ${item.autor.toUpperCase()}`;
+      const itemData = `${item.autor.toUpperCase()}`;
   
        const textData = text.toUpperCase();
         
@@ -65,22 +64,26 @@ export default class Musica extends React.Component {
       <View >
         <View style={{width: WIDTH, margin: 5}}>
         <SearchBar
-          clearIcon={{ color: 'gray', size: 15 }}
-          searchIcon={{size: 55}}
-          inputStyle={{
-            backgroundColor: 'transparent',
-            color: 'white',
-          }}
-          onChangeText={(text) => this.SearchFilterFunction(text)}
-          containerStyle={{
-            backgroundColor: 'rgba(255,255,255, 0.40)', 
-            borderWidth: 0,
-            borderTopWidth: 0,
-            borderBottomWidth: 0, 
-            borderRadius: 30,
-            borderColor: '#8CA853'
-          }}
-          placeholder='Buscar...' />
+            clearIcon={{ color: 'gray', size: 30 }}
+            searchIcon={{
+              size: 60,
+              color: 'black',
+            }}
+            inputStyle={{
+              backgroundColor: 'white',
+              color: 'black',
+
+            }}
+            onChangeText={(text) => this.SearchFilterFunction(text)}
+            containerStyle={{
+              backgroundColor: 'white',
+              borderWidth: 0,
+              borderTopWidth: 0,
+              borderBottomWidth: 0, 
+              borderRadius: 30,
+              borderColor: '#8CA853'
+            }}
+            placeholder='Buscar...' />
         </View>
         <FlatList style={styles.flatList}
           horizontal= {false}
@@ -93,7 +96,7 @@ export default class Musica extends React.Component {
               onHideUnderlay={separators.unhighlight}
               >
               <View style={styles.cell}>                    
-                <Image style={styles.thumb} source= {require('../../resources/images/acordeon.jpg')} />
+                <Image style={styles.thumb} source= {require('../../resources/images/nota.png')} />
                 <Text style={styles.texto}>{item.autor}</Text>
               </View>
               
@@ -170,23 +173,18 @@ const styles = StyleSheet.create({
   thumb: {
     resizeMode: 'contain',
     width: WIDTH / 2 - 12,
-    height: HEIGHT / 2 - (SIZE_ICON * 3),
+    height: HEIGHT / 2 - (SIZE_ICON * 4),
   },
   button: {
     width: WIDTH / 2 - 10,
     marginLeft: 5,
-    //backgroundColor: '#8CA853',
     borderBottomWidth: 1,
-    //borderColor: '#8CA853',
     borderBottomColor: '#d1d1d1', 
     marginBottom: 5,
     alignItems: 'center'
   },
   lista: {
     flex: 1,
-    //backgroundColor: '#8CA853',
-    //borderWidth: 1,
-    //borderColor: '#8CA853',
     borderBottomColor: '#d1d1d1', 
     marginBottom: 5,
     minHeight: 55,
