@@ -41,6 +41,8 @@ export default class Agenda extends React.Component {
     return (
       <View >
         <Text style={styles.titulo}>#FNCH2019 Grilla</Text>
+
+        <Text style={styles.subtitulo}>La presente programación está sujeta a modificaciones por razones técnicas, artísticas o de fuerza mayor.</Text>
         <View style={{ flex: 9, width: WIDTH}}>
           <WebView
               style={{ backgroundColor: 'transparent'}}
@@ -87,6 +89,13 @@ const styles = StyleSheet.create({
     fontFamily: 'berlin3',
     fontSize: 30,
     textAlign: 'center',
-    marginBottom: 5,
+    margin: 5,
+  },
+  subtitulo: {
+    color: 'red',
+    fontFamily: 'berlin3',
+    fontSize: 14,
+    textAlign: 'center',
+    margin: 5,
   }
 });

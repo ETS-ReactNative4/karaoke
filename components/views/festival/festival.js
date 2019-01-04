@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, ActivityIndicator, Dimensions, ImageBackground, WebView,  } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, ActivityIndicator, Dimensions, ImageBackground} from 'react-native';
 import { Font, ScreenOrientation, Constants, Video } from 'expo';
 
 const WIDTH = Dimensions.get('window').width;
@@ -24,6 +24,12 @@ export default class Festival extends React.Component {
 
   async componentWillMount() {
     await ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
+  }
+
+  async componentWillUnmount() {
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+
+    this.setState({ shouldPlay: false, });
   }
 
   _renderView = () => {
@@ -57,6 +63,12 @@ export default class Festival extends React.Component {
           <Text style={styles.texto2}>Chamamé Maceta: de pulsos y ritmos vivos, habituales en los grupos que tocan en festivales, bailes y &quot;boliches&quot;.</Text>
           <Text style={styles.texto2}>Chamamé Cangüí (triste): se caracteriza por su tónica lenta y sentimental.</Text>
           <Text style={styles.texto2}>Chamamé Orillero: en el que se notan muchas influencias del tango.</Text>
+
+          <Text style={styles.subTitulo}>Cómo llegar</Text>
+          <View style={{flexDirection: 'row', width: WIDTH, minHeight: 50, alignItems: 'center'}}>
+            <Image style={styles.imagen1} source={require('../../resources/images/ubicacion.png')}/>
+            <Text style={styles.texto2}>Av. Domingo Sarmiento 2650, Corrientes</Text>
+          </View>
         </View>
         </ScrollView>
     )
@@ -113,6 +125,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     marginBottom: 5,
+    marginTop: 15
   },
   texto: {
     marginHorizontal: 10,
@@ -126,7 +139,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     color: 'white',
     fontFamily: 'berlin3',
-    //fontStyle: 'italic',
     fontSize: 18,
     marginBottom: 10,
     textAlign: 'center',
@@ -138,5 +150,11 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
     marginBottom: 10,
     marginTop: 10,
+  },
+  imagen1: {
+    width: 30,
+    height: 50,
+    resizeMode: 'contain',
+    margin: 5
   }
 });
