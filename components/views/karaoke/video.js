@@ -30,11 +30,23 @@ export default class VideoKaraoke extends React.Component {
   async componentWillMount() {
 
     await ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
+
+    this.blurSuscription =
+      this.props.navigation.addListener('willBlur', () => {
+          if (!this.player.state.shouldPlay) {
+            this.player.stopAsync();
+          } else {
+            this.player.playAsync();
+          }
+      });
+
   }
 
-  componentWillUnmount() {
+  async componentWillUnmount() {
     
-    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+
+    this.blurSuscription.remove();
   }
   
   _renderView = () => {
@@ -42,6 +54,9 @@ export default class VideoKaraoke extends React.Component {
         <View >
             <Text style={styles.titulo}>{this.state.video.titulo} - {this.state.video.autor}</Text>
             <Video
+                ref={(ref) => {
+                  this.player = ref
+                }}
                 source={{ uri: URL + this.state.video.url }}
                 rate={1.0}
                 volume={1}

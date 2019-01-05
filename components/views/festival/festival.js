@@ -18,18 +18,25 @@ export default class Festival extends React.Component {
       'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });
 
-    this.setState({ fontLoaded: true });
+    this.setState({ fontLoaded: true, shouldPlay: true });
 
   }
 
   async componentWillMount() {
     await ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
+
+    this.blurSuscription =
+      this.props.navigation.addListener('willBlur', () => {
+          if (!this.player.state.shouldPlay) {
+            this.player.stopAsync();
+          }
+      });
   }
 
   async componentWillUnmount() {
     await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
 
-    this.setState({ shouldPlay: false, });
+    this.blurSuscription.remove();
   }
 
   _renderView = () => {
@@ -43,10 +50,13 @@ export default class Festival extends React.Component {
           obtenga el reconocimiento internacional.</Text>
 
           <Video
+                ref={(ref) => {
+                  this.player = ref
+                }}
                 source={require('../../resources/videos/spot.mp4')}
                 rate={1.0}
                 volume={1}
-                shouldPlay
+                shouldPlay={this.state.shouldPlay}
                 resizeMode="contain"
                 useNativeControls={true}
                 style={{ width: WIDTH, height: 250, alignSelf: 'center', marginBottom: 20 }}

@@ -7,7 +7,6 @@ import {
   Text,
   TouchableHighlight,
   View,
-  BackHandler,
 } from 'react-native';
 import { Asset, Audio, Font, Video } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -133,13 +132,22 @@ export default class Player extends React.Component {
 
       this.setState({ fontLoaded: true, shouldPlay: true });
 
-      
-
     }
+  }
+
+  componentWillMount() {
+    this.blurSuscription =
+      this.props.navigation.addListener('willBlur', () => {
+          if (!this._video.state.shouldPlay) {
+            this._onStopPressed();
+          }
+      });
   }
 
   componentWillUnmount() {
     this.mounted = false;
+
+    this.blurSuscription.remove();
   }
 
   LoadPlaylist(temas) {

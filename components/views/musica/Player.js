@@ -110,7 +110,6 @@ export default class Player extends React.Component {
     if(this.mounted) {
       this.mounted = false;
 
-      //const temas = await ajax.fetchAlbum(this.props.navigation.state.params.album);
       const temas = await ajax.fetchTemas(this.props.navigation.state.params.autor, this.props.navigation.state.params.track_id);
       this.setState({ temas: temas, album: this.props.navigation.state.params.autor });
 
@@ -131,16 +130,22 @@ export default class Player extends React.Component {
       });
 
       this.setState({ fontLoaded: true });
-
-      //Habilito boton fisico atras
-      // this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      //   this.props.navigation.navigate('Lista'); // works best when the goBack is async
-      // });
     }
+  }
+
+  componentWillMount() {
+    this.blurSuscription =
+      this.props.navigation.addListener('willBlur', () => {
+          if (!this._video.state.shouldPlay) {
+            this._onStopPressed();
+          }
+      });
   }
 
   componentWillUnmount() {
     this.mounted = false;
+
+    this.blurSuscription.remove();
   }
 
   LoadPlaylist(temas) {
