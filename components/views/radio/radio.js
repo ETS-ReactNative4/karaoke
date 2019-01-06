@@ -69,15 +69,15 @@ const BUFFERING_STRING = '...buffering...';
 const RATE_SCALE = 3.0;
 const VIDEO_CONTAINER_HEIGHT = DEVICE_HEIGHT / 2.0 - FONT_SIZE;
 
-export default class Player extends React.Component {
+export default class Radio extends React.Component {
   constructor(props) {
     super(props);
     this.index = 0;
     this.isSeeking = false;
     this.shouldPlayAtEndOfSeek = false;
     this.playbackInstance = null;
-    this.mounted = true;
     this.state = {
+      mounted : true,
       showVideo: false,
       playbackInstanceName: LOADING_STRING,
       playbackInstanceThumb: null,
@@ -107,15 +107,15 @@ export default class Player extends React.Component {
   }
 
   async componentDidMount() {
-    if(this.mounted) {
-      this.mounted = false;
+    if(this.state.mounted) {
+      this.setState({ mounted : false });
 
       const temas = await ajax.fetchRadio();
       
       this.setState({ temas: temas });
 
       await this.LoadPlaylist(this.state.temas);
-      
+
       Audio.setAudioModeAsync({
         allowsRecordingIOS: false,
         interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
@@ -130,23 +130,21 @@ export default class Player extends React.Component {
         'berlin3': require('../../assets/fonts/berlin3.ttf'),
       });
 
-      this.setState({ fontLoaded: true, shouldPlay: true });
-
+      this.setState({ fontLoaded: true, shouldPlay: true});
     }
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     this.blurSuscription =
       this.props.navigation.addListener('willBlur', () => {
-          if (!this._video.state.shouldPlay) {
-            this._onStopPressed();
-          }
+          // if (!this._video.state.shouldPlay) {
+          //   this.props.navigation.pop();
+          // }
+          this.props.navigation.pop();
       });
   }
 
   componentWillUnmount() {
-    this.mounted = false;
-
     this.blurSuscription.remove();
   }
 
@@ -534,8 +532,8 @@ export default class Player extends React.Component {
             onPress={this._onBackPressed}
             disabled={this.state.isLoading}>
             <Image style={styles.button} source={ICON_BACK_BUTTON.module} />
-          </TouchableHighlight>
-          <TouchableHighlight
+          </TouchableHighlight> */}
+          {/* <TouchableHighlight
             underlayColor={BACKGROUND_COLOR}
             style={styles.wrapper}
             onPress={this._onPlayPausePressed}
@@ -544,8 +542,8 @@ export default class Player extends React.Component {
               style={styles.button}
               source={this.state.isPlaying ? ICON_PAUSE_BUTTON.module : ICON_PLAY_BUTTON.module}
             />
-          </TouchableHighlight>
-          <TouchableHighlight
+          </TouchableHighlight> */}
+          {/* <TouchableHighlight
             underlayColor={BACKGROUND_COLOR}
             style={styles.wrapper}
             onPress={this._onStopPressed}
@@ -558,7 +556,7 @@ export default class Player extends React.Component {
             onPress={this._onForwardPressed}
             disabled={this.state.isLoading}>
             <Image style={styles.button} source={ICON_FORWARD_BUTTON.module} />
-          </TouchableHighlight> */}
+          </TouchableHighlight>  */}
         </View>
         <View style={[styles.buttonsContainerBase, styles.buttonsContainerMiddleRow]}>
           <View style={styles.volumeContainer}>

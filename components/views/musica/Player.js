@@ -137,7 +137,7 @@ export default class Player extends React.Component {
     this.blurSuscription =
       this.props.navigation.addListener('willBlur', () => {
           if (!this._video.state.shouldPlay) {
-            this._onStopPressed();
+            this._onPlayPausePressed();
           }
       });
   }
