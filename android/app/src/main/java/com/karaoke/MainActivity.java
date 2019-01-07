@@ -10,9 +10,10 @@ public class MainActivity extends ReactActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getWindow().
-            addFlags(WindowManager.LayoutParms.FLAG_KEEP_SCREEN_ON);
+        setContentView(R.layout.activity_main);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
+    
 
     /**
      * Returns the name of the main component registered from JavaScript.

@@ -33,10 +33,10 @@ export default class Inicio extends React.Component {
 
   _renderAlert = () => {
     Alert.alert(
-      '¡Votá tu canción favorita!',
-      'Ingresá a la grilla y votá que canción te gustaría que cante el Bocha Sheridan',
+      '¡Votá tu canción favorita del Bocha!',
+      'Ingresá y votá que canción te gustaría que cante el Bocha Sheridan',
       [
-        {text: 'Ir a la Grilla', onPress: () => this.props.navigation.navigate('Agenda', {flag: 1})},
+        {text: 'Ir a Votar', onPress: () => this.props.navigation.navigate('Agenda', {flag: 1})},
         {text: 'Cancelar', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
       ],
       { cancelable: false }
@@ -99,16 +99,40 @@ export default class Inicio extends React.Component {
             </View>
           </View> 
 
-          <View style={styles.centro1}>  
+          <View style={styles.centro1}> 
+
+          <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Agenda', {flag: 1})}
+              style={{
+                  flex: 5,
+                  backgroundColor: '#133101',
+                  borderColor: 'white',
+                  borderWidth: 2,
+                  alignItems:'center',
+                  justifyContent:'center',
+                  width: WIDTH - 20,
+                  height:70,
+                  position: 'relative',
+                  borderRadius:50,
+                  marginBottom: 5,
+                }}
+            >
+            <View style={{flexDirection:'row'}}>
+              <View style={{flexDirection:'row'}}>
+                <Text style={styles.info1}>¡VOTÁ AL BOCHA!</Text>
+              </View>
+            </View>
+            </TouchableOpacity>
+
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('Vivo')}
               style={{
-                  flex: 6,
+                  flex: 5,
                   borderWidth:1,
                   borderColor:'rgba(0,0,0,0.2)',
                   alignItems:'center',
                   justifyContent:'center',
-                  width: WIDTH / 2 - 2,
+                  width: WIDTH - 20,
                   height:50,
                   position: 'relative',
                   backgroundColor:'rgba(0,0,0,0.5)',
@@ -121,27 +145,7 @@ export default class Inicio extends React.Component {
             </View>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Agenda', {flag: 1})}
-              style={{
-                  flex: 4,
-                  borderWidth:1,
-                  borderColor:'rgba(0,0,0,0.2)',
-                  alignItems:'center',
-                  justifyContent:'center',
-                  width: WIDTH / 2 - 2,
-                  height:50,
-                  position: 'relative',
-                  backgroundColor:'rgba(0,0,0,0.5)',
-                  borderRadius:50,
-                }}
-            >
-            <View style={{flexDirection:'row'}}>
-            <View style={{flexDirection:'row'}}>
-                <Text style={styles.info1}>¡Votá al Bocha!</Text>
-              </View>
-            </View>
-            </TouchableOpacity>
+            
             
           </View>
 
@@ -153,7 +157,7 @@ export default class Inicio extends React.Component {
                 style={styles.btnContainer}>
                 <Icon
                   name='facebook-square'
-                  size={50}
+                  size={30}
                   color='white'/>
               </View>
             </TouchableOpacity>
@@ -165,7 +169,7 @@ export default class Inicio extends React.Component {
                 style={styles.btnContainer}>
                 <Icon
                   name='instagram'
-                  size={50}
+                  size={30}
                   color='white'/>
               </View>
             </TouchableOpacity>
@@ -177,7 +181,7 @@ export default class Inicio extends React.Component {
                 style={styles.btnContainer}>
                 <Icon
                   name='youtube'
-                  size={50}
+                  size={30}
                   color='white'/>
               </View>
             </TouchableOpacity>
@@ -189,7 +193,7 @@ export default class Inicio extends React.Component {
                 style={styles.btnContainer}>
                 <Icon
                   name='twitter-square'
-                  size={50}
+                  size={30}
                   color='white'/>
               </View>
             </TouchableOpacity>
@@ -222,7 +226,7 @@ const styles = StyleSheet.create({
     alignContent: 'center'
   },
   titulo: {
-    flex: 1,
+    flex: 0.5,
     fontFamily: 'berlin3',
     color: 'white',
     fontSize: 32,
@@ -256,7 +260,7 @@ const styles = StyleSheet.create({
     alignContent: 'center'
   },
   footer: {
-    flex: 1,
+    flex: 0.5,
     flexDirection: 'row',
     marginBottom: 5,
     marginTop: 5,
@@ -274,13 +278,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   centro: {
-    flex: 5,
+    flex: 6,
     justifyContent: 'center',
     alignItems: 'center',
   },
   centro1: {
-    flex: 1,
-    flexDirection:'row',
+    flex: 2,
     width: WIDTH,
     justifyContent: 'center',
     alignItems: 'center',
@@ -314,7 +317,7 @@ const styles = StyleSheet.create({
     color: '#e7c600',
     textAlign: 'center',
     fontFamily: 'berlin3',
-    fontSize: 18,
+    fontSize: 28,
     marginLeft: 5,
   },
   btnLink: {
@@ -325,9 +328,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: HEIGHT / 4,
     width: WIDTH / 2 - 10,
-    marginLeft: 5,
-    marginRight: 5,
-    marginBottom: 5,
+    margin: 5,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center'
