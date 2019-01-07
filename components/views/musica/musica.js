@@ -173,7 +173,8 @@ const styles = StyleSheet.create({
   thumb: {
     resizeMode: 'contain',
     width: WIDTH / 2 - 12,
-    height: HEIGHT / 2 - (SIZE_ICON * 4),
+    //height: HEIGHT / 2 - (SIZE_ICON * 5),
+    height: WIDTH / 5,
   },
   button: {
     width: WIDTH / 2 - 10,

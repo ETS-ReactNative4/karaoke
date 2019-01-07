@@ -36,7 +36,7 @@ export default class Inicio extends React.Component {
       '¡Votá tu canción favorita!',
       'Ingresá a la grilla y votá que canción te gustaría que cante el Bocha Sheridan',
       [
-        {text: 'Ir a la Grilla', onPress: () => this.props.navigation.navigate('Agenda')},
+        {text: 'Ir a la Grilla', onPress: () => this.props.navigation.navigate('Agenda', {flag: 1})},
         {text: 'Cancelar', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
       ],
       { cancelable: false }
@@ -122,7 +122,7 @@ export default class Inicio extends React.Component {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Agenda')}
+              onPress={() => this.props.navigation.navigate('Agenda', {flag: 1})}
               style={{
                   flex: 4,
                   borderWidth:1,
@@ -147,7 +147,7 @@ export default class Inicio extends React.Component {
 
           <View style={styles.footer}>
             <TouchableOpacity
-              onPress={ ()=> Linking.openURL('https://www.facebook.com/FNChamame') }
+              onPress={ ()=> Linking.openURL('https://web.facebook.com/Chamam%C3%A9-20-Sembrando-Chamam%C3%A9-597174660713574/') }
               style={styles.btnClickContain}>
               <View
                 style={styles.btnContainer}>
@@ -171,7 +171,7 @@ export default class Inicio extends React.Component {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={ ()=> Linking.openURL('https://www.youtube.com/channel/UC_gkRuW_H3CWVeNPUbB9Ehw') }
+              onPress={ ()=> Linking.openURL('https://www.youtube.com/channel/UC4ytfWTJk85pl0vZZ0Ch2VQ') }
               style={styles.btnClickContain}>
               <View
                 style={styles.btnContainer}>

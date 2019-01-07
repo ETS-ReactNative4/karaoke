@@ -1,6 +1,6 @@
 {
   "name": "karaoke",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "devDependencies": {
     "react-native-scripts": "1.14.0",
@@ -23,6 +23,7 @@
     "react": "16.3.1",
     "react-native": "~0.55.2",
     "react-native-elements": "^0.19.1",
+    "react-native-keep-awake": "^3.2.0",
     "react-native-orientation": "^3.1.3",
     "react-native-slider": "^0.11.0",
     "react-native-thumbnail-video": "^0.1.1",

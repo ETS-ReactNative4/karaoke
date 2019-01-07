@@ -6,10 +6,11 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
-  View,
+  View
 } from 'react-native';
 import { Asset, Audio, Font, Video } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons';
+
 import ajax from '../../services/fetchMusica';
 import URL from '../../config';
 
@@ -131,15 +132,18 @@ export default class Radio extends React.Component {
       });
 
       this.setState({ fontLoaded: true, shouldPlay: true});
+
     }
   }
 
   async componentWillMount() {
+    
     this.blurSuscription =
       this.props.navigation.addListener('willBlur', () => {
           // if (!this._video.state.shouldPlay) {
           //   this.props.navigation.pop();
           // }
+          this._onPlayPausePressed();
           this.props.navigation.pop();
       });
   }
@@ -198,7 +202,9 @@ export default class Radio extends React.Component {
 
     this._updateScreenForLoading(false);
 
-    this._onPlayPausePressed();
+    
+    this.playbackInstance.playAsync();
+
   }
 
   _mountVideo = component => {
@@ -482,6 +488,9 @@ export default class Radio extends React.Component {
                 height: 0,
               },
             ]}
+            ignoreSilentSwitch={"ignore"}
+            playWhenInactive={true}
+            playInBackground={true}
             resizeMode={Video.RESIZE_MODE_CONTAIN}
             onPlaybackStatusUpdate={this._onPlaybackStatusUpdate}
             onLoadStart={this._onLoadStart}
@@ -500,7 +509,7 @@ export default class Radio extends React.Component {
               opacity: this.state.isLoading ? DISABLED_OPACITY : 1.0,
             },
           ]}>
-          {/* <Slider
+          <Slider
             style={styles.playbackSlider}
             trackImage={ICON_TRACK_1.module}
             thumbImage={ICON_THUMB_1.module}
@@ -516,7 +525,7 @@ export default class Radio extends React.Component {
             <Text style={[styles.text, styles.timestamp, { fontFamily: 'berlin3' }]}>
               {this._getTimestamp()}
             </Text>
-          </View> */}
+          </View>
         </View>
         <View
           style={[

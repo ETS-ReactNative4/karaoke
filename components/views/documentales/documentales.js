@@ -30,7 +30,7 @@ export default class Documentales extends React.Component {
   _renderView = () => {
     return (
       <View style={{flex: 1, width: WIDTH, height: HEIGHT, alignContent: 'center', justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={styles.texto}>Proximamente...</Text>
+        <Text style={styles.texto}>Próximamente...</Text>
         {/* <FlatList
           data={this.state.temas}
           renderItem={({item, separators}) => (  

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Asset, Audio, Font, Video } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons';
+
 import ajax from '../../services/fetchMusica';
 import URL from '../../config';
 
@@ -144,7 +145,6 @@ export default class Player extends React.Component {
 
   componentWillUnmount() {
     this.mounted = false;
-
     this.blurSuscription.remove();
   }
 
@@ -482,6 +482,9 @@ export default class Player extends React.Component {
                 height: 0,
               },
             ]}
+            ignoreSilentSwitch={"ignore"}
+            playWhenInactive={true}
+            playInBackground={true}
             resizeMode={Video.RESIZE_MODE_CONTAIN}
             onPlaybackStatusUpdate={this._onPlaybackStatusUpdate}
             onLoadStart={this._onLoadStart}

@@ -6,6 +6,7 @@ import ajax from '../../services/fetchGrilla';
 import URL from '../../config';
 
 const URI = URL + '/public';
+const URIV = URL + '/public/votos/17';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -38,18 +39,30 @@ export default class Agenda extends React.Component {
   }
 
   _renderView = () => {
+    // const {state} = this.props.navigation;
+    // var flag = state.params ? "1" : "0";
     return (
       <View >
         <Text style={styles.titulo}>#FNCH2019 Grilla</Text>
 
         <Text style={styles.subtitulo}>La presente programación está sujeta a modificaciones por razones técnicas, artísticas o de fuerza mayor.</Text>
         <View style={{ flex: 9, width: WIDTH}}>
-          <WebView
+        { this.props.navigation.state.params ? 
+          (<WebView
               style={{ backgroundColor: 'transparent'}}
               javaScriptEnabled={true}
-              source={{uri: URI}}
-          />
+              source={{uri: 'http://13.90.59.76/ApiKaraoke/public/votos/17'}}
+          />) 
+          :
+          (<WebView
+            style={{ backgroundColor: 'transparent'}}
+            javaScriptEnabled={true}
+            source={{uri: URI}}
+        />)
+        }
           </View>
+
+        
       </View>
     )
   }
