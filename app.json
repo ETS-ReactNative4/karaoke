@@ -10,7 +10,7 @@
     },
     "android": {
       "package": "host.exp.Exponent",
-      "versionCode": 9
+      "versionCode": 10
     },
     "splash": {
       "image": "./components/resources/images/splash.png",
