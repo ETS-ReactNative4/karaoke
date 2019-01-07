@@ -131,20 +131,18 @@ export default class Radio extends React.Component {
         'berlin3': require('../../assets/fonts/berlin3.ttf'),
       });
 
-      this.setState({ fontLoaded: true, shouldPlay: true});
-
+      this.setState({ fontLoaded: true});
+      
     }
   }
 
-  async componentWillMount() {
-    
+  componentWillMount() {
     this.blurSuscription =
       this.props.navigation.addListener('willBlur', () => {
-          // if (!this._video.state.shouldPlay) {
-          //   this.props.navigation.pop();
-          // }
-          this._onPlayPausePressed();
-          this.props.navigation.pop();
+          if (!this._video.state.shouldPlay) {
+            this._onPlayPausePressed();
+          }
+          //this.props.navigation.pop();
       });
   }
 
@@ -203,7 +201,8 @@ export default class Radio extends React.Component {
     this._updateScreenForLoading(false);
 
     
-    this.playbackInstance.playAsync();
+    //this.playbackInstance.playAsync();
+    //this._onPlayPausePressed();
 
   }
 
@@ -502,7 +501,7 @@ export default class Radio extends React.Component {
           />
           <Image source= {require('../../resources/images/icono.png')} style={styles.backgroundVideo} />
         </View>
-        <View
+        {/* <View
           style={[
             styles.playbackContainer,
             {
@@ -526,7 +525,7 @@ export default class Radio extends React.Component {
               {this._getTimestamp()}
             </Text>
           </View>
-        </View>
+        </View> */}
         <View
           style={[
             styles.buttonsContainerBase,
@@ -542,16 +541,16 @@ export default class Radio extends React.Component {
             disabled={this.state.isLoading}>
             <Image style={styles.button} source={ICON_BACK_BUTTON.module} />
           </TouchableHighlight> */}
-          {/* <TouchableHighlight
+          <TouchableHighlight
             underlayColor={BACKGROUND_COLOR}
             style={styles.wrapper}
             onPress={this._onPlayPausePressed}
             disabled={this.state.isLoading}>
             <Image
-              style={styles.button}
+              style={styles.buttonP}
               source={this.state.isPlaying ? ICON_PAUSE_BUTTON.module : ICON_PLAY_BUTTON.module}
             />
-          </TouchableHighlight> */}
+          </TouchableHighlight>
           {/* <TouchableHighlight
             underlayColor={BACKGROUND_COLOR}
             style={styles.wrapper}
@@ -569,7 +568,7 @@ export default class Radio extends React.Component {
         </View>
         <View style={[styles.buttonsContainerBase, styles.buttonsContainerMiddleRow]}>
           <View style={styles.volumeContainer}>
-            <TouchableHighlight
+            {/* <TouchableHighlight
               underlayColor={BACKGROUND_COLOR}
               style={styles.wrapper}
               onPress={this._onMutePressed}>
@@ -584,7 +583,7 @@ export default class Radio extends React.Component {
               thumbImage={ICON_THUMB_2.module}
               value={1}
               onValueChange={this._onVolumeSliderValueChange}
-            />
+            /> */}
           </View>
         </View> 
         <View />
@@ -711,12 +710,13 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: BACKGROUND_COLOR,
+
   },
   buttonsContainerBase: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
   },
   buttonsContainerTopRow: {
     maxHeight: ICON_PLAY_BUTTON.height,

@@ -1,8 +1,18 @@
 package com.karaoke;
 
+import android.os.Bundle;
+import android.view.WindowManager;
+
 import com.facebook.react.ReactActivity;
 
 public class MainActivity extends ReactActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.getWindow().
+            addFlags(WindowManager.LayoutParms.FLAG_KEEP_SCREEN_ON);
+    }
 
     /**
      * Returns the name of the main component registered from JavaScript.
