@@ -134,21 +134,30 @@ export default class Radio extends React.Component {
       this.setState({ fontLoaded: true});
       
     }
+    
   }
 
   componentWillMount() {
     this.blurSuscription =
       this.props.navigation.addListener('willBlur', () => {
           if (!this._video.state.shouldPlay) {
-            this._onPlayPausePressed();
+            this.pausa();
           }
-          //this.props.navigation.pop();
       });
   }
 
   componentWillUnmount() {
     this.blurSuscription.remove();
   }
+
+
+  pausa = () => {
+    if (this.playbackInstance != null) {
+      if (this.state.isPlaying) {
+        this.playbackInstance.pauseAsync();
+      }
+    }
+  };
 
   LoadPlaylist(temas) {
     for(var i=0; i < temas.length; i++) {
