@@ -62,7 +62,7 @@ export default class VideoKaraoke extends React.Component {
                   shouldPlay={this.state.shouldPlay}
                   resizeMode="contain"
                   useNativeControls={true}
-                  style={{ width: HEIGHT / 2, height: WIDTH * 0.7, margin: 5 }}
+                  style={{ width: HEIGHT / 2, height: WIDTH * 0.7, margin: 5, alignSelf: 'center'}}
               />
             </View>
             <View style={{ flex: 2 }}>
