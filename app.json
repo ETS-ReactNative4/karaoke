@@ -6,7 +6,7 @@
     "slug": "Chamame",
     "icon": "./components/resources/images/icono.png",
     "ios": {
-      "bundleIdentifier": "host.exp.Exponent"
+      "bundleIdentifier": "com.chamame.sembrando"
     },
     "android": {
       "package": "host.exp.Exponent",
