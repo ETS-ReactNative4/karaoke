@@ -16,6 +16,8 @@ export default class VideoKaraoke extends React.Component {
 
   async componentDidMount() {
 
+    ScreenOrientation.allow(ScreenOrientation.Orientation.LANDSCAPE);
+    
     await Font.loadAsync({
         'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });    
@@ -24,19 +26,15 @@ export default class VideoKaraoke extends React.Component {
                                         
     this.setState({ shouldPlay: true, fontLoaded: true, video: video });
 
-    
   }
 
   async componentWillMount() {
-
-    await ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
 
     this.blurSuscription =
       this.props.navigation.addListener('willBlur', () => {
           if (!this.player.state.shouldPlay) {
             this.player.stopAsync();
-          } else {
-            this.player.playAsync();
+            this.props.navigation.pop();
           }
       });
 
@@ -44,27 +42,32 @@ export default class VideoKaraoke extends React.Component {
 
   async componentWillUnmount() {
     
-    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
 
     this.blurSuscription.remove();
   }
   
   _renderView = () => {
     return (
-        <View >
+        <View style={{ flex: 1 }}>
             <Text style={styles.titulo}>{this.state.video.titulo} - {this.state.video.autor}</Text>
-            <Video
-                ref={(ref) => {
-                  this.player = ref
-                }}
-                source={{ uri: URL + this.state.video.url }}
-                rate={1.0}
-                volume={1}
-                shouldPlay={this.state.shouldPlay}
-                resizeMode="contain"
-                useNativeControls={true}
-                style={{ width: WIDTH, minHeight: 200, alignSelf: 'center' }}
-            />
+            <View style={{ flex: 7 }}>
+              <Video
+                  ref={(ref) => {
+                    this.player = ref
+                  }}
+                  source={{ uri: URL + this.state.video.url }}
+                  rate={1.0}
+                  volume={1}
+                  shouldPlay={this.state.shouldPlay}
+                  resizeMode="contain"
+                  useNativeControls={true}
+                  style={{ width: HEIGHT / 2, height: WIDTH * 0.7, margin: 5 }}
+              />
+            </View>
+            <View style={{ flex: 2 }}>
+              
+            </View>
         </View>
     )
   }
@@ -72,7 +75,7 @@ export default class VideoKaraoke extends React.Component {
   render() {
       return (
         <View style={styles.container}>
-        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
+        <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: HEIGHT, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
     justifyContent:'center',}} >
         <View style={styles.fondo}>
           { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
@@ -90,21 +93,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'transparent',
     alignContent: 'center',
+    width: HEIGHT,
+    height: WIDTH
   },
   fondo: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.70)',
-    width: WIDTH,
-    height: HEIGHT,
+    width: HEIGHT,
+    height: WIDTH,
     alignItems: 'center',
     justifyContent: 'center',
     alignContent: 'center'
   },
   titulo: {
+    flex: 1,
     color: 'white',
     fontFamily: 'berlin3',
     fontSize: 22,
     textAlign: 'center',
-    marginBottom: 20,
+    margin: 5,
   }
 });
