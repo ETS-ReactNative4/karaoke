@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, ActivityIndicator, ImageBackground, TouchableOpacity, Linking, Alert, Image } from 'react-native';
-import { Font, ScreenOrientation, Constants } from 'expo';
+import { Font, ScreenOrientation, Constants, KeepAwake  } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 
@@ -205,12 +205,13 @@ export default class Inicio extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <KeepAwake/>
         <ImageBackground source={require('../../resources/images/fondo.png')} style={{flex: 1, width: WIDTH, margin: 0, paddingTop: Constants.statusBarHeight, alignItems: 'center',
     justifyContent:'center',}} >
         <View style={styles.fondo}>
           { this.state.fontLoaded ? (this._renderView()) : (<ActivityIndicator size="large" color="#ffff" />) }
         </View>
-        </ImageBackground>
+        </ImageBackground>        
       </View>
     )
   }
