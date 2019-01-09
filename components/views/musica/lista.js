@@ -31,6 +31,9 @@ export default class Lista extends React.Component {
   }
 
   async componentDidMount() {
+
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+
     await Font.loadAsync({
       'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });
@@ -39,9 +42,7 @@ export default class Lista extends React.Component {
     
     this.setState({ data: temas, loading: false, fontLoaded: true });
 
-    this.arrayholder = temas; 
-
-    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+    this.arrayholder = temas;
   }
 	
   SearchFilterFunction = text => {    

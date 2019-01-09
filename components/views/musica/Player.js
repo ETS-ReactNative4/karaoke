@@ -108,6 +108,9 @@ export default class Player extends React.Component {
   }
 
   async componentDidMount() {
+
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+    
     if(this.mounted) {
       this.mounted = false;
 

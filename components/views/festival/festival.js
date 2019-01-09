@@ -14,6 +14,9 @@ export default class Festival extends React.Component {
   }
 
   async componentDidMount() {
+
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+    
     await Font.loadAsync({
       'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });
@@ -23,7 +26,6 @@ export default class Festival extends React.Component {
   }
 
   async componentWillMount() {
-    await ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
 
     this.blurSuscription =
       this.props.navigation.addListener('willBlur', () => {
@@ -34,7 +36,6 @@ export default class Festival extends React.Component {
   }
 
   async componentWillUnmount() {
-    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
 
     this.blurSuscription.remove();
   }

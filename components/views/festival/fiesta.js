@@ -12,13 +12,14 @@ export default class Fiesta extends React.Component {
   };
 
   async componentDidMount() {
+
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+
     await Font.loadAsync({
         'berlin3': require('../../assets/fonts/berlin3.ttf'),
       });
 
       this.setState({ fontLoaded: true });
-    
-    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
   _renderView = () => {

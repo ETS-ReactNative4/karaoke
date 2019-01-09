@@ -16,7 +16,7 @@ export default class VideoKaraoke extends React.Component {
 
   async componentDidMount() {
 
-    ScreenOrientation.allow(ScreenOrientation.Orientation.LANDSCAPE);
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.LANDSCAPE);
     
     await Font.loadAsync({
         'berlin3': require('../../assets/fonts/berlin3.ttf'),
@@ -42,7 +42,7 @@ export default class VideoKaraoke extends React.Component {
 
   async componentWillUnmount() {
     
-    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
 
     this.blurSuscription.remove();
   }

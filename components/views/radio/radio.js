@@ -108,6 +108,9 @@ export default class Radio extends React.Component {
   }
 
   async componentDidMount() {
+    
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+
     if(this.state.mounted) {
       this.setState({ mounted : false });
 

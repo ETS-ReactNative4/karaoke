@@ -24,6 +24,9 @@ export default class Agenda extends React.Component {
   }
 
   async componentDidMount() {
+
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+
     await Font.loadAsync({
       'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });
@@ -35,7 +38,7 @@ export default class Agenda extends React.Component {
   }
 
   async componentWillMount() {
-    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+    
   }
 
   _renderView = () => {

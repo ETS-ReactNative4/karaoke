@@ -17,6 +17,8 @@ export default class Vivo extends React.Component {
 
   async componentDidMount() {
 
+    await ScreenOrientation.allow(ScreenOrientation.Orientation.LANDSCAPE);
+
     await Font.loadAsync({
         'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });
@@ -24,8 +26,7 @@ export default class Vivo extends React.Component {
     const vivo = await ajax.fetchVivo();            
 
     this.setState({ shouldPlay: true, fontLoaded: true, vivo: vivo});
-
-    await ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);    
+  
   }
   
   _renderView = () => {
