@@ -8,7 +8,7 @@ import {
   TouchableHighlight,
   View
 } from 'react-native';
-import { Asset, Audio, Font, Video } from 'expo';
+import { Asset, Audio, Font, Video, ScreenOrientation } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import ajax from '../../services/fetchMusica';
@@ -66,7 +66,7 @@ const BACKGROUND_COLOR = '#133101';
 const DISABLED_OPACITY = 0.5;
 const FONT_SIZE = 16;
 const LOADING_STRING = '... cargando ...';
-const BUFFERING_STRING = '...buffering...';
+const BUFFERING_STRING = '... cargando ...';
 const RATE_SCALE = 3.0;
 const VIDEO_CONTAINER_HEIGHT = DEVICE_HEIGHT / 2.0 - FONT_SIZE;
 
@@ -146,6 +146,7 @@ export default class Radio extends React.Component {
           if (!this._video.state.shouldPlay) {
             this.pausa();
           }
+          this.props.navigation.pop();
       });
   }
 
@@ -211,10 +212,6 @@ export default class Radio extends React.Component {
     }
 
     this._updateScreenForLoading(false);
-
-    
-    //this.playbackInstance.playAsync();
-    //this._onPlayPausePressed();
 
   }
 

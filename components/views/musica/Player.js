@@ -8,7 +8,7 @@ import {
   TouchableHighlight,
   View
 } from 'react-native';
-import { Asset, Audio, Font, Video } from 'expo';
+import { Asset, Audio, Font, Video, ScreenOrientation } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import ajax from '../../services/fetchMusica';
@@ -66,7 +66,7 @@ const BACKGROUND_COLOR = '#133101';
 const DISABLED_OPACITY = 0.5;
 const FONT_SIZE = 16;
 const LOADING_STRING = '... cargando ...';
-const BUFFERING_STRING = '...buffering...';
+const BUFFERING_STRING = '... cargando ...';
 const RATE_SCALE = 3.0;
 const VIDEO_CONTAINER_HEIGHT = DEVICE_HEIGHT / 2.0 - FONT_SIZE;
 
@@ -141,7 +141,7 @@ export default class Player extends React.Component {
     this.blurSuscription =
       this.props.navigation.addListener('willBlur', () => {
           if (!this._video.state.shouldPlay) {
-            this._onPlayPausePressed();
+            this.pausa();
           }
       });
   }
@@ -150,6 +150,14 @@ export default class Player extends React.Component {
     this.mounted = false;
     this.blurSuscription.remove();
   }
+
+  pausa = () => {
+    if (this.playbackInstance != null) {
+      if (this.state.isPlaying) {
+        this.playbackInstance.pauseAsync();
+      }
+    }
+  };
 
   LoadPlaylist(temas) {
     this.state.temas = this.state.temas.reverse();
