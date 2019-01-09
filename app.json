@@ -5,8 +5,12 @@
     "privacy": "public",
     "slug": "Chamame",
     "icon": "./components/resources/images/icono.png",
+    "updates": {
+      "enabled": false
+    },
     "ios": {
-      "bundleIdentifier": "com.chamame.sembrando"
+      "bundleIdentifier": "com.chamame.chamame",
+      "buildNumber": "2"
     },
     "android": {
       "package": "host.exp.Exponent",
