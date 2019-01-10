@@ -28,6 +28,8 @@ export default class VideoKaraoke extends React.Component {
 
   }
 
+  
+
   async componentWillMount() {
 
     this.blurSuscription =
@@ -50,8 +52,10 @@ export default class VideoKaraoke extends React.Component {
   _renderView = () => {
     return (
         <View style={{ flex: 1 }}>
-            <Text style={styles.titulo}>{this.state.video.titulo} - {this.state.video.autor}</Text>
-            <View style={{ flex: 7 }}>
+           <View style={{ flex: 1 }}>
+              <Text style={styles.titulo}>{this.state.video.titulo} - {this.state.video.autor}</Text>
+           </View>
+           <View style={{ flex: 7 }}>
               <Video
                   ref={(ref) => {
                     this.player = ref
@@ -61,11 +65,14 @@ export default class VideoKaraoke extends React.Component {
                   volume={1}
                   shouldPlay={this.state.shouldPlay}
                   resizeMode="contain"
+                  ignoreSilentSwitch={"ignore"}
+                  playWhenInactive={true}
+                  playInBackground={true}
                   useNativeControls={true}
-                  style={{ width: HEIGHT / 2, height: WIDTH * 0.7, margin: 5, alignSelf: 'center'}}
+                  style={{ width: HEIGHT * 0.9, height: WIDTH * 0.7, marginBottom: 40, alignSelf: 'center'}}
               />
             </View>
-            <View style={{ flex: 2 }}>
+            <View style={{ flex: 0.5 }}>
               
             </View>
         </View>
@@ -105,11 +112,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center'
   },
+  activityIndicator: {
+    position: 'absolute',
+    top: 70,
+    left: 70,
+    right: 70,
+    height: 50,
+  },
   titulo: {
     flex: 1,
     color: 'white',
     fontFamily: 'berlin3',
-    fontSize: 22,
+    fontSize: 16,
     textAlign: 'center',
     margin: 5,
   }

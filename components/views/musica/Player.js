@@ -505,7 +505,7 @@ export default class Player extends React.Component {
             onReadyForDisplay={this._onReadyForDisplay}
             useNativeControls={this.state.useNativeControls}
           />
-          <Image source= {require('../../resources/images/icono.png')} style={styles.backgroundVideo} />
+          <Image source= {require('../../resources/images/icono1.png')} style={styles.backgroundVideo} />
         </View>
         <View
           style={[
