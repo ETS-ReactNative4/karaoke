@@ -10,11 +10,11 @@
     },
     "ios": {
       "bundleIdentifier": "com.chamame.chamame",
-      "buildNumber": "7"
+      "buildNumber": "8"
     },
     "android": {
       "package": "host.exp.Exponent",
-      "versionCode": 14
+      "versionCode": 15
     },
     "splash": {
       "image": "./components/resources/images/splash.png",

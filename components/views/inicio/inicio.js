@@ -28,7 +28,7 @@ export default class Inicio extends React.Component {
 
     this.setState({ fontLoaded: true });
 
-    this._renderAlert();
+    //this._renderAlert();
   }
 
   _renderAlert = () => {
