@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, Dimensions, TouchableOpacity, ActivityIndicator, ImageBackground, Linking, Image, Alert } from 'react-native';
+import { View, StyleSheet, Text, Dimensions, TouchableOpacity, ActivityIndicator, ImageBackground, Platform, Linking, Image, Alert } from 'react-native';
 import { Font, ScreenOrientation, Constants } from 'expo';
 
 const WIDTH = Dimensions.get('window').width;
@@ -48,18 +48,24 @@ export default class Juego extends React.Component {
                 </Image>
             </View>
             <View style={styles.bottom}>
-                <TouchableOpacity style={styles.button}
+              { Platform.OS === 'ios' ?
+                (<TouchableOpacity style={styles.button}
+                  onPress={()=> this._renderAlert()}
+                  >
+                      <Image source={require('../../resources/images/appstore.png')} style={styles.imagen} />
+                      
+                  </TouchableOpacity >)
+
+                  :
+
+                (<TouchableOpacity style={styles.button}
                 onPress={()=> Linking.openURL('https://play.google.com/store/apps/details?id=com.sambrana.chamamesito')}
                 >
                     <Image source={require('../../resources/images/google.png')} style={styles.imagen} />
                     
-                </TouchableOpacity >
-                <TouchableOpacity style={styles.button}
-                onPress={()=> this._renderAlert()}
-                >
-                    <Image source={require('../../resources/images/appstore.png')} style={styles.imagen} />
-                    
-                </TouchableOpacity >
+                </TouchableOpacity >)
+                
+                }
             </View>
         </View>
     )

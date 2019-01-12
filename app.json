@@ -6,15 +6,15 @@
     "slug": "Chamame",
     "icon": "./components/resources/images/icono.png",
     "updates": {
-      "enabled": false
+      "enabled": true
     },
     "ios": {
       "bundleIdentifier": "com.chamame.chamame",
-      "buildNumber": "8"
+      "buildNumber": "10"
     },
     "android": {
       "package": "host.exp.Exponent",
-      "versionCode": 15
+      "versionCode": 17
     },
     "splash": {
       "image": "./components/resources/images/splash.png",

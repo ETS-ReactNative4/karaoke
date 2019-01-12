@@ -28,16 +28,16 @@ export default class Inicio extends React.Component {
 
     this.setState({ fontLoaded: true });
 
-    //this._renderAlert();
+    this._renderAlert();
   }
 
   _renderAlert = () => {
     Alert.alert(
-      '¡Votá tu canción favorita del Bocha!',
-      'Ingresá y votá que canción te gustaría que cante el Bocha Sheridan',
+      '¡JORNADA SUSPENDIDA!',
+      'Se suspendió la actividad de la segunda noche de la 29° Fiesta Nacional del Chamamé',
       [
-        {text: 'Ir a Votar', onPress: () => this.props.navigation.navigate('Agenda', {flag: 1})},
-        {text: 'Cancelar', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        // {text: 'Ir a Votar', onPress: () => this.props.navigation.navigate('Agenda', {flag: 1})},
+        {text: 'Aceptar', onPress: () => console.log('Cancel Pressed'), style: 'ok'},
       ],
       { cancelable: false }
     )
@@ -101,7 +101,7 @@ export default class Inicio extends React.Component {
 
           <View style={styles.centro1}> 
 
-          <TouchableOpacity
+          {/* <TouchableOpacity
               onPress={() => this.props.navigation.navigate('Agenda', {flag: 1})}
               style={{
                   flex: 5,
@@ -122,7 +122,7 @@ export default class Inicio extends React.Component {
                 <Text style={styles.info1}>¡VOTÁ AL BOCHA!</Text>
               </View>
             </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('Vivo')}
@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   centro1: {
-    flex: 2,
+    flex: 1,
     width: WIDTH,
     justifyContent: 'center',
     alignItems: 'center',
@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontFamily: 'berlin3',
-    fontSize: 18,
+    fontSize: 20,
     marginLeft: 5,
   },
   info1: {
