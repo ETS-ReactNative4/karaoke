@@ -28,13 +28,13 @@ export default class Inicio extends React.Component {
 
     this.setState({ fontLoaded: true });
 
-    this._renderAlert();
+    //this._renderAlert();
   }
 
   _renderAlert = () => {
     Alert.alert(
-      '¡JORNADA SUSPENDIDA!',
-      'Se suspendió la actividad de la segunda noche de la 29° Fiesta Nacional del Chamamé',
+      'Cambio de horario de la 3ra. noche',
+      'La programación de la 3ra noche iniciará puntualmente a las 19:55 hs. \r\n Las entradas de la 2da. noche son válidas para el día de hoy.',
       [
         // {text: 'Ir a Votar', onPress: () => this.props.navigation.navigate('Agenda', {flag: 1})},
         {text: 'Aceptar', onPress: () => console.log('Cancel Pressed'), style: 'ok'},
