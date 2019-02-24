@@ -38,7 +38,8 @@ export default class Lista extends React.Component {
       'berlin3': require('../../assets/fonts/berlin3.ttf'),
     });
 
-    const temas = await ajax.fetchAutor(this.props.navigation.state.params.autor);
+    //const temas = await ajax.fetchAutor(this.props.navigation.state.params.autor);
+    const temas = await ajax.fetchMusica();
     
     this.setState({ data: temas, loading: false, fontLoaded: true });
 
@@ -47,7 +48,7 @@ export default class Lista extends React.Component {
 	
   SearchFilterFunction = text => {    
     const newData = this.arrayholder.filter(item => {      
-      const itemData = `${item.titulo.toUpperCase()}`;
+      const itemData = `${item.autor.toUpperCase()} ${item.titulo.toUpperCase()}`;
   
        const textData = text.toUpperCase();
         
@@ -91,7 +92,7 @@ export default class Lista extends React.Component {
               onHideUnderlay={separators.unhighlight}>
               <View style={styles.lista}>
                 <Icon name='play-circle' size={40} color={'white'}/>
-                <Text style={styles.texto}>{item.titulo}</Text>
+                <Text style={styles.texto}>{item.autor} - {item.titulo}</Text>
               </View>
             </TouchableOpacity>
           )}

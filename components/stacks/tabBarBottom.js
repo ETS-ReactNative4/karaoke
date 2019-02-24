@@ -18,7 +18,6 @@ import Lista from '../views/musica/lista';
 import Chamiguito from '../views/juego/juego';
 
 const MusicaStack = createStackNavigator({
-  Musica: {screen: Musica},
   Lista: {screen: Lista},
   Player: {screen: Player}
 },{

@@ -54,7 +54,7 @@ export default class Agenda extends React.Component {
           (<WebView
               style={{ backgroundColor: 'transparent'}}
               javaScriptEnabled={true}
-              source={{uri: 'http://13.90.59.76/ApiKaraoke/public/votos/17'}}
+              source={{uri: 'http://13.90.59.76/ApiKaraoke/public/votos/151'}}
           />) 
           :
           (<WebView

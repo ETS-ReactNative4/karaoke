@@ -119,12 +119,12 @@ export default class Inicio extends React.Component {
             >
             <View style={{flexDirection:'row'}}>
               <View style={{flexDirection:'row'}}>
-                <Text style={styles.info1}>¡VOTÁ AL BOCHA!</Text>
+                <Text style={styles.info1}>¡VOTÁ A LOS DE IMAGUARÉ!</Text>
               </View>
             </View>
             </TouchableOpacity> */}
 
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={() => this.props.navigation.navigate('Vivo')}
               style={{
                   flex: 5,
@@ -143,7 +143,7 @@ export default class Inicio extends React.Component {
                 <Image style={styles.imagen} source={require('../../resources/images/rec.png')}/>
                 <Text style={styles.info}>#FNCH VER EN VIVO</Text>
             </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             
             
@@ -311,14 +311,14 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontFamily: 'berlin3',
-    fontSize: 20,
+    fontSize: 22,
     marginLeft: 5,
   },
   info1: {
     color: '#e7c600',
     textAlign: 'center',
     fontFamily: 'berlin3',
-    fontSize: 28,
+    fontSize: 24,
     marginLeft: 5,
   },
   btnLink: {

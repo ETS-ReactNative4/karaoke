@@ -27,7 +27,7 @@ export default class Biblioteca extends React.Component {
         <View >
           <View style={styles.botones}>
             <TouchableOpacity style={styles.button}
-              onPress={() => this.props.navigation.navigate('Musica')}
+              onPress={() => this.props.navigation.navigate('Lista')}
                >
                 <ImageBackground source={require('../../resources/images/acordeon.png')} style={{flex: 1, width: WIDTH, margin: 0}}>
                   <Text style={styles.texto}>MÚSICA</Text>
